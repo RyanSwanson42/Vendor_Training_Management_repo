@@ -23,12 +23,13 @@ public class VendorShortListPtAndVendorDetailsMapper implements RowMapper<Vendor
 		
 		VendorShortListPt vslp = new VendorShortListPt();
 		
-		vslp.setVendor_training_request_id(result.getInt(6));
+		// WTF is this JOSH
+		//vslp.setVendor_training_request_id(result.getInt(6));
 		
 		VendorShortListPtAndVendorDetails v = new VendorShortListPtAndVendorDetails();
 		
 		v.setVd(vd);
-		v.setVslp(vslp);
+		//v.setVslp(vslp);
 		
 		return v;
 	}

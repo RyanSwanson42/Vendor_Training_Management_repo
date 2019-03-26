@@ -20,6 +20,9 @@ public class VendorShortListPtAndVendorDetails {
 	public void setVd(VendorDetail vd) {
 		this.vd = vd;
 	}
-	
+	@Override
+	public String toString() {
+		return "VendorShortListPtAndVendorDetails [vslp=" + vslp + ", vd=" + vd + "]";
+	}
 	
 }
