@@ -16,6 +16,12 @@ public class EmployeeDAO {
 		temp = (JdbcTemplate) context.getBean("db");
 	}
 	
+	public Employee getEmployeeByUsername(String username){   
+        List<Employee> employee = temp.query("select * from employee where user_name=?",
+                new Object[]{username}, new EmployeeMapper());
+        return employee.get(0);
+    }
+	
 	public List<Employee> getAllEmployee() {
 		String sql = "select * from employee";
 		List<Employee> employeeList = temp.query(sql, new EmployeeMapper());

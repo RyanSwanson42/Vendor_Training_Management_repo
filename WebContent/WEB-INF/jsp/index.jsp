@@ -73,25 +73,24 @@
 					type="search" id="sb"
 					style="color: white; border-radius: 15px; border: #fff 2px solid; background-color: #3c8dbc; padding-top: 2px; padding-bottom: 3px"
 					required placeholder="  Filter..." /></li>
-				<li class="nav-item"><a class="nav-link" href="#">Run
-						Report</a></li>
+				<li class="nav-item"><a class="nav-link" onclick="location.href='/SpringApp/report'" style="cursor: pointer">
+					Run Report</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="<c:url value="vendormanagement" />">Vendor Management</a></li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					href="vendormanagement/0">Vendor Management</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> <i class="fas fa-user-circle"
-						style="float: none;"></i> Mahesh
-					</a>
+						style="float: none;"></i> ${username}
+				</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<span class="dropdown-item">Welcome, SPOC</span> <span
-							class="dropdown-item">Your Vertical: Logistics</span>
+						<span class="dropdown-item">Welcome, ${fname} ${lname}</span> <span
+							class="dropdown-item">Your Vertical: ${uservert}</span>
 						<div class="dropdown-divider"></div>
 						<a onclick="location.href='/SpringApp/logout'"
 							class="dropdown-item"> <b style="color: tomato">Logout</b>
 						</a>
-					</div>
-				</li>
+					</div></li>
 			</ul>
 		</div>
 	</div>
@@ -110,45 +109,52 @@
 			<div id="new" class="col-md-3"
 				style="border: 10px solid #FFFF66; border-style: none none none solid;">
 				<h4>New</h4>
-			<!-- 	<button type="submit" class="btn btn-outline-warning " id="bpbutton"
+				<!-- 	<button type="submit" class="btn btn-outline-warning " id="bpbutton"
 					style="float: right; position: relative; top: -40px; margin-right: 10px;">to
 					Processing</button> -->
-					
-				<div id="toProcessing-btng" class="btn-group" style="float: right; position: relative; top: -40px; margin-right: 10px;">
-				  <button id="bpbutton" type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    to Processing
-				  </button>
-				  <div id="toProcessing-ddm" class="dropdown-menu" style="min-width: 6rem">
-				    <a class="dropdown-item" id="it-link" href="toProcessing/it/" style="padding-left: 10px; padding-right: 10px;">
-				    <img src="<c:url value="/resources/img/it-icon.png" />">
-				    IT</a>
-				    <a class="dropdown-item" id="dt-link" href="toProcessing/dt/" style="padding-left: 10px; padding-right: 10px;">
-				    <img src="<c:url value="/resources/img/dt-icon.png" />">
-				    DT</a>
-				    <a class="dropdown-item" id="vt-link" href="toProcessing/vt/" style="padding-left: 10px; padding-right: 10px;">
-				    <img src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
-					VT</a>
-				  </div>
+
+				<div id="toProcessing-btng" class="btn-group"
+					style="float: right; position: relative; top: -40px; margin-right: 10px;">
+					<button id="bpbutton" type="button"
+						class="btn btn-outline-warning dropdown-toggle"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						to Processing</button>
+					<div id="toProcessing-ddm" class="dropdown-menu"
+						style="min-width: 6rem">
+						<a class="dropdown-item" id="it-link" href="toProcessing/it/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/it-icon.png" />"> IT
+						</a> <a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/dt-icon.png" />"> DT
+						</a> <a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+							VT
+						</a>
+					</div>
 				</div>
-				
+
 				<!-- Start of for loop for new training requests on the left of the screen -->
-				<c:forEach var="pro1" items="${vendorTrainingRequestList1}"
+				<c:forEach var="pro1" items="${trainingRequestList}"
 					varStatus="theCount">
 					<div class="card"
 						style="width: 14rem; margin-left: 10px; margin-top: 20px;" id="p1">
 						<div class="cardcontainer">
 							<%-- <input type="checkbox" class="form-check-input" id="pro1-check-${theCount.count}"> --%>
-							
-							<label class="chkbox-container">
-								<input type="checkbox" class="chk" id="pro1-check-${pro1.getVendorTrainingRequest().vendor_training_request_id}">
-							<span class="checkmark" style="margin-top: 8px; margin-right: 8px;"></span>
+
+							<label class="chkbox-container"> <input type="checkbox"
+								class="chk"
+								id="pro1-check-${pro1.getTrainingRequest().training_request_id}">
+								<span class="checkmark"
+								style="margin-top: 8px; margin-right: 8px;"></span>
 							</label>
-							
+
 							<div class="card-body">
 								<h5 class="card-title">
 									<span> <i class="fa fa-id-card" aria-hidden="true"
 										style="color: #3c8dbc; float: inherit;"></i>
-										${pro1.getVendorTrainingRequest().vendor_training_request_id}
+										${pro1.getTrainingRequest().training_request_id}
 									</span>
 								</h5>
 								<hr style="width: 90%; border-color: #b9b9b9;">
@@ -318,7 +324,7 @@
 											</div>
 											<div style="overflow-y: scroll" class="modal-body">
 												<div class="row">
-													<div class="col">
+													<div class="col-8">
 														<!--Accordion start-->
 														<div class="accordion" id="accordionEx" role="tablist"
 															aria-multiselectable="true">
@@ -329,7 +335,7 @@
 																	class="card-header" role="tab" id="headingOne1">
 																	<a style="text-decoration: none" class="collapsed"
 																		data-toggle="collapse" data-parent="#accordionEx"
-																		href="#collapseOne1" aria-expanded="true"
+																		href="#collapseOne1" aria-expanded="false"
 																		aria-controls="collapseOne1">
 																		<h5 class="mb-0">
 																			SPOC Shortlist Vendor <i id="modalIcons"
@@ -342,28 +348,30 @@
 																	role="tabpanel" aria-labelledby="headingOne1"
 																	data-parent="#accordionEx">
 																	<div class="card-body">
-																		<%-- 
-																			<a class="nav-link" href="#" id="vm-open"
+																		<%-- <a class="nav-link" href="#" id="vm-open"
 																			data-toggle="modal" data-target="#vm-modal"
 																			data-backdrop="static">Vendor Management</a>
 																			<button onclick="openVendorModal(${pro2.getVendorTrainingRequest().vendor_training_request_id});" class="nav-link" href="#" id="vm-open"
 																			data-toggle="modal" data-target="#vm-modal"
 																			data-backdrop="static">Select Vendors</button> --%>
-																	</div>
-																	<table id="vendorSPOC" class="table">
-																		<thead class="thead-light">
-																			<tr>
-																				<th>Vendor</th>
-																				<th>Phone</th>
-																				<th>Email</th>
-																				<th>City</th>
-																				<th>State</th>
-																			</tr>
-																		</thead>
-																		<tbody id="table-body1">
+																		<a
+																			href="vendormanagement/${pro2.getVendorTrainingRequest().vendor_training_request_id}">Select
+																			Vendors</a>
+																		<table id="vendorSPOC" class="table">
+																			<thead id="th1" class="thead-light">
+																				<tr>
+																					<th>Vendor</th>
+																					<th>Phone</th>
+																					<th>Email</th>
+																					<th>City</th>
+																					<th>State</th>
+																				</tr>
+																			</thead>
+																			<tbody id="table-body1">
 
-																		</tbody>
-																	</table>
+																			</tbody>
+																		</table>
+																	</div>
 																</div>
 															</div>
 															<div class="card">
@@ -386,7 +394,7 @@
 																	aria-labelledby="headingTwo2"
 																	data-parent="#accordionEx">
 																	<div class="card-body">
-																		<table id="vendorPT" class="table">
+																		<table id="vendorPT" class="table" width="60%">
 																			<thead class="thead-light">
 																				<tr>
 																					<th>Vendor</th>
@@ -457,85 +465,376 @@
 																	aria-labelledby="headingFour4"
 																	data-parent="#accordionEx">
 																	<div class="card-body">
-																		<form>
+																		<form
+																			action="/trainingSchedule/${pro2.getVendorTrainingRequest().vendor_training_request_id}">
 																			<!-- <label>Training Dates</label> -->
 																			<div class="form-group">
 																				<div class="row">
-																					<div class="col-4">
+																					<div class="col-3"></div>
+																					<div class="col-2">
 																						<label>Start Date</label>
 																					</div>
-																					<input type="date" class="form-control-sm"
-																						id="startDate">
+																					<div class="col-4">
+																						<input type="date" class="form-control-sm"
+																							name="startDate" required>
+																					</div>
+																					<div class="col-3"></div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
-																					<div class="col-4">
+																					<div class="col-3"></div>
+																					<div class="col-2">
 																						<label>End Date</label>
 																					</div>
-																					<input type="date" class="form-control-sm"
-																						id="endDate">
+																					<div class="col-4">
+																						<input type="date" class="form-control-sm"
+																							name="endDate" required>
+																					</div>
+																					<div class="col-3"></div>
 																				</div>
 																			</div>
 																			<hr>
 																			<div class="form-group">
 																				<div class="row">
-																					<div class="col-4">
+																					<div class="col-3"></div>
+																					<div class="col-2">
 																						<label>Participants</label>
-																						<!-- <i class="fas fa-users"></i> -->
 																					</div>
-																					<input type="number"
-																						placeholder="Participants Count"
-																						class="form-control-sm" id="participants">
+																					<div class="col-4">
+																						<input type="number" min="0" required
+																							placeholder="Participants Count"
+																							class="form-control-sm" name="participants">
+																					</div>
+																					<div class="col-2"></div>
 																				</div>
 																			</div>
 																			<hr>
-																			<label>Training Type</label>
-																			<div class="form-check">
-																				<input class="form-check-input" type="radio"
-																					name="exampleRadios" id="classRoom" value="option1">
-																				<label class="form-check-label" for="classRoom">
-																					Class Room </label>
-																			</div>
-																			<div class="form-check">
-																				<input class="form-check-input" type="radio"
-																					name="exampleRadios" id="online" value="option2">
-																				<label class="form-check-label" for="online">
-																					Online </label>
+																			<div class="row">
+																				<div class="col-3"></div>
+																				<div class="col-3">
+																					<label>Training Type</label>
+																				</div>
+																				<div class="col-3">
+																					<div class="form-check">
+																						<input class="form-check-input" type="radio"
+																							name="exampleRadios" id="online" value="option2">
+																						<label class="form-check-label" for="online">
+																							Online </label>
+																					</div>
+																					<div class="form-check">
+																						<input class="form-check-input" type="radio"
+																							name="exampleRadios" id="classRoom"
+																							value="option1"> <label
+																							class="form-check-label" for="classRoom">
+																							Class Room </label>
+																					</div>
+																				</div>
+																				<div class="col-3"></div>
 																			</div>
 																			<div id="classRoomForm" class="form-group">
 																				<div class="row">
 																					<div class="col">
-																						<br> <input id="city" placeholder="City"
+																						<br> <input name="city" placeholder="City"
+																							required type="text" class="form-control">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="state" placeholder="State" required
 																							type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="state" placeholder="State" type="text"
+																						<input name="country" placeholder="Country"
+																							required type="text" class="form-control">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="zipcode" placeholder="Zipcode"
+																							required type="number" pattern="\d*" max="99999"
 																							class="form-control">
 																					</div>
 																				</div>
-																				<div style="margin-top: 0.4rem;" class="row">
+																				<!-- <div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="country" placeholder="Country"
+																						<input name="timezone" placeholder="Time Zone" required
 																							type="text" class="form-control">
 																					</div>
-																				</div>
+																				</div> -->
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="zipcode" placeholder="Zipcode"
-																							type="number" pattern="\d*" max="99999"
-																							class="form-control">
+																						<select name="timezone" class="form-control"
+																							id="timezone" required>
+																							<option selected="selected" disabled>Time Zone</option>
+																							<option timeZoneId="1" gmtAdjustment="GMT-12:00"
+																								useDaylightTime="0" value="-12">(GMT-12:00)
+																								International Date Line West</option>
+																							<option timeZoneId="2" gmtAdjustment="GMT-11:00"
+																								useDaylightTime="0" value="-11">(GMT-11:00)
+																								Midway Island, Samoa</option>
+																							<option timeZoneId="3" gmtAdjustment="GMT-10:00"
+																								useDaylightTime="0" value="-10">(GMT-10:00)
+																								Hawaii</option>
+																							<option timeZoneId="4" gmtAdjustment="GMT-09:00"
+																								useDaylightTime="1" value="-9">(GMT-09:00)
+																								Alaska</option>
+																							<option timeZoneId="5" gmtAdjustment="GMT-08:00"
+																								useDaylightTime="1" value="-8">(GMT-08:00)
+																								Pacific Time (US & Canada)</option>
+																							<option timeZoneId="6" gmtAdjustment="GMT-08:00"
+																								useDaylightTime="1" value="-8">(GMT-08:00)
+																								Tijuana, Baja California</option>
+																							<option timeZoneId="7" gmtAdjustment="GMT-07:00"
+																								useDaylightTime="0" value="-7">(GMT-07:00)
+																								Arizona</option>
+																							<option timeZoneId="8" gmtAdjustment="GMT-07:00"
+																								useDaylightTime="1" value="-7">(GMT-07:00)
+																								Chihuahua, La Paz, Mazatlan</option>
+																							<option timeZoneId="9" gmtAdjustment="GMT-07:00"
+																								useDaylightTime="1" value="-7">(GMT-07:00)
+																								Mountain Time (US & Canada)</option>
+																							<option timeZoneId="10" gmtAdjustment="GMT-06:00"
+																								useDaylightTime="0" value="-6">(GMT-06:00)
+																								Central America</option>
+																							<option timeZoneId="11" gmtAdjustment="GMT-06:00"
+																								useDaylightTime="1" value="-6">(GMT-06:00)
+																								Central Time (US & Canada)</option>
+																							<option timeZoneId="12" gmtAdjustment="GMT-06:00"
+																								useDaylightTime="1" value="-6">(GMT-06:00)
+																								Guadalajara, Mexico City, Monterrey</option>
+																							<option timeZoneId="13" gmtAdjustment="GMT-06:00"
+																								useDaylightTime="0" value="-6">(GMT-06:00)
+																								Saskatchewan</option>
+																							<option timeZoneId="14" gmtAdjustment="GMT-05:00"
+																								useDaylightTime="0" value="-5">(GMT-05:00)
+																								Bogota, Lima, Quito, Rio Branco</option>
+																							<option timeZoneId="15" gmtAdjustment="GMT-05:00"
+																								useDaylightTime="1" value="-5">(GMT-05:00)
+																								Eastern Time (US & Canada)</option>
+																							<option timeZoneId="16" gmtAdjustment="GMT-05:00"
+																								useDaylightTime="1" value="-5">(GMT-05:00)
+																								Indiana (East)</option>
+																							<option timeZoneId="17" gmtAdjustment="GMT-04:00"
+																								useDaylightTime="1" value="-4">(GMT-04:00)
+																								Atlantic Time (Canada)</option>
+																							<option timeZoneId="18" gmtAdjustment="GMT-04:00"
+																								useDaylightTime="0" value="-4">(GMT-04:00)
+																								Caracas, La Paz</option>
+																							<option timeZoneId="19" gmtAdjustment="GMT-04:00"
+																								useDaylightTime="0" value="-4">(GMT-04:00)
+																								Manaus</option>
+																							<option timeZoneId="20" gmtAdjustment="GMT-04:00"
+																								useDaylightTime="1" value="-4">(GMT-04:00)
+																								Santiago</option>
+																							<option timeZoneId="21" gmtAdjustment="GMT-03:30"
+																								useDaylightTime="1" value="-3.5">(GMT-03:30)
+																								Newfoundland</option>
+																							<option timeZoneId="22" gmtAdjustment="GMT-03:00"
+																								useDaylightTime="1" value="-3">(GMT-03:00)
+																								Brasilia</option>
+																							<option timeZoneId="23" gmtAdjustment="GMT-03:00"
+																								useDaylightTime="0" value="-3">(GMT-03:00)
+																								Buenos Aires, Georgetown</option>
+																							<option timeZoneId="24" gmtAdjustment="GMT-03:00"
+																								useDaylightTime="1" value="-3">(GMT-03:00)
+																								Greenland</option>
+																							<option timeZoneId="25" gmtAdjustment="GMT-03:00"
+																								useDaylightTime="1" value="-3">(GMT-03:00)
+																								Montevideo</option>
+																							<option timeZoneId="26" gmtAdjustment="GMT-02:00"
+																								useDaylightTime="1" value="-2">(GMT-02:00)
+																								Mid-Atlantic</option>
+																							<option timeZoneId="27" gmtAdjustment="GMT-01:00"
+																								useDaylightTime="0" value="-1">(GMT-01:00)
+																								Cape Verde Is.</option>
+																							<option timeZoneId="28" gmtAdjustment="GMT-01:00"
+																								useDaylightTime="1" value="-1">(GMT-01:00)
+																								Azores</option>
+																							<option timeZoneId="29" gmtAdjustment="GMT+00:00"
+																								useDaylightTime="0" value="0">(GMT+00:00)
+																								Casablanca, Monrovia, Reykjavik</option>
+																							<option timeZoneId="30" gmtAdjustment="GMT+00:00"
+																								useDaylightTime="1" value="0">(GMT+00:00)
+																								Greenwich Mean Time : Dublin, Edinburgh, Lisbon,
+																								London</option>
+																							<option timeZoneId="31" gmtAdjustment="GMT+01:00"
+																								useDaylightTime="1" value="1">(GMT+01:00)
+																								Amsterdam, Berlin, Bern, Rome, Stockholm, Vienna</option>
+																							<option timeZoneId="32" gmtAdjustment="GMT+01:00"
+																								useDaylightTime="1" value="1">(GMT+01:00)
+																								Belgrade, Bratislava, Budapest, Ljubljana,
+																								Prague</option>
+																							<option timeZoneId="33" gmtAdjustment="GMT+01:00"
+																								useDaylightTime="1" value="1">(GMT+01:00)
+																								Brussels, Copenhagen, Madrid, Paris</option>
+																							<option timeZoneId="34" gmtAdjustment="GMT+01:00"
+																								useDaylightTime="1" value="1">(GMT+01:00)
+																								Sarajevo, Skopje, Warsaw, Zagreb</option>
+																							<option timeZoneId="35" gmtAdjustment="GMT+01:00"
+																								useDaylightTime="1" value="1">(GMT+01:00)
+																								West Central Africa</option>
+																							<option timeZoneId="36" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Amman</option>
+																							<option timeZoneId="37" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Athens, Bucharest, Istanbul</option>
+																							<option timeZoneId="38" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Beirut</option>
+																							<option timeZoneId="39" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Cairo</option>
+																							<option timeZoneId="40" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="0" value="2">(GMT+02:00)
+																								Harare, Pretoria</option>
+																							<option timeZoneId="41" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Helsinki, Kyiv, Riga, Sofia, Tallinn, Vilnius</option>
+																							<option timeZoneId="42" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Jerusalem</option>
+																							<option timeZoneId="43" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Minsk</option>
+																							<option timeZoneId="44" gmtAdjustment="GMT+02:00"
+																								useDaylightTime="1" value="2">(GMT+02:00)
+																								Windhoek</option>
+																							<option timeZoneId="45" gmtAdjustment="GMT+03:00"
+																								useDaylightTime="0" value="3">(GMT+03:00)
+																								Kuwait, Riyadh, Baghdad</option>
+																							<option timeZoneId="46" gmtAdjustment="GMT+03:00"
+																								useDaylightTime="1" value="3">(GMT+03:00)
+																								Moscow, St. Petersburg, Volgograd</option>
+																							<option timeZoneId="47" gmtAdjustment="GMT+03:00"
+																								useDaylightTime="0" value="3">(GMT+03:00)
+																								Nairobi</option>
+																							<option timeZoneId="48" gmtAdjustment="GMT+03:00"
+																								useDaylightTime="0" value="3">(GMT+03:00)
+																								Tbilisi</option>
+																							<option timeZoneId="49" gmtAdjustment="GMT+03:30"
+																								useDaylightTime="1" value="3.5">(GMT+03:30)
+																								Tehran</option>
+																							<option timeZoneId="50" gmtAdjustment="GMT+04:00"
+																								useDaylightTime="0" value="4">(GMT+04:00)
+																								Abu Dhabi, Muscat</option>
+																							<option timeZoneId="51" gmtAdjustment="GMT+04:00"
+																								useDaylightTime="1" value="4">(GMT+04:00)
+																								Baku</option>
+																							<option timeZoneId="52" gmtAdjustment="GMT+04:00"
+																								useDaylightTime="1" value="4">(GMT+04:00)
+																								Yerevan</option>
+																							<option timeZoneId="53" gmtAdjustment="GMT+04:30"
+																								useDaylightTime="0" value="4.5">(GMT+04:30)
+																								Kabul</option>
+																							<option timeZoneId="54" gmtAdjustment="GMT+05:00"
+																								useDaylightTime="1" value="5">(GMT+05:00)
+																								Yekaterinburg</option>
+																							<option timeZoneId="55" gmtAdjustment="GMT+05:00"
+																								useDaylightTime="0" value="5">(GMT+05:00)
+																								Islamabad, Karachi, Tashkent</option>
+																							<option timeZoneId="56" gmtAdjustment="GMT+05:30"
+																								useDaylightTime="0" value="5.5">(GMT+05:30)
+																								Sri Jayawardenapura</option>
+																							<option timeZoneId="57" gmtAdjustment="GMT+05:30"
+																								useDaylightTime="0" value="5.5">(GMT+05:30)
+																								Chennai, Kolkata, Mumbai, New Delhi</option>
+																							<option timeZoneId="58" gmtAdjustment="GMT+05:45"
+																								useDaylightTime="0" value="5.75">(GMT+05:45)
+																								Kathmandu</option>
+																							<option timeZoneId="59" gmtAdjustment="GMT+06:00"
+																								useDaylightTime="1" value="6">(GMT+06:00)
+																								Almaty, Novosibirsk</option>
+																							<option timeZoneId="60" gmtAdjustment="GMT+06:00"
+																								useDaylightTime="0" value="6">(GMT+06:00)
+																								Astana, Dhaka</option>
+																							<option timeZoneId="61" gmtAdjustment="GMT+06:30"
+																								useDaylightTime="0" value="6.5">(GMT+06:30)
+																								Yangon (Rangoon)</option>
+																							<option timeZoneId="62" gmtAdjustment="GMT+07:00"
+																								useDaylightTime="0" value="7">(GMT+07:00)
+																								Bangkok, Hanoi, Jakarta</option>
+																							<option timeZoneId="63" gmtAdjustment="GMT+07:00"
+																								useDaylightTime="1" value="7">(GMT+07:00)
+																								Krasnoyarsk</option>
+																							<option timeZoneId="64" gmtAdjustment="GMT+08:00"
+																								useDaylightTime="0" value="8">(GMT+08:00)
+																								Beijing, Chongqing, Hong Kong, Urumqi</option>
+																							<option timeZoneId="65" gmtAdjustment="GMT+08:00"
+																								useDaylightTime="0" value="8">(GMT+08:00)
+																								Kuala Lumpur, Singapore</option>
+																							<option timeZoneId="66" gmtAdjustment="GMT+08:00"
+																								useDaylightTime="0" value="8">(GMT+08:00)
+																								Irkutsk, Ulaan Bataar</option>
+																							<option timeZoneId="67" gmtAdjustment="GMT+08:00"
+																								useDaylightTime="0" value="8">(GMT+08:00)
+																								Perth</option>
+																							<option timeZoneId="68" gmtAdjustment="GMT+08:00"
+																								useDaylightTime="0" value="8">(GMT+08:00)
+																								Taipei</option>
+																							<option timeZoneId="69" gmtAdjustment="GMT+09:00"
+																								useDaylightTime="0" value="9">(GMT+09:00)
+																								Osaka, Sapporo, Tokyo</option>
+																							<option timeZoneId="70" gmtAdjustment="GMT+09:00"
+																								useDaylightTime="0" value="9">(GMT+09:00)
+																								Seoul</option>
+																							<option timeZoneId="71" gmtAdjustment="GMT+09:00"
+																								useDaylightTime="1" value="9">(GMT+09:00)
+																								Yakutsk</option>
+																							<option timeZoneId="72" gmtAdjustment="GMT+09:30"
+																								useDaylightTime="0" value="9.5">(GMT+09:30)
+																								Adelaide</option>
+																							<option timeZoneId="73" gmtAdjustment="GMT+09:30"
+																								useDaylightTime="0" value="9.5">(GMT+09:30)
+																								Darwin</option>
+																							<option timeZoneId="74" gmtAdjustment="GMT+10:00"
+																								useDaylightTime="0" value="10">(GMT+10:00)
+																								Brisbane</option>
+																							<option timeZoneId="75" gmtAdjustment="GMT+10:00"
+																								useDaylightTime="1" value="10">(GMT+10:00)
+																								Canberra, Melbourne, Sydney</option>
+																							<option timeZoneId="76" gmtAdjustment="GMT+10:00"
+																								useDaylightTime="1" value="10">(GMT+10:00)
+																								Hobart</option>
+																							<option timeZoneId="77" gmtAdjustment="GMT+10:00"
+																								useDaylightTime="0" value="10">(GMT+10:00)
+																								Guam, Port Moresby</option>
+																							<option timeZoneId="78" gmtAdjustment="GMT+10:00"
+																								useDaylightTime="1" value="10">(GMT+10:00)
+																								Vladivostok</option>
+																							<option timeZoneId="79" gmtAdjustment="GMT+11:00"
+																								useDaylightTime="1" value="11">(GMT+11:00)
+																								Magadan, Solomon Is., New Caledonia</option>
+																							<option timeZoneId="80" gmtAdjustment="GMT+12:00"
+																								useDaylightTime="1" value="12">(GMT+12:00)
+																								Auckland, Wellington</option>
+																							<option timeZoneId="81" gmtAdjustment="GMT+12:00"
+																								useDaylightTime="0" value="12">(GMT+12:00)
+																								Fiji, Kamchatka, Marshall Is.</option>
+																							<option timeZoneId="82" gmtAdjustment="GMT+13:00"
+																								useDaylightTime="0" value="13">(GMT+13:00)
+																								Nuku'alofa</option>
+																						</select>
+
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="location" placeholder="Location"
-																							type="text" class="form-control">
+																						<input name="location" placeholder="Location"
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="room" placeholder="Room Number"
+																						<input name="room" placeholder="Room Number"
+																							required type="text" class="form-control">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="breakdown"
+																							placeholder="Training Break Down" required
 																							type="text" class="form-control">
 																					</div>
 																				</div>
@@ -543,15 +842,15 @@
 																			<div id="onlineForm" class="form-group">
 																				<div class="row">
 																					<div class="col">
-																						<br> <input id="url"
-																							placeholder="Training URL" type="text"
+																						<br> <input name="url"
+																							placeholder="Training URL" type="text" required
 																							class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input id="audio" placeholder="Training Audio"
-																							type="text" class="form-control">
+																						<input name="audio" placeholder="Training Audio"
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																			</div>
@@ -565,7 +864,7 @@
 														</div>
 														<!-- Accordion end -->
 													</div>
-													<div class="col">
+													<div class="col-4">
 														<div id="card" class="card">
 															<div id="card-body" class="card-body">
 																<h5 class="card-title">Progress</h5>
@@ -742,17 +1041,24 @@
 	</script>
 
 
+	<script>
+	$('.modal').on('hidden.bs.modal', function(e) {
+		$('#collapseOne1').collapse('hide');
+	})
+	</script>
+
 	<!-- Yosuf ElSaadany 3/24/2019 10:30pm -->
 	<!-- All Ajax Requests -->
 	<script>
 	
-	// Open Vendor Modal from SPOC Vendor Shortlist
-	function openVendorModal(id) {
+	// Open Vendor Tab from SPOC Vendor Shortlist
+	function openVendorTab(id) {
 		$.ajax({
         	type: "POST",
-            url : 'vendorModal',
+        	data: {id: id},
+            url : 'vendormanagementwithid',
             success : function(data) {   
-           		//alert('Modal Open');
+           		alert('Vendor Tab Opened with id: ' + id);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -766,7 +1072,8 @@
         	type: "POST",
             url : 'process',
             success : function(data) {   
-           		//alert('Modal Open');
+				//$("#th1").hide();
+				//$("#th2").hide();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -782,11 +1089,12 @@
         	data: {id: id},
             url : 'section1',
             success : function(data) {
+            	//$("#th1").show();
             	for(var i = 0; i < data.length; i++){
     				var shortlistSPOC = data[i];
             		var tr = '<tr><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
             		$('#table-body1').append(tr);
-            	}       
+            	}      	
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -802,6 +1110,7 @@
         	data: {id: id},
             url : 'section2',
             success : function(data) {
+            	//$("#th2").show();
             	for(var i = 0; i < data.length; i++){
     				var shortlistPT = data[i];
             		var tr='<tr><td>' + shortlistPT.vendor_name +  '</td><td>' + shortlistPT.vendor_phone +  '</td><td>' + shortlistPT.vendor_email +  '</td><td>' + shortlistPT.vendor_city +  '</td><td>' + shortlistPT.vendor_state +  '</td></tr>';
@@ -816,12 +1125,12 @@
 	
 	// Section 3 accordion
 	function section3() {
-		alert('Accordion 3 clicked');
+		//alert('Accordion 3 clicked');
 	}
 	
 	// Section 4 accordion
 	function section4() {
-		alert('Accordion 4 clicked');
+		//alert('Accordion 4 clicked');
 	}
 	
 	</script>

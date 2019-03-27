@@ -54,4 +54,15 @@ public class TrainingManagementStatusDAO {
 		return tms.get(0);
 	}
 	
+	public void updateTrainingManagementStatusOnPid(int status, int training_request_id) {
+		
+		String sql = "update training_management_status set status = ? where training_management_status_id = \r\n" + 
+				"(select tms.training_management_status_id from training_management_status tms\r\n" + 
+				"inner join training_request tr \r\n" + 
+				"on tms.training_request_id = tr.TRAINING_REQUEST_ID\r\n" + 
+				"where tr.TRAINING_REQUEST_ID = ?)";
+		
+		temp.update(sql, new Object[] {status, training_request_id});
+	}
+	
 }

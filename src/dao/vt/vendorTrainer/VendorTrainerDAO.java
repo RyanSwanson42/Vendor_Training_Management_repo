@@ -52,4 +52,18 @@ public class VendorTrainerDAO {
 		
 		return vt.get(0);
 	}
+	
+	public List<VendorTrainer> getAllTrainersforVendor(int vendor_id) {
+		
+		String sql = "select * from vendor_trainer vt \r\n" + 
+				"inner join vendor_details vd\r\n" + 
+				"on vt.VENDOR_DETAILS_ID = vd.VENDOR_ID\r\n" + 
+				"where vd.vendor_id = ?";
+		
+		List<VendorTrainer> AllTrainersForVendor = temp.query(sql, new Object[] {vendor_id}, new VendorTrainerMapper());
+		
+		return AllTrainersForVendor;
+		
+	}
+	
 }

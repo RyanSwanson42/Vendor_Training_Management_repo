@@ -127,7 +127,7 @@ Integration of Modal- Styling
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 90% !important;
+  width: 95% !important;
 }
 
 /* Modal Title */
@@ -205,3 +205,8 @@ Integration of Modal- Styling
   margin-left: 10%;
   margin-top: 19%;
 }
+
+*, ::after, ::before {
+    /* box-sizing: border-box; */
+}
+

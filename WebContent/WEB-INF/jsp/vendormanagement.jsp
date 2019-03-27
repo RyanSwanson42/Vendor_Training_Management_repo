@@ -31,15 +31,15 @@
 	crossorigin="anonymous">
 
 <!-- Custom styles-->
-<link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
-<link href="<c:url value="/resources/css/vtm-modal.css"/>"
+<link href="<c:url value="../resources/css/style.css"/>" rel="stylesheet">
+<link href="<c:url value="../resources/css/vtm-modal.css"/>"
 	rel="stylesheet">
 
 
 <!-- Bootstrap core JavaScript -->
-<script src="<c:url value="resources/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="../resources/vendor/jquery/jquery.min.js"/>"></script>
 <script
-	src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.min.js" /> "></script>
+	src="<c:url value="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js" /> "></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -47,8 +47,8 @@
 
 
 <!-- Local js scripts-->
-<script src="<c:url value="resources/js/vtm.js" />"></script>
-<script src="<c:url value="resources/js/trainingType.js" />"></script>
+<script src="<c:url value="../resources/js/vtm.js" />"></script>
+<script src="<c:url value="../resources/js/trainingType.js" />"></script>
 
 </head>
 <body style="padding-top: 70px">
@@ -57,7 +57,7 @@
 	<nav class="main-header navbar navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #3c8dbc">
 	<div class="container">
-		<img src="<c:url value="resources/img/AtosSyntelLogoMedWhite.png" />"
+		<img src="<c:url value="../resources/img/AtosSyntelLogoMedWhite.png" />"
 			height="30" /> <a class="navbar-brand" href="<c:url value="/" />"> <!--<b>Atos</b>Syntel-->
 			<i>Vendor <b>TRM</b>
 		</i>

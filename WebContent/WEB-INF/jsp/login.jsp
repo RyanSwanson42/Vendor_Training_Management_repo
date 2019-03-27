@@ -25,7 +25,20 @@
 <script src="resources/vendor/jquery/jquery.js"></script>
 
 </head>
-
+<script>
+function Validation(){
+ var name = 'loginerror';
+ var regexS = "/"+name;
+ var regex = new RegExp( regexS );
+ var results = regex.exec( window.location.href );
+ if( results != null ){
+   //here you don't have login errors
+      alert("Wrong username and/or password, please try again.");
+ }
+   //here you have login error
+      
+}
+</script>
 <body>
         <div class="logo-placement"><img class="Logo-size" src="<c:url value="resources/img/AtosSyntelLogoLargeBlue.png" />"></div>
 
@@ -44,14 +57,14 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" class="form-control" placeholder="username" required>
+                            <input type="text" name="un" class="form-control" placeholder="username" required>
 
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" class="form-control" placeholder="password" required>
+                            <input type="password" name="up" class="form-control" placeholder="password" required>
                         </div>
                         <div class="row align-items-center remember">
                             <input type="checkbox">Remember Me
@@ -59,6 +72,9 @@
                         <div class="form-group">
                             <input type="submit" id="submit" value="Login" class="btn float-right login_btn">
                         </div>
+                        <script>
+                        	Validation();
+                        </script>
                     </form>
                 </div>
                 <div class="card-footer">

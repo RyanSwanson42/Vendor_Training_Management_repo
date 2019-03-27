@@ -51,4 +51,11 @@ public class VendorTrainingRequestDAO {
 		
 		return vtr.get(0);
 	}
+	
+	public void insertVendorTrainingRequestWithTRID(int training_request_id) {
+		
+		String sql = "insert into vendor_training_request(vendor_training_request_id, training_request_id) values (vendor_training_request_id_seq.nextval, ?)";
+		
+		temp.update(sql, new Object[] {training_request_id});
+	}
 }
