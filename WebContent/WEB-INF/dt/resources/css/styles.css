@@ -1,0 +1,515 @@
+#ashlogo {
+  width: 8vw;
+}
+
+#asflogo {
+  width: 175px;
+}
+
+footer {
+  /* position: fixed;
+        left: 0;
+        bottom: 0; */
+  width: 100%;
+  background-color: lightgray;
+  opacity: 0.5;
+}
+
+.phead {
+  padding: 0%;
+  background-image: linear-gradient(to right, white, lightblue);
+}
+
+.phead h4 {
+  font-size: 27px;
+}
+
+.hfas {
+
+  color: black;
+
+}
+
+
+.nvbr {
+
+
+  background-color: lightblue;
+}
+
+.proc-card {
+  margin-bottom: 10px;
+  border-width: 3px;
+}
+
+.proc-card-body {
+  padding: 1rem;
+}
+
+.proc-btn {
+  margin-top: 5px;
+  float: right;
+  padding: .2rem .375rem;
+}
+
+.summary-btn {
+  float: right;
+}
+
+#processed-title {
+  position: fixed;
+  top: 0;
+
+}
+
+/* .processed-row-scroll {
+        height: 600px;
+        overflow-y: scroll;
+    } */
+
+.myButton {
+  color: red;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+}
+
+
+
+.button-success,
+.button-error,
+.button-warning,
+.button-secondary {
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.button-success {
+  background-color: #4CAF50;
+}
+
+.button-error {
+  background-color: #C12525;
+}
+
+.button-warning {
+  background-color: #FF8C00;
+}
+
+.button-success:hover {
+  background-color: #46a049;
+  color: black;
+}
+
+.button-error:hover {
+  background-color: #AB2121;
+  color: black;
+}
+
+.button-warning:hover {
+  background-color: #E67E00;
+  color: black;
+}
+
+#status{
+  color: #AB2121;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: lightgrey;
+  float: right;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#sidebarOpenBtnDiv {
+  float: right;
+}
+
+.openbtn {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: white;
+  color: #0066a1;
+  padding-left: 50%;
+  padding: 5px 5px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+.exec-card
+{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 25px;
+    border-width: 3px;
+    border-color: green;
+    background-color: #bfbfbf;
+    width: 300px;
+    box-shadow: 10px 10px 5px grey;
+}
+.exec-card-header:first-child
+{
+  background-color: #bfbfbf;
+  border-radius: 25px;
+}
+#exec-expand-btn
+{
+  background-color: transparent;
+  border-color: transparent;
+  float: right;
+}
+.exec-check-box
+{
+  background-color: transparent;
+  border-color: transparent;
+}
+/* Accordion */
+ul { list-style-type: none; }
+.accordion {
+  width: 100%;
+  max-width: 360px;
+  margin: 30px auto 20px;
+  background: #FFF;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.accordion .link {
+  cursor: pointer;
+  display: block;
+  padding: 15px 15px 15px 42px;
+  color: #4D4D4D;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #CCC;
+  position: relative;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li:last-child .link { border-bottom: 0; }
+
+.accordion li i {
+  position: relative;
+  right: 30px;
+  font-size: 18px;
+  color: #595959;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.accordion li i.fa-chevron-down {
+	float: right;
+  font-size: 16px;
+}
+
+.accordion li.open .link { color: #b63b4d; }
+
+.accordion li.open i { color: white; }
+
+.accordion li.open i.fa-chevron-down {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+/**
+ * Submenu
+ -----------------------------*/
+
+
+.submenu {
+  display: none;
+  background: grey;
+  font-size: 28px;
+  color: white;
+}
+
+.submenu li { border-bottom: 1px solid #4b4a5e; }
+
+.submenu a {
+  display: block;
+  text-decoration: none;
+  color: pink;
+
+  -webkit-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+.submenu a:hover {
+  background: #b63b4d;
+  color: #FFF;
+}
+
+
+
+.datepicker {
+    width: 50%;
+}
+
+
+label {
+	display: inline-block;
+font-size: 14px;
+padding-left: 15px;
+}
+
+/*Datepicker window*/
+.ui-datepicker th {
+  text-transform: uppercase;
+  font-size: 6pt;
+  padding: 5px 0;
+  color: #666666;
+  text-shadow: 1px 0px 0px #fff;
+  filter: dropshadow(color=#fff, offx=1, offy=0);
+}
+.ui-datepicker thead {
+  background-color: #f7f7f7;
+  background-image: -moz-linear-gradient(top,  #f7f7f7 0%, #f1f1f1 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(100%,#f1f1f1));
+  background-image: -webkit-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: -o-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: -ms-linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  background-image: linear-gradient(top,  #f7f7f7 0%,#f1f1f1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#f1f1f1',GradientType=0 );
+  border-bottom: 1px solid #bbb;
+}
+.ui-datepicker-header {
+  color: #e0e0e0;
+  font-weight: bold;
+  -webkit-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, 2);
+  -moz-box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+  box-shadow: inset 0px 1px 1px 0px rgba(250, 250, 250, .2);
+  text-shadow: 1px -1px 0px #000;
+  filter: dropshadow(color=#000, offx=1, offy=-1);
+  line-height: 30px;
+  border-width: 1px 0 0 0;
+  border-style: solid;
+  border-color: #111;
+}
+
+.ui-datepicker-title {
+  text-align: center;
+}
+
+.ui-datepicker-prev, .ui-datepicker-next {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  cursor: pointer;
+  background-image: url('../img/arrow.png');
+  background-repeat: no-repeat;
+  line-height: 600%;
+  overflow: hidden;
+}
+
+.ui-datepicker-prev {
+  float: left;
+  background-position: center -30px;
+}
+.ui-datepicker-next {
+  float: right;
+  background-position: center 0px;
+}
+
+.ui-datepicker tbody td {
+  padding: 0;
+  border-right: 1px solid #bbb;
+  background: white;
+}
+
+.ui-datepicker th {
+  text-transform: uppercase;
+  font-size: 6pt;
+  padding: 5px 0;
+  color: #666666;
+  text-shadow: 1px 0px 0px #fff;
+  filter: dropshadow(color=#fff, offx=1, offy=0);
+}
+
+.ui-datepicker tbody td {
+  padding: 0;
+  border-right: 1px solid #bbb;
+}
+
+.ui-datepicker tbody td:last-child {
+  border-right: 0px;
+}
+
+.ui-datepicker tbody tr {
+  border-bottom: 1px solid #bbb;
+}
+.ui-datepicker tbody tr:last-child {
+  border-bottom: 0px;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #666666;
+  text-shadow: 1px 1px 0px #fff;
+  filter: dropshadow(color=#fff, offx=1, offy=1);
+}
+.ui-datepicker-calendar .ui-state-default {
+  background: #ededed;
+  background: -moz-linear-gradient(top,  #ededed 0%, #dedede 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededed), color-stop(100%,#dedede));
+  background: -webkit-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: -o-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: -ms-linear-gradient(top,  #ededed 0%,#dedede 100%);
+  background: linear-gradient(top,  #ededed 0%,#dedede 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#dedede',GradientType=0 );
+  -webkit-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+  -moz-box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+  box-shadow: inset 1px 1px 0px 0px rgba(250, 250, 250, .5);
+}
+.ui-datepicker-unselectable .ui-state-default {
+  background: #f4f4f4;
+  color: #b4b3b3;
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+  background: #f7f7f7;
+}
+
+.ui-datepicker-calendar .ui-state-active {
+  background: #6eafbf;
+  -webkit-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  -moz-box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  box-shadow: inset 0px 0px 10px 0px rgba(0, 0, 0, .1);
+  color: #e0e0e0;
+  text-shadow: 0px 1px 0px #4d7a85;
+  filter: dropshadow(color=#4d7a85, offx=0, offy=1);
+  border: 1px solid #55838f;
+  position: relative;
+  margin: -1px;
+}
+
+/* for checkbox group on update training request */
+.checkboxes label {
+  display: block;
+  float: left;
+  padding-right: 10px;
+  padding-left: 22px;
+  text-indent: -22px;
+}
+.checkboxes input {
+  vertical-align: middle;
+}
+.checkboxes label span {
+  vertical-align: middle;
+}
+
+/* For input boxes on UTR*/
+.container input, li input[type=text]
+ {
+  position: relative;
+    text-align: right;
+	width: 175px;
+	font-size: 20px;
+}
+
+/*For location input on UTR*/
+.location {
+	font-size: 14px;
+}
+
+/* to get super fun trainer stuff to line up */
+.stupidLeft{width:25%; float:left;}
+.stupidRight{width:65%;float:left;margin:auto;width:75%;}
+.trainerList{float: none !important}
+
+
+.justwork {
+	display: inline-block;
+}	
+.justworkdate {
+	padding-right: 25px;
+	float: right;
+}
+
+
+
+/* This is not in my file */
+
+.proc-card-a {
+  width: 250px;
+  height: 250px;
+  margin-top: 0;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-bottom: 25px;
+}
+
+/* Workflow view cards */
+.container input.wfcl {
+	width: 25px;	
+}
+
+div#exec-table .btn-wf {
+	text-align: center;
+	width: 100px;
+	padding: 0;
+	height: 2rem;
+}

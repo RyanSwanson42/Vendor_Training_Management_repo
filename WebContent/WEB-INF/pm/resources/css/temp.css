@@ -1,0 +1,96 @@
+@charset "ISO-8859-1";
+.modal-body {
+    			max-height: calc(100vh - 210px);
+    			overflow-y: scroll;
+	}
+			body { 
+				margin: auto; 
+				padding: auto; 
+				height: 100%; 
+				width: 100%;
+			}
+			
+			.btn_row{
+				display: flex;
+				justify-content: space-between;
+				margin:auto;
+				padding-right:35px;
+				padding-left:35px;
+				padding-top:20px;
+				padding-bottom:10px;
+			}
+
+			.navbar-nav{
+				flex-direction:row;
+			}
+			.nav-item{
+				padding-right:30px;
+			}
+			.my-card {
+				margin: auto;
+				padding-right:20px;
+				padding-left:20px;
+				padding-top:10px;
+				padding-bottom:10px;
+			}
+			.card-body:hover {
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			.dropdown-item:hover{
+				background:lightgrey;
+				font-color:black;
+			}
+			.dropdown-toggle {
+				color: cornsilk;
+			}
+			#changePassword, #viewInfo {
+				padding-top: 100px;
+			}
+
+
+			#createNewRequest {
+				background-color:rgb(51, 96, 223);
+				border:none;
+			}
+			#createNewRequest:hover {
+				background-color:rgb(187, 196, 201);
+			}
+			#createNewRequest:focus{
+				-webkit-box-shadow: none !important;
+				box-shadow: none  !important;
+			}
+			.card-red .green-fa, .card-red .yellow-fa{
+				display:none;
+			}
+			.card-yellow .green-fa, .card-yellow .red-fa, .card-yellow .approve-btn{
+				display:none;
+			}
+			.card-green .yellow-fa, .card-green .red-fa, .card-green .approve-btn{
+				display:none;
+			}
+			.card-green .border, .card-green .list-group-item, .card-green .my-fa{
+				background-color:palegreen;
+			}
+			 .card-yellow .border, .card-yellow .list-group-item, .card-yellow .my-fa{
+				background-color:#ffc107;
+			}
+			 .card-red .border, .card-red .list-group-item, .card-red .my-fa{
+				background-color:tomato;
+			}
+			.card-green .my-fa{
+				border:palegreen;
+			}
+			.card-yellow .my-fa{
+				border:#ffc107;
+			}
+			.card-red .my-fa{
+				border:tomato;
+			}
+			.mainContainer {
+			    height: auto !important; }
+			.approve-btn{
+				font-size:9.5;
+			}
+			.my-contain{
+				min-height:65vh;
+			}

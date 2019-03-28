@@ -1,0 +1,167 @@
+#ashlogo {
+  width: 175px;
+
+}
+
+#asflogo {
+  width: 175px;
+}
+
+footer {
+  /* position: fixed;
+        left: 0;
+        bottom: 0; */
+  width: 100%;
+  background-color: lightgray;
+  opacity: 0.5;
+}
+
+.phead {
+  padding: 0%;
+  background-image: linear-gradient(to right, white, lightblue);
+}
+
+.phead h4 {
+  font-size: 27px;
+}
+
+.hfas {
+
+  color: black;
+
+}
+
+
+.nvbr {
+  background-color: lightblue;
+}
+
+.proc-card {
+  margin-bottom: 10px;
+  border-width: 3px;
+}
+
+.proc-card-body {
+  padding: 1rem;
+}
+
+.proc-btn {
+  margin-top: 5px;
+  float: right;
+  padding: .2rem .375rem;
+}
+
+.summary-btn {
+  float: right;
+}
+
+#processed-title {
+  position: fixed;
+  top: 0;
+
+}
+
+.main-container {
+  max-width: 85%;
+  padding-right: 0;
+}
+
+.proc-card {
+  width: 30%;
+  float: left;
+  margin: 1%;
+  margin-top: 0;
+}
+
+.proc-card-icon-col {
+  padding-right: 3%;
+  text-align: center;
+}
+
+.proc-reqs {
+  padding-left: 4%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: lightgrey;
+  float: right;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+#sidebarOpenBtnDiv {
+  float: right;
+}
+
+.openbtn {
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: white;
+  color: #0066a1;
+  padding-left: 50%;
+  padding: 5px 5px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+.exec-card {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 25px;
+  border-width: 3px;
+  border-color: green;
+  background-color: #bfbfbf;
+  width: 300px;
+  box-shadow: 10px 10px 5px grey;
+}
+
+.exec-card-header:first-child {
+  background-color: #bfbfbf;
+  border-radius: 25px;
+}
+
+#exec-expand-btn {
+  background-color: transparent;
+  border-color: transparent;
+  float: right;
+}
+
+.exec-check-box {
+  background-color: transparent;
+  border-color: transparent;
+}

@@ -58,7 +58,7 @@
 		style="background-color: #3c8dbc">
 	<div class="container">
 		<img src="<c:url value="resources/img/AtosSyntelLogoMedWhite.png" />"
-			height="30" /> <a class="navbar-brand" href="<c:url value="/" />"> <!--<b>Atos</b>Syntel-->
+			height="30" /> <a class="navbar-brand" href="<c:url value="/dashboard" />"> <!--<b>Atos</b>Syntel-->
 			<i>Vendor <b>TRM</b>
 		</i>
 		</a>

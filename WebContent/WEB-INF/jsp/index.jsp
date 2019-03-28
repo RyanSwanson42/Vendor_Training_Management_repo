@@ -475,8 +475,8 @@
 																						<label>Start Date</label>
 																					</div>
 																					<div class="col-4">
-																						<input type="date" class="form-control-sm"
-																							name="startDate" required>
+																						<input id="StartDate" type="date" class="form-control-sm"
+																							name="startDate" >
 																					</div>
 																					<div class="col-3"></div>
 																				</div>
@@ -486,26 +486,22 @@
 																						<label>End Date</label>
 																					</div>
 																					<div class="col-4">
-																						<input type="date" class="form-control-sm"
-																							name="endDate" required>
+																						<input id="EndDate" type="date" class="form-control-sm"
+																							name="endDate" >
 																					</div>
 																					<div class="col-3"></div>
 																				</div>
-																			</div>
-																			<hr>
-																			<div class="form-group">
-																				<div class="row">
-																					<div class="col-3"></div>
-																					<div class="col-2">
-																						<label>Participants</label>
-																					</div>
-																					<div class="col-4">
-																						<input type="number" min="0" required
-																							placeholder="Participants Count"
-																							class="form-control-sm" name="participants">
-																					</div>
-																					<div class="col-2"></div>
-																				</div>
+																				<script>
+																					document.getElementById("EndDate").addEventListener("change", function() {
+																					    var input = this.value;
+																					    var input2 = document.getElementById("StartDate").value;
+																					    var dateEntered = new Date(input);
+																					    var ins = "insertDates/${pro2.getVendorTrainingRequest().vendor_training_request_id}/" + input2 + "/" + input;
+																					    console.log(ins);
+																					    document.getElementById("insdates").setAttribute('href', ins);
+																					});
+																				</script>
+																				<a id="insdates" href="#">Button</a>
 																			</div>
 																			<hr>
 																			<div class="row">
@@ -530,29 +526,30 @@
 																				</div>
 																				<div class="col-3"></div>
 																			</div>
+																			
 																			<div id="classRoomForm" class="form-group">
 																				<div class="row">
 																					<div class="col">
 																						<br> <input name="city" placeholder="City"
-																							required type="text" class="form-control">
+																							 type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input name="state" placeholder="State" required
+																						<input name="state" placeholder="State" 
 																							type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="country" placeholder="Country"
-																							required type="text" class="form-control">
+																							 type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="zipcode" placeholder="Zipcode"
-																							required type="number" pattern="\d*" max="99999"
+																							 type="number" pattern="\d*" max="99999"
 																							class="form-control">
 																					</div>
 																				</div>
@@ -565,7 +562,7 @@
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<select name="timezone" class="form-control"
-																							id="timezone" required>
+																							id="timezone">
 																							<option selected="selected" disabled>Time Zone</option>
 																							<option timeZoneId="1" gmtAdjustment="GMT-12:00"
 																								useDaylightTime="0" value="-12">(GMT-12:00)
@@ -822,19 +819,19 @@
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="location" placeholder="Location"
-																							required type="text" class="form-control">
+																							 type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="room" placeholder="Room Number"
-																							required type="text" class="form-control">
+																							 type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="breakdown"
-																							placeholder="Training Break Down" required
+																							placeholder="Training Break Down" 
 																							type="text" class="form-control">
 																					</div>
 																				</div>
@@ -843,14 +840,14 @@
 																				<div class="row">
 																					<div class="col">
 																						<br> <input name="url"
-																							placeholder="Training URL" type="text" required
+																							placeholder="Training URL" type="text" 
 																							class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="audio" placeholder="Training Audio"
-																							required type="text" class="form-control">
+																							 type="text" class="form-control">
 																					</div>
 																				</div>
 																			</div>
@@ -1039,6 +1036,7 @@
 							});
 				});
 	</script>
+	
 
 
 	<script>
@@ -1125,12 +1123,23 @@
 	
 	// Section 3 accordion
 	function section3() {
-		//alert('Accordion 3 clicked');
+	
 	}
 	
 	// Section 4 accordion
-	function section4() {
-		//alert('Accordion 4 clicked');
+	function section4(id) {
+		$.ajax({
+        	type: "POST",
+        	data: {id: id},
+            url : 'selectDates',
+            success : function(data) {
+				$('#StartDate').val(data.training_start_date);
+				$('#EndDate').val(data.training_end_date);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+            }   
+		});
 	}
 	
 	</script>
