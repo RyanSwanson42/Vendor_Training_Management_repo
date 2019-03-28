@@ -1,4 +1,4 @@
-package dao.getName;
+package trm.it.dao.getName;
 
 import java.util.List;
 

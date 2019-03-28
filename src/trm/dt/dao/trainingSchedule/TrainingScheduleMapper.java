@@ -1,4 +1,4 @@
-package dao.trainingSchedule;
+package trm.dt.dao.trainingSchedule;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package jt;
+package trm.dt.jt;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

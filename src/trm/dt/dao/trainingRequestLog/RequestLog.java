@@ -1,9 +1,9 @@
-package dao.trainingRequestLog;
+package trm.dt.dao.trainingRequestLog;
 
 import java.sql.Timestamp;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestDAO;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingRequest.TrainingRequestDAO;
 
 public class RequestLog {
 	private int request_log_id;

@@ -1,7 +1,7 @@
-package dao.spocMaster;
+package trm.dt.dao.spocMaster;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
 
 public class SpocMaster 
 {

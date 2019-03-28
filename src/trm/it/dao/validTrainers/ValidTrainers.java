@@ -1,8 +1,8 @@
-package dao.it.validTrainers;
+package trm.it.dao.validTrainers;
 
-import dao.employee.Employee;
-import dao.it.internalTrainer.InternalTrainer;
-import dao.trainingManagementStatus.TrainingManagementStatus;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.internalTrainer.InternalTrainer;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatus;
 
 public class ValidTrainers {
 	private InternalTrainer internalTrainer;

@@ -1,6 +1,6 @@
-package dao.spocMaster;
+package trm.it.dao.spocMaster;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 
 public class SpocMaster extends Employee
 {

@@ -1,6 +1,6 @@
-package dbo;
+package trm.pm.dbo;
 
-import dbo.TrainingRequestLogDAO;
+import trm.pm.dbo.TrainingRequestLogDAO;
 
 import java.util.List;
 

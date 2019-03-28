@@ -1,10 +1,10 @@
-package bl;
+package trm.it.bl;
 
 import java.util.List;
 
-import dao.getStatus.GetStatus;
-import dao.getStatus.GetStatusDAO;
-import dao.trainingManagementStatus.TrainingManagementStatusDAO;
+import trm.it.dao.getStatus.GetStatus;
+import trm.it.dao.getStatus.GetStatusDAO;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 
 public class GetRequestCol {
 	public int getNew()

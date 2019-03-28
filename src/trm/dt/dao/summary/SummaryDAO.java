@@ -1,4 +1,4 @@
-package dao.dtt.summary;
+package trm.dt.dao.summary;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 public class Training_Participants {
 	private int training_participant_id;

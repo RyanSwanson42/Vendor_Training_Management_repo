@@ -1,4 +1,4 @@
-package dao.employee;
+package trm.it.dao.employee;
 
 public class Employee
 {

@@ -1,18 +1,18 @@
-package dao.it.internalTrainingRequest;
+package trm.it.dao.internalTrainingRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeMapper;
-import dao.it.internalTrainer.InternalTrainer;
-import dao.it.internalTrainer.InternalTrainerMapper;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestMapper;
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleMapper;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeMapper;
+import trm.it.dao.it.internalTrainer.InternalTrainer;
+import trm.it.dao.it.internalTrainer.InternalTrainerMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.trainingSchedule.TrainingSchedule;
+import trm.it.dao.trainingSchedule.TrainingScheduleMapper;
 
 public class InternalTrainingRequestMapper implements RowMapper<InternalTrainingRequest>{
 	/*

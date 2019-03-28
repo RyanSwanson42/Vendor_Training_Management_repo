@@ -1,4 +1,4 @@
-package dao.trainingRequest;
+package trm.it.dao.trainingRequest;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
 
 public class TrainingRequestDAO {
 

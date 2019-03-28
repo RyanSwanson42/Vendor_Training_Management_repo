@@ -1,9 +1,9 @@
-package dao.trainingRequest;
+package trm.it.dao.trainingRequest;
 
 import java.sql.Date;
 import java.sql.Time;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 
 public class TrainingRequest
 {

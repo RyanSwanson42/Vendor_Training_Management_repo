@@ -1,7 +1,7 @@
-package dao.trainingManagementStatus;
+package trm.dt.dao.trainingManagementStatus;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestDAO;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingRequest.TrainingRequestDAO;
 
 public class ManagmentStatus {
 	private int training_management_status_id;

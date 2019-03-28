@@ -1,4 +1,4 @@
-package jt;
+package trm.it.jt;
 
 import java.util.List;
 import org.springframework.context.ApplicationContext;

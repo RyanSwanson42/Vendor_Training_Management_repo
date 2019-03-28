@@ -1,9 +1,9 @@
-package dao.trainingRequest;
+package trm.dt.dao.trainingRequest;
 
 import java.sql.Timestamp;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
 
 public class TrainingRequest {
 	private int training_request_id;

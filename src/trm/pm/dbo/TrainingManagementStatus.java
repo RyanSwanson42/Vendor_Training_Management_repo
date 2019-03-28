@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 public class TrainingManagementStatus {
 	private int training_management_status_id;

@@ -1,4 +1,4 @@
-package bl;
+package trm.dt.bl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

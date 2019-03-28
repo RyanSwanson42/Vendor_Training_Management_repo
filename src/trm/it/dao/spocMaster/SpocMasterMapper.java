@@ -1,12 +1,12 @@
-package dao.spocMaster;
+package trm.it.dao.spocMaster;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeMapper;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeMapper;
 
 public class SpocMasterMapper implements RowMapper<SpocMaster>{
 	/*

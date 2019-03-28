@@ -1,4 +1,4 @@
-package DDTProject;
+package trm.dt.trial.DDTProject;
 
 public class DTTNewRequestCard {
 	private int requestId;

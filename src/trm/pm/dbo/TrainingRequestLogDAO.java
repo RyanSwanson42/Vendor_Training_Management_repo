@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import java.sql.Timestamp;
 import java.util.List;

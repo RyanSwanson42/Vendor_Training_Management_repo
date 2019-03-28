@@ -1,4 +1,4 @@
-package dao.trainingManagementStatus;
+package trm.it..trainingManagementStatus;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.trainingManagementStatus.TrainingManagementStatus;
-import dao.trainingManagementStatus.TrainingManagementStatusMapper;
-import dao.trainingRequestLog.TrainingRequestLogDAO;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatus;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatusMapper;
+import trm.it.dao.trainingRequestLog.TrainingRequestLogDAO;
 
 public class TrainingManagementStatusDAO {
 

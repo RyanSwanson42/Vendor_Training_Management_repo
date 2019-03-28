@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import java.util.ArrayList;
 import java.util.List;

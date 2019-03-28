@@ -1,4 +1,4 @@
-package dao.trainingSchedule;
+package trm.it.dao.trainingSchedule;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleMapper;
+import trm.it.dao.trainingSchedule.TrainingSchedule;
+import trm.it.dao.trainingSchedule.TrainingScheduleMapper;
 
 public class TrainingScheduleDAO {
 

@@ -1,8 +1,8 @@
-package bl;
+package trm.pm.bl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jt.MyTemplate;
+import trm.pm.jt.MyTemplate;
 
 public class NewCustomerRegistration {
 

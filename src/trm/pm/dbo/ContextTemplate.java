@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

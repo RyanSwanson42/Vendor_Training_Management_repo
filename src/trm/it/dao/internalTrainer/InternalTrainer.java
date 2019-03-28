@@ -1,6 +1,6 @@
-package dao.it.internalTrainer;
+package trm.it.dao.internalTrainer;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 
 public class InternalTrainer
 {

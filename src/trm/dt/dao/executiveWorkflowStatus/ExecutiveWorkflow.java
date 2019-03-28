@@ -1,9 +1,9 @@
-package dao.executiveWorkflowStatus;
+package trm.dt.dao.executiveWorkflowStatus;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestDAO;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingRequest.TrainingRequestDAO;
 
 
 public class ExecutiveWorkflow {

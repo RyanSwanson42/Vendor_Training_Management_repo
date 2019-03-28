@@ -1,4 +1,4 @@
-package dao.dtt.developTeamTrainerRequest;
+package trm.dt.dao.developTeamTrainerRequest;
 
 import java.sql.Timestamp;
 import java.util.List;

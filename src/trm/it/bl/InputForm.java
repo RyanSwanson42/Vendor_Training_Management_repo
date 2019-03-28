@@ -1,4 +1,4 @@
-package bl;
+package trm.it.bl;
 
 public class InputForm
 {

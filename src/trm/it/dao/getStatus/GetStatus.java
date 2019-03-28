@@ -1,8 +1,8 @@
-package dao.getStatus;
+package trm.it.dao.getStatus;
 
-import dao.spocMaster.SpocMaster;
-import dao.trainingManagementStatus.TrainingManagementStatus;
-import dao.trainingRequest.TrainingRequest;
+import trm.it.dao.spocMaster.SpocMaster;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatus;
+import trm.it.dao.trainingRequest.TrainingRequest;
 
 public class GetStatus {
 	SpocMaster spoc = new SpocMaster();

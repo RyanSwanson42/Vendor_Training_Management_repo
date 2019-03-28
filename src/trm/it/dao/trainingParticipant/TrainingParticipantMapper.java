@@ -1,14 +1,14 @@
-package dao.trainingParticipant;
+package trm.it.dao.trainingParticipant;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeMapper;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
 
 public class TrainingParticipantMapper implements RowMapper<TrainingParticipant>{
 	/*

@@ -1,4 +1,4 @@
-package dao.spocMaster;
+package trm.dt.dao.spocMaster;
 
 import java.util.List;
 

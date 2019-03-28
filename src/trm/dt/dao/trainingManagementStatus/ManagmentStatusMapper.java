@@ -1,4 +1,4 @@
-package dao.trainingManagementStatus;
+package trm.dt.dao.trainingManagementStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

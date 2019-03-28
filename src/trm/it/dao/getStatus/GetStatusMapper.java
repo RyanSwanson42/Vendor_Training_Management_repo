@@ -1,13 +1,13 @@
-package dao.getStatus;
+package trm.it.dao.getStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.spocMaster.SpocMaster;
-import dao.trainingManagementStatus.TrainingManagementStatus;
-import dao.trainingRequest.TrainingRequest;
+import trm.it.dao.spocMaster.SpocMaster;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatus;
+import trm.it.dao.trainingRequest.TrainingRequest;
 
 public class GetStatusMapper implements RowMapper{
 	public GetStatus mapRow(ResultSet result, int arg1) throws SQLException {

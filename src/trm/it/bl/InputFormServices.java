@@ -1,15 +1,15 @@
-package bl;
+package trm.it.bl;
 
-import dao.getName.GetNameDAO;
-import dao.getStatus.GetStatus;
-import dao.getStatus.GetStatusDAO;
-import dao.it.internalTrainer.InternalTrainer;
-import dao.it.internalTrainer.InternalTrainerDAO;
-import dao.it.internalTrainingRequest.InternalTrainingRequest;
-import dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
-import dao.trainingManagementStatus.TrainingManagementStatusDAO;
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleDAO;
+import trm.it.dao.getName.GetNameDAO;
+import trm.it.dao.getStatus.GetStatus;
+import trm.it.dao.getStatus.GetStatusDAO;
+import trm.it.dao.it.internalTrainer.InternalTrainer;
+import trm.it.dao.it.internalTrainer.InternalTrainerDAO;
+import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequest;
+import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
+import trm.it.dao.trainingSchedule.TrainingSchedule;
+import trm.it.dao.trainingSchedule.TrainingScheduleDAO;
 
 public class InputFormServices
 {

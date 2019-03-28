@@ -1,4 +1,4 @@
-package controllers;
+package trm.it.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import dao.employee.Employee;
-import dao.getName.GetName;
-import dao.getName.GetNameDAO;
-import bl.InputForm;
-import bl.InputFormServices;
-import bl.SecurityCheck;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.getName.GetName;
+import trm.it.dao.getName.GetNameDAO;
+import trm.it.bl.InputForm;
+import trm.it.bl.InputFormServices;
+import trm.it.bl.SecurityCheck;
 
 @Controller
 public class InternalTrainingController {

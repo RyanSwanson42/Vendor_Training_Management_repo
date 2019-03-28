@@ -1,4 +1,4 @@
-package dao.trainingRequest;
+package trm.it.dao.trainingRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
-import dao.employee.EmployeeMapper;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeDAO;
+import trm.it.dao.employee.EmployeeMapper;
 public class TrainingRequestMapper implements RowMapper<TrainingRequest>{
 	public TrainingRequest mapRow(ResultSet result, int arg1)
 			throws SQLException {

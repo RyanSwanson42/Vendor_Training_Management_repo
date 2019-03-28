@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import java.util.HashMap;
 import java.util.List;

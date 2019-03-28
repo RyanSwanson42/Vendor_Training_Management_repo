@@ -1,13 +1,13 @@
-package dao.dtt.developTeamTrainingRequest;
+package trm.dt.dao.developTeamTrainingRequest;
 
-import dao.dtt.developTeamTrainerRequest.DDTTrainer;
-import dao.dtt.developTeamTrainerRequest.DDTTrainerDOA;
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestDAO;
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleDAO;
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainerDOA;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingRequest.TrainingRequestDAO;
+import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.TrainingScheduleDAO;
 
 public class DDTTraining {
 	private int Dtt_training_id;

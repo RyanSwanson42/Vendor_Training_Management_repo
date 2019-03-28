@@ -1,4 +1,4 @@
-package dao.dtt.inProcessCard;
+package trm.dt.dao.inProcessCard;
 
 import java.util.List;
 

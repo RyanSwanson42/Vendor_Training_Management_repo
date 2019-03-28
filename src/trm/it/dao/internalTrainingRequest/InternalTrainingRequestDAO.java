@@ -1,4 +1,4 @@
-package dao.it.internalTrainingRequest;
+package trm.it.dao.internalTrainingRequest;
 
 import java.util.List;
 

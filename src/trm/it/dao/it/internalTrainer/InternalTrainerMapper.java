@@ -1,4 +1,4 @@
-package dao.it.internalTrainer;
+package trm.it.dao.it.internalTrainer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 /*
 it_trainer_id number(7) CONSTRAINT it_trainer_fk references employee(employee_id) unique not null,
 profile_file_path varchar(100),

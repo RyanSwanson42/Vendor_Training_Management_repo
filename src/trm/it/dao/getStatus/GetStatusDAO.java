@@ -1,4 +1,4 @@
-package dao.getStatus;
+package trm.it.dao.getStatus;
 
 import java.util.List;
 

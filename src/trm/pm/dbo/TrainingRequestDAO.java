@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -9,8 +9,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dbo.TrainingRequest;
-import dbo.TrainingRequestMapper;
+import trm.pm.dbo.TrainingRequest;
+import trm.pm.dbo.TrainingRequestMapper;
 
 public class TrainingRequestDAO {
 

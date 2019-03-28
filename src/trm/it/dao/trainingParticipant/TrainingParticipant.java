@@ -1,6 +1,6 @@
-package dao.trainingParticipant;
+package trm.it.dao.trainingParticipant;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 
 public class TrainingParticipant extends Employee
 {

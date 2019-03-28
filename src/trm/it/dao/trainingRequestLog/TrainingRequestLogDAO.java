@@ -1,4 +1,4 @@
-package dao.trainingRequestLog;
+package trm.it.dao.trainingRequestLog;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -10,10 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestMapper;
-import dao.trainingRequestLog.TrainingRequestLog;
-import dao.trainingRequestLog.TrainingRequestLogMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.trainingRequestLog.TrainingRequestLog;
+import trm.it.dao.trainingRequestLog.TrainingRequestLogMapper;
 
 public class TrainingRequestLogDAO {
 

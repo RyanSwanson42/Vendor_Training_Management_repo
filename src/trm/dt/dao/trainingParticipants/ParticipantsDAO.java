@@ -1,4 +1,4 @@
-package dao.trainingParticipants;
+package trm.dt.dao.trainingParticipants;
 
 import java.util.List;
 

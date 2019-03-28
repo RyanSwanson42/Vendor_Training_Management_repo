@@ -1,4 +1,4 @@
-package ddtProjectQueries;
+package trm.dt.ddtProjectQueries;
 
 import java.sql.Timestamp;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package dao.it.stepTwo;
+package trm.it.dao.stepTwo;
 
 public class StepTwoDAO {
 

@@ -1,11 +1,11 @@
-package controllers;
+package trm.pm.controllers;
 
 import java.util.List;
 
-import dbo.TrainingManagementStatus;
-import dbo.TrainingManagementStatusDAO;
-import dbo.TrainingRequest;
-import dbo.TrainingRequestDAO;
+import trm.pm.dbo.TrainingManagementStatus;
+import trm.pm.dbo.TrainingManagementStatusDAO;
+import trm.pm.dbo.TrainingRequest;
+import trm.pm.dbo.TrainingRequestDAO;
 //change status 102 (no longer used) to 100,
 //create a status management for all the test data that didn't have one
 public class FixAllStatus {

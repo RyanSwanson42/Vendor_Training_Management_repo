@@ -1,6 +1,6 @@
-package bl;
+package trm.it.bl;
 
-import jt.MyTemplate;
+import trm.it.jt.MyTemplate;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

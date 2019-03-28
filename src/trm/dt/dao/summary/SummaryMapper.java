@@ -1,17 +1,17 @@
-package dao.dtt.summary;
+package trm.dt.dao.summary;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.dtt.developTeamTrainingRequest.DDTTraining;
-import dao.dtt.developTeamTrainerRequest.DDTTrainer;
-import dao.employee.Employee;
-import dao.trainingManagementStatus.ManagmentStatus;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleMapper;
+import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.TrainingScheduleMapper;
 
 public class SummaryMapper implements RowMapper<Summary> 
 {

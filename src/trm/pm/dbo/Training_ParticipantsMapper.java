@@ -1,4 +1,4 @@
-package dbo;
+package trm.pm.dbo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

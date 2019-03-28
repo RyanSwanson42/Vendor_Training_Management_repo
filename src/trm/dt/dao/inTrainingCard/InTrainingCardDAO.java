@@ -1,4 +1,4 @@
-package dao.dtt.inTrainingCard;
+package trm.dt.dao.inTrainingCard;
 
 import java.util.List;
 

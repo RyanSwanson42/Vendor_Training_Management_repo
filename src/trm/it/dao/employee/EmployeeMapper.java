@@ -1,4 +1,4 @@
-package dao.employee;
+package trm.it.dao.employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

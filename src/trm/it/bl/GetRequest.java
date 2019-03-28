@@ -1,7 +1,7 @@
-package bl;
+package trm.it.bl;
 
-import dao.it.internalTrainingRequest.InternalTrainingRequest;
-import dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequest;
+import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
 
 public class GetRequest {
 

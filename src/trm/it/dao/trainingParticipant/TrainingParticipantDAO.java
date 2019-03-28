@@ -1,4 +1,4 @@
-package dao.trainingParticipant;
+package trm.it.dao.trainingParticipant;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.spocMaster.SpocMaster;
-import dao.spocMaster.SpocMasterMapper;
+import trm.it.dao.spocMaster.SpocMaster;
+import trm.it.dao.spocMaster.SpocMasterMapper;
 
 public class TrainingParticipantDAO {
 	/*

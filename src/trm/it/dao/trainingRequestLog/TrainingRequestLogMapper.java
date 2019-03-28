@@ -1,13 +1,13 @@
-package dao.trainingRequestLog;
+package trm.it.dao.trainingRequestLog;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestDAO;
-import dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestDAO;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
 
 public class TrainingRequestLogMapper implements RowMapper<TrainingRequestLog>{
 	/*

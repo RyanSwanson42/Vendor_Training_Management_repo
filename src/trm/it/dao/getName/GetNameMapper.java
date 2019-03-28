@@ -1,11 +1,11 @@
-package dao.getName;
+package trm.it.dao.getName;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
+import trm.it.dao.employee.Employee;
 
 public class GetNameMapper implements RowMapper {
 

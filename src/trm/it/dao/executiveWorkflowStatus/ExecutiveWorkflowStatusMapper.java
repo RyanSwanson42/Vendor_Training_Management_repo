@@ -1,13 +1,13 @@
-package dao.executiveWorkflowStatus;
+package trm.it.dao.executiveWorkflowStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeMapper;
-import dao.trainingRequest.TrainingRequest;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
 
 public class ExecutiveWorkflowStatusMapper implements RowMapper<ExecutiveWorkflowStatus>{
 	/*

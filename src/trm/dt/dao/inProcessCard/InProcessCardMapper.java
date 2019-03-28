@@ -1,15 +1,15 @@
-package dao.dtt.inProcessCard;
+package trm.dt.dao.inProcessCard;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.dtt.developTeamTrainingRequest.DDTTraining;
-import dao.employee.Employee;
-import dao.trainingManagementStatus.ManagmentStatus;
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingSchedule.TrainingSchedule;
 
 public class InProcessCardMapper implements RowMapper<InProcessCard>
 {

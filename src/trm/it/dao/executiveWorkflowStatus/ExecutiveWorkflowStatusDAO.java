@@ -1,4 +1,4 @@
-package dao.executiveWorkflowStatus;
+package trm.it.dao.executiveWorkflowStatus;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeMapper;
-import dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.employee.EmployeeMapper;
+import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
 
 public class ExecutiveWorkflowStatusDAO {
 	/*

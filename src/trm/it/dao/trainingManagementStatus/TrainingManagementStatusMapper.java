@@ -1,12 +1,12 @@
-package dao.trainingManagementStatus;
+package trm.it.dao.trainingManagementStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import dao.trainingRequest.TrainingRequest;
-import dao.trainingRequest.TrainingRequestMapper;
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
 
 public class TrainingManagementStatusMapper implements RowMapper<TrainingManagementStatus> {
 	/*

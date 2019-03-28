@@ -1,6 +1,6 @@
-package dao.trainingManagementStatus;
+package trm.it.dao.trainingManagementStatus;
 
-import dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequest;
 
 public class TrainingManagementStatus
 {

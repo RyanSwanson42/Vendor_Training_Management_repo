@@ -1,7 +1,7 @@
-package dao.trainingParticipants;
+package trm.dt.dao.trainingParticipants;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
 
 public class Participants {
 	private int training_participant_id;

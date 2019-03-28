@@ -1,4 +1,4 @@
-package dao.trainingSchedule;
+package trm.dt.dao.trainingSchedule;
 
 import java.net.URL;
 import java.sql.Timestamp;

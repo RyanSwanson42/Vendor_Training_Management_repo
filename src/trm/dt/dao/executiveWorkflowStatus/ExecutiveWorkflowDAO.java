@@ -1,4 +1,4 @@
-package dao.executiveWorkflowStatus;
+package trm.dt.dao.executiveWorkflowStatus;
 
 import java.util.List;
 

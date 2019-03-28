@@ -1,4 +1,4 @@
-package dao.trainingSchedule;
+package trm.it.dao.trainingSchedule;
 
 import java.sql.Date;
 
