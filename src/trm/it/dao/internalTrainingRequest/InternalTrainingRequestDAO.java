@@ -32,7 +32,7 @@ public class InternalTrainingRequestDAO {
 	}
 	
 	public void insertInternalTrainingRequest(int training_request_id){
-		String sql = "INSERT INTO Internal_Training_Request values(internal_training_id_seq.nextval, ?, null, null, null, getRandExec, null)";
+		String sql = "INSERT INTO Internal_Training_Request (internal_training_id,training_request_id) values(internal_training_id_seq.nextval, ?)";
 		temp.update(sql, new Object[]{training_request_id});
 	}
 	

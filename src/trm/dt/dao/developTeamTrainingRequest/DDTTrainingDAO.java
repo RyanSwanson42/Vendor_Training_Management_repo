@@ -50,4 +50,11 @@ public class DDTTrainingDAO
 				new Object[]{Dtt_training_id},new DDTTrainingMapper());
 		return trainingRequest.get(0);
 	}
+	
+	public void insertDDTTrainingWithDTTID(int training_request_id) {
+		
+		String sql = "insert into DEVELOP_TEAM_TRAINING_REQUEST(Dtt_training_id, training_request_id) values (dtt_training_req_id_seq.nextval, ?)";
+		
+		temp.update(sql, new Object[] {training_request_id});
+	}
 }

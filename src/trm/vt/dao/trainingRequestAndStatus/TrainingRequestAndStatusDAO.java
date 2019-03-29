@@ -18,7 +18,7 @@ public class TrainingRequestAndStatusDAO {
 	
 	public List<TrainingRequestAndStatus> getTrainingRequestDetail100(String vertical) {
 		
-		String sql = "select t.TRAINING_REQUEST_ID, e.first_name, e.last_name, t.request_training_module, t.request_training_module_scope, \r\n" + 
+		String sql = "select distinct t.TRAINING_REQUEST_ID, e.first_name, e.last_name, t.request_training_module, t.request_training_module_scope, \r\n" + 
 				"t.request_training_mode, t.request_start_date, t.request_end_date, \r\n" + 
 				"t.request_location, t.request_approx_participant, t.time_requested,\r\n" + 
 				"t.justification_of_request from employee e \r\n" + 

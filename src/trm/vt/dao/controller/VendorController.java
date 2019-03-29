@@ -23,12 +23,15 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import trm.dt.dao.developTeamTrainingRequest.DDTTrainingDAO;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflow;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
 import trm.dt.dao.inTrainingCard.InTrainingCard;
 import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
+import trm.dt.ddtProjectQueries.CallbackFunction;
 import trm.dt.trial.DDTProject.DTTProcessingCard;
 import trm.dt.trial.DDTProject.DTTdaoServices;
+import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
 import trm.vt.dao.SpocChart.SpocChartDao;
@@ -51,7 +54,9 @@ import trm.vt.dao.vendorTrainingRequestAndStatus.VendorTrainingRequestAndStatusD
 
 @Controller
 public class VendorController {
-
+	
+	/*------------------ Vendor Training Management Services -------------------*/
+	
 	@RequestMapping(value = "/")
 	public String loginView() {
 		return "login";
@@ -77,12 +82,6 @@ public class VendorController {
 		return "report";
 	}
 
-//	@RequestMapping(value="/vendormanagement/{id}")
-//    public String vendorManagementView(@PathVariable("id") int id) {
-//		System.out.println("The training id sent is: " + id);
-//        return "vendormanagement";
-//    }
-
 	@RequestMapping(value = "/vendormanagement/{id}")
 	public String vendorManagementView(ModelMap map) {
 		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
@@ -92,13 +91,11 @@ public class VendorController {
 
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-
 		trm.vt.bl.SecurityCheck ob = new SecurityCheck();
 		boolean result = ob.isUserValid(request.getParameter("un"), request.getParameter("up"));
-
-		if (!result) {
+		if (!result)
 			return "redirect:/loginerror";
-		} else {
+		else {
 			request.getSession().setAttribute("username", request.getParameter("un"));
 			return "redirect:/dashboard";
 		}
@@ -106,37 +103,35 @@ public class VendorController {
 
 	@RequestMapping(value = "/dashboard")
 	public String dashboardView(ModelMap map, HttpServletRequest request) {
-
+		// Get Session of employee who logged in
 		String username = request.getSession().getAttribute("username").toString();
 		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
 		String uservertical = user.getVertical();
 		String userfname = user.getFirst_name();
 		String userlname = user.getLast_name();
-
-		List<TrainingRequestAndStatus> list100 = new TrainingRequestAndStatusDAO().getTrainingRequestDetail100(uservertical);
-		map.addAttribute("trainingRequestList", list100);
-		List<VendorTrainingRequestAndStatus> list102 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail303(uservertical);
-		map.addAttribute("vendorTrainingRequestList2", list102);
-		List<VendorTrainingRequestAndStatus> list103 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail330(uservertical);
-		map.addAttribute("vendorTrainingRequestList3", list103);
-		System.out.println("---------------------------------");
-		System.out.println(list102.toString());
-		System.out.println("---------------------------------");
-
-		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
-		map.addAttribute("vendorDetails", vendorDetails);
-
 		map.addAttribute("username", username);
 		map.addAttribute("uservert", uservertical);
 		map.addAttribute("fname", userfname);
 		map.addAttribute("lname", userlname);
-		System.out.println("login controller");
 
-		// ------------------------  DT Team
+		// Get new training request list (common for all types of training)
+		List<TrainingRequestAndStatus> list100 = new TrainingRequestAndStatusDAO().getTrainingRequestDetail100(uservertical);
+		map.addAttribute("trainingRequestList", list100);
+		
+		// Get vendor training requests 
+		List<VendorTrainingRequestAndStatus> list102 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail303(uservertical);
+		map.addAttribute("vendorTrainingRequestList2", list102);
+		List<VendorTrainingRequestAndStatus> list103 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail330(uservertical);
+		map.addAttribute("vendorTrainingRequestList3", list103);
+		
+		// Get list of all vendors in the system
+		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
+		map.addAttribute("vendorDetails", vendorDetails);
+
+		// ----------------------------  DT Team -------------------------------//
 		List<DTTProcessingCard> cards;
 		cards = new DTTdaoServices().getRequestsProcessing(uservertical);
 		map.addAttribute("TRM_DTT_Homepage", cards);
-		
 		
 		List<ExecutiveWorkflow> wfCards;
 		List<InTrainingCard> itc;
@@ -150,32 +145,31 @@ public class VendorController {
 		return "index";
 	}
 	
-	// DT Team
+	// DT Team update executive workflow status
 	@RequestMapping(value = "updateWorkflowStatus/{executive_workflow_status_id}")
 	public String updateStatus(@PathVariable("executive_workflow_status_id") int wfid,
 			@ModelAttribute("ewf") ExecutiveWorkflow ewf) {
 		new ExecutiveWorkflowDAO().updateExecutiveWorkflow(ewf.getExecutive_workflow_status_id(),
 				ewf.getSent_invitations(), ewf.getCompleted_skillport_enrollment(), ewf.getAssessments_recorded(),
 				ewf.getVendor_training_clearance(), ewf.getCompleted_feedback(), ewf.getTraining_completed());
-
 		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/toProcessing/it/{req_id}")
-	public String toProcessingIT(@PathVariable("req_id") String[] req_id) {
+	public String toProcessingIT(@PathVariable("req_id") int[] req_id) {
 		for (int i = 0; i < req_id.length; i++) {
-			// TODO: update status of red_id[i]
-			// new TrainingRequestDAO().updateStatus(req_id[i], 102);
+			new InternalTrainingRequestDAO().insertInternalTrainingRequest(req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 103);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Internal Trainer");
 		}
 		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/toProcessing/dt/{req_id}")
-	public String toProcessingDT(@PathVariable("req_id") String[] req_id) {
+	public String toProcessingDT(@PathVariable("req_id") int[] req_id) {
 		for (int i = 0; i < req_id.length; i++) {
-			// TODO: update status of red_id[i]
-			//new TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(203, req_id[i]);
+			new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 203);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Dev Team Trainer");
 		}
 		return "redirect:/dashboard";
@@ -186,15 +180,16 @@ public class VendorController {
 		for (int i = 0; i < req_id.length; i++) {
 			// TODO: update status of red_id[i]
 			new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(req_id[i]);
-			new TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(303, req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 303);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Vendor Trainer");
 		}
 		return "redirect:/dashboard";
 	}
 
+	/*----------------------------- Modal and accordion services for Vendor Trainings ----------------------------*/
 	@RequestMapping(value = "/process", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String process() {
-		return "redirect:/";
+		return "redirect:/dashboard";
 	}
 
 	@RequestMapping(value = "/section1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

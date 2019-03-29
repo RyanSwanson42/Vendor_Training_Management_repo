@@ -3,6 +3,9 @@ package trm.dt.ddtProjectQueries;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO;
+import trm.vt.dao.trainingRequestLog.TrainingRequestLogDAO;
+
 public class CallbackFunction 
 {
 	public boolean compareAgeOfTimestap(Timestamp timestamp, int numOfDays)
@@ -28,255 +31,123 @@ public class CallbackFunction
 		return date;
 	}
 	
-	public void statusChange(int status)
-	{
-		switch(status)
-		{
-		case 103:
-			//IT
-			break;
-		case 104:
-			//IT
-			break;
-		case 105:
-			//IT
-			break;
-		case 106:
-			//IT
-			break;
-		case 107:
-			//IT
-			break;
-		case 108:
-			//IT
-			break;
-		case 109:
-			//IT
-			break;
-		case 110:
-			//IT sent to PM
-			//function to ask PM to choose
-			break;
-		case 121:
-			//IT rejected
-			//if to decide to move back or continue
-			statusChange(203);
-			break;
-		case 122:
-			//IT approved
-			statusChange(130);
-			break;
-		case 130:
-			//IT sent to EXEC
-			break;
-		case 203:
-			//DDT move to middle of screen
-			break;
-		case 204:
-			//DDT first edit to trainer
-			break;
-		case 205:
-			//DDT communicating with trainer
-			break;
-		case 206:
-			//DDT trainer confirmed
-			break;
-		case 207: 
-			//DDT first edit to location
-			break;
-		case 208: 
-			//DDT 
-			break;
-		case 209: 
-			//DDT
-			break;
-		case 210:
-			//DDT awaiting PM approval
-			break;
-		case 220:
-			//DDT response from PM
-			break;
-		case 221:
-			//DDT PM rejected
-			break;
-		case 222:
-			//DDT PM approved
-			break;
-		case 230:
-			//DDT sent to EXEC
-			break;
-		case 303:
-			//VT
-			break;
-		case 304:
-			//VT
-			break;
-		case 305:
-			//VT
-			break;
-		case 306:
-			//VT
-			break;
-		case 307:
-			//VT
-			break;
-		case 308:
-			//VT
-			break;
-		case 309:
-			//VT
-			break;
-		case 310:
-			//VT sent to PM
-			break;
-		case 320:
-			//VT response from PM
-			break;
-		case 321:
-			//VT rejected
-			break;
-		case 322:
-			//VT approved
-			break;
-		case 330:
-			//VT sent to EXEC
-			break;
-		case 150:
-			//Training Completed
-			break;
-		default:
-			break;
-			
-			
-		}
-	}
-	
-	public void statusPosition(int status)
-	{
-		switch(status)
-		{
-		case 100:
-			//new request
-			//create new card for site
-			break;
-		case 103:
-			//IT
-			//Move to in process
-			break;
-		case 104:
-			//IT
-			break;
-		case 105:
-			//IT
-			break;
-		case 106:
-			//IT
-			break;
-		case 107:
-			//IT
-			break;
-		case 108:
-			//IT
-			break;
-		case 109:
-			//IT
-			break;
-		case 110:
-			//IT sent to PM
-			break;
-		case 120:
-			//IT response from PM
-			break;
-		case 121:
-			//IT rejected
-			statusChange(203);
-			break;
-		case 122:
-			//IT approved
-			break;
-		case 130:
-			//IT sent to EXEC
-			break;
-		case 203:
-			//DDT
-			//Move to in process
-			break;
-		case 204:
-			//DDT
-			//looking for trainer
-			break;
-		case 205:
-			//DDT
-			break;
-		case 206:
-			//DDT
-			break;
-		case 207:
-			//DDT
-			break;
-		case 208:
-			//DDT
-			break;
-		case 209:
-			//DDT
-			break;
-		case 210:
-			//DDT sent to PM
-			break;
-		case 221:
-			//DDT rejected
-			//move back to 203 or onward to 303
-			break;
-		case 222:
-			//DDT approved
-			//move to 230
-			break;
-		case 230:
-			//DDT sent to EXEC
-			//move to in training
-			break;
-		case 303:
-			//VT
-			break;
-		case 304:
-			//VT
-			break;
-		case 305:
-			//VT
-			break;
-		case 306:
-			//VT
-			break;
-		case 307:
-			//VT
-			break;
-		case 308:
-			//VT
-			break;
-		case 309:
-			//VT
-			break;
-		case 310:
-			//VT sent to PM
-			break;
-		case 320:
-			//VT response from PM
-			break;
-		case 321:
-			//VT rejected
-			break;
-		case 322:
-			//VT approved
-			break;
-		case 330:
-			//VT sent to EXEC
-			break;
-		case 150:
-			//Finished
-			//move to archived
-			break;
-		default:
-			break;			
-		}
+	public void statusChange(int training_id, int status)
+    {
+        String message = "";
+        switch(status)
+        {
+        case 103:
+            message = "Internal Training Request started";
+            break;
+        case 104:
+            message = "Looking for available internal trainers";
+            break;
+        case 105:
+            message = "Internal Training Request ";
+            break;
+        case 106:
+            message = "Internal Training Request ";
+            break;
+        case 107:
+            message = "Internal Training Request ";
+            break;
+        case 108:
+            message = "Internal Training Request ";
+            break;
+        case 109:
+            message = "Internal Training Request ";
+            break;
+        case 110:
+            message = "Internal Training Request at PM for Final Approval";
+            //function to ask PM to choose
+            break;
+        case 121:
+            message = "Internal Training Request declined by PM / Awaiting next action";
+            //ask spoc if they want to move to next type of training or restart internal process
+            //if to decide to move back or continue
+            break;
+        case 122:
+            message = "Internal Training Request approved by PM / Ready for training";
+            //move automatically or wait for the start date
+            break;
+        case 130:
+            message = "Internal Training in progress";
+            break;
+        case 203:
+            message = "Development Training Request started";
+            break;
+        case 204:
+            message = "Confirming details with available development trainers";
+            break;
+        case 205:
+            message = "Confirming details with development trainer's manager";
+            break;
+        case 206:
+            message = "Awaiting PM for development trainer approval";
+            break;
+        case 207: 
+            message = "Confirming logistical details for development training";
+            break;
+        case 208: 
+            message = "";
+            break;
+        case 209: 
+            //DDT
+            break;
+        case 210:
+            message = "Development Training Request at PM for final approval";
+            break;
+        case 221:
+            message = "Development Training Request declined by PM / Awaiting next action";
+            break;
+        case 222:
+            message = "Development Training Request approved by PM / Ready for training";
+            break;
+        case 230:
+            message = "Development Training in progress";
+            break;
+        case 303:
+            message = "Vendor Training Request started";
+            break;
+        case 304:
+            message = "Vendor Training Request ";
+            break;
+        case 305:
+            message = "Vendor Training Request ";
+            break;
+        case 306:
+            message = "Vendor Training Request ";
+            break;
+        case 307:
+            message = "Vendor Training Request ";
+            break;
+        case 308:
+            message = "Vendor Training Request ";
+            break;
+        case 309:
+            message = "Vendor Training Request ";
+            break;
+        case 310:
+            message = "Vendor Training Request at PM for Final Approval";
+            break;
+        case 321:
+            message = "Vendor Training Request declined by PM / awaiting next action";
+            break;
+        case 322:
+            message = "Vendor Training Request approved by PM / ready for training";
+            break;
+        case 330:
+            message = "Vendor Training in progress";
+            break;
+        case 150:
+            message = "Training completed / Archiving request";
+            break;
+        default:
+            break;
+        }
+        TrainingRequestLogDAO rl = new TrainingRequestLogDAO();
+        rl.insertTrainingRequestLog(training_id, status, Timestamp.from(java.time.Instant.now()), message);
+        TrainingManagementStatusDAO ms = new TrainingManagementStatusDAO();
+        ms.updateTrainingManagementStatusOnPid(status, training_id);
 	}
 }

@@ -1,19 +1,13 @@
 package trm.it.dao.trainingRequestLog;
 
-import java.time.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-import java.sql.*;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import trm.it.dao.trainingRequest.TrainingRequest;
-import trm.it.dao.trainingRequest.TrainingRequestMapper;
-import trm.it.dao.trainingRequestLog.TrainingRequestLog;
-import trm.it.dao.trainingRequestLog.TrainingRequestLogMapper;
 
 public class TrainingRequestLogDAO {
 
@@ -98,4 +92,10 @@ public class TrainingRequestLogDAO {
 		
 		return trl.get(0);
 	}
+	
+	public TrainingRequestLog getTrainingRequestLogByTrainingRequestId(int id){
+        String sql = "SELECT * FROM training_request_log WHERE training_request_id = ?";
+        TrainingRequestLog trl = temp.query(sql, new Object[]{id}, new TrainingRequestLogMapper()).get(0);
+        return trl;
+    }
 }

@@ -1,5 +1,7 @@
 package trm.vt.dao.trainingRequestLog;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -24,7 +26,7 @@ public class TrainingRequestLogDAO {
 		return TrainingRequestList;
 	}
 	
-	public void insertTrainingRequestLog(int training_request_id, int status_changed_to, String status_change_time, String description){
+	public void insertTrainingRequestLog(int training_request_id, int status_changed_to, Timestamp status_change_time, String description){
 		
 		String sql = "insert into training_request_log values(training_request_log_id_seq.nextval, ?,?,?,?)";
 		

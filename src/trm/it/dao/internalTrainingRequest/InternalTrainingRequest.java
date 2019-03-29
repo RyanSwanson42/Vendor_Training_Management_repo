@@ -18,7 +18,6 @@ public class InternalTrainingRequest
 	
 	private int internal_training_id;
 	private int training_request_id;		//Training Request join
-	private String training_type;
 	private int schedule; 					//Training Schedule join
 	private int confirmed_trainer;			//Internal Trainer join
 	private int executive;					//Employee join
@@ -91,14 +90,11 @@ public class InternalTrainingRequest
 		this.training_request_id = training_request_id;
 	}
 
-	public String getTraining_type() {
-		return training_type;
+	@Override
+	public String toString() {
+		return "InternalTrainingRequest [internal_training_id=" + internal_training_id + ", training_request_id="
+				+ training_request_id + ", schedule=" + schedule + ", confirmed_trainer=" + confirmed_trainer
+				+ ", executive=" + executive + ", description_of_status=" + description_of_status + "]";
 	}
-
-	public void setTraining_type(String training_type) {
-		this.training_type = training_type;
-	}
-	
-	
 	
 }
