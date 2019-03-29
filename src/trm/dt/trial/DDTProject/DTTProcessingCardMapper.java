@@ -10,10 +10,10 @@ public class DTTProcessingCardMapper implements RowMapper<DTTProcessingCard> {
 	public DTTProcessingCard mapRow(ResultSet result, int arg1) throws SQLException {
 		DTTProcessingCard card = new DTTProcessingCard();
 		
-		card.setRequestId(result.getInt("training_request_id"));
+		card.setRequestId(result.getInt("dtt_training_id"));
 		card.setLastName(result.getString("last_name"));
 		card.setFirstName(result.getString("first_name"));
-		card.setTrainingType(result.getString("request_training_type"));
+		card.setTrainingType(result.getString("request_training_mode"));
 		card.setTrainingModule(result.getString("request_training_module"));
 		card.setTrainingModuleScope(result.getString("request_training_module_scope"));
 		card.setStartDate(result.getString("request_start_date"));

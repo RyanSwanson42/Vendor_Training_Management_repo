@@ -59,4 +59,10 @@ public class InTrainingCard
 	public void setWorkflow(ExecutiveWorkflow workflow) {
 		this.workflow = workflow;
 	}
+	@Override
+	public String toString() {
+		return "\nInTrainingCard [training=" + training + ", request=" + request + ", schedule=" + schedule + ", status="
+				+ status + ", pm=" + pm + ", ct=" + ct + ", workflow=" + workflow + "]";
+	}
+	
 }

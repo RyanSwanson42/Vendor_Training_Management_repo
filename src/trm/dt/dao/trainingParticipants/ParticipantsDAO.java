@@ -13,7 +13,7 @@ public class ParticipantsDAO
 	public ParticipantsDAO()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<Participants> getParticipants()
 	{

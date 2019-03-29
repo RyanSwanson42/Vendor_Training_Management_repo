@@ -14,7 +14,7 @@ public class DDTTrainerDOA
 	public DDTTrainerDOA()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<DDTTrainer> getDDTTrainerList()
 	{

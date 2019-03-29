@@ -26,7 +26,7 @@ public class VendorTrainingRequestAndStatusDAO {
 				"from employee e inner join training_request t on e.employee_id = t.requester_id\r\n" + 
 				"inner join vendor_training_request v on t.training_request_id = v.training_request_id\r\n" + 
 				"inner join training_management_status tms on t.training_request_id = tms.training_request_id\r\n" + 
-				"where tms.status = 303 and e.vertical = ?";
+				"where tms.status = 303 and t.vertical = ?";
 		List<VendorTrainingRequestAndStatus> TrainingRequestAndStatus = temp.query(sql, new Object[] {vertical}, new VendorTrainingRequestAndStatusMapper());
 		return TrainingRequestAndStatus;
 	}
@@ -40,7 +40,7 @@ public class VendorTrainingRequestAndStatusDAO {
 				"from employee e inner join training_request t on e.employee_id = t.requester_id\r\n" + 
 				"inner join vendor_training_request v on t.training_request_id = v.training_request_id\r\n" + 
 				"inner join training_management_status tms on t.training_request_id = tms.training_request_id\r\n" + 
-				"where tms.status = 330 and e.vertical = ?";
+				"where tms.status = 330 and t.vertical = ?";
 		List<VendorTrainingRequestAndStatus> TrainingRequestAndStatus = temp.query(sql, new Object[] {vertical}, new VendorTrainingRequestAndStatusMapper());
 		return TrainingRequestAndStatus;
 	}

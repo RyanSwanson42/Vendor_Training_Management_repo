@@ -2,10 +2,10 @@ package trm.dt.dao.developTeamTrainerRequest;
 
 import java.sql.Timestamp;
 
-import dao.employee.Employee;
-import dao.employee.EmployeeDAO;
-import dao.trainingSchedule.TrainingSchedule;
-import dao.trainingSchedule.TrainingScheduleDAO;
+import trm.dt.dao.employee.Employee;
+import trm.dt.dao.employee.EmployeeDAO;
+import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.TrainingScheduleDAO;
 
 public class DDTTrainer {
 	private int dtt_trainer_request_id;

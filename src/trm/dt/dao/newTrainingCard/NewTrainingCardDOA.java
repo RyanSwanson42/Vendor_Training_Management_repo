@@ -13,7 +13,7 @@ public class NewTrainingCardDOA
 	public NewTrainingCardDOA()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<NewTrainingCard> getNewTrainingCardList()
 	{

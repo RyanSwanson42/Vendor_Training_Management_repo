@@ -10,7 +10,7 @@
                            http://www.springframework.org/schema/mvc
                            http://www.springframework.org/schema/mvc/spring-mvc.xsd ">
 
-   <context:component-scan base-package="dao.vt.controller" />
+   <context:component-scan base-package="trm.vt.dao.controller" />
 
    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name="prefix" value="/WEB-INF/jsp/" />

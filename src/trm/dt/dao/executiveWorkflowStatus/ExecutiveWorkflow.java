@@ -92,4 +92,15 @@ public class ExecutiveWorkflow {
 	public void setTraining_completed(int training_completed) {
 		this.training_completed = training_completed;
 	}
+
+	@Override
+	public String toString() {
+		return "\nExecutiveWorkflow [executive_workflow_status_id=" + executive_workflow_status_id
+				+ ", training_request_id=" + training_request_id + ", executive_id=" + executive_id
+				+ ", sent_invitations=" + sent_invitations + ", completed_skillport_enrollment="
+				+ completed_skillport_enrollment + ", assessments_recorded=" + assessments_recorded
+				+ ", vendor_training_clearance=" + vendor_training_clearance + ", completed_feedback="
+				+ completed_feedback + ", training_completed=" + training_completed + "]";
+	}
+	
 }

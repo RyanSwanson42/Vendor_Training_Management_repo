@@ -13,7 +13,7 @@ public class EmployeeDAO
 	public EmployeeDAO()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<Employee> getEmployees()
 	{

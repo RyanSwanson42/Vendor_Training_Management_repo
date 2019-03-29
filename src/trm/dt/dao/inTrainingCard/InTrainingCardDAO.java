@@ -12,7 +12,7 @@ public class InTrainingCardDAO {
 	public InTrainingCardDAO()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<InTrainingCard> getInTrainingCardList()
 	{
@@ -29,10 +29,12 @@ public class InTrainingCardDAO {
 					+ "dtr.trainer_request_id = dttr.dtt_trainer_request_id "
 					+ "join EMPLOYEE ct on ct.employee_id = dttr.trainer_id "
 					+ "join EXECUTIVE_WORKFLOW_STATUS  ex on ex.training_request_id = tr.training_request_id"
-					+ " where s.status = 230", 
+					+ " where s.status = 100", 
 				new Object[]{},new InTrainingCardMapper());
 		return InTrainingCardList;
 	}
+	
+	
 	
 
 }

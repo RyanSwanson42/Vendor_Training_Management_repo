@@ -10,17 +10,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import DDTProject.DTTNewRequestCard;
-import DDTProject.DTTProcessingCard;
-import DDTProject.DTTdaoServices;
-import DDTProject.TrainingSchedule;
+import trm.dt.trial.DDTProject.DTTNewRequestCard;
+import trm.dt.trial.DDTProject.DTTProcessingCard;
+import trm.dt.trial.DDTProject.DTTdaoServices;
+import trm.dt.trial.DDTProject.TrainingSchedule;
+import trm.dt.trial.DDTProject.DTTProcessingCard;
 
-import bl.SecurityCheck;
-import dao.dtt.inTrainingCard.InTrainingCard;
-import dao.dtt.inTrainingCard.InTrainingCardDAO;
-import dao.executiveWorkflowStatus.ExecutiveWorkflow;
-import dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
-import dao.trainingManagementStatus.ManagmentStatusDAO;
+
+import trm.dt.bl.SecurityCheck;
+import trm.dt.dao.inTrainingCard.InTrainingCard;
+import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
+import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflow;
+import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
+import trm.dt.dao.trainingManagementStatus.ManagmentStatusDAO;
+import trm.dt.jt.MyTemplate;
 
 @Controller
 public class dttController {

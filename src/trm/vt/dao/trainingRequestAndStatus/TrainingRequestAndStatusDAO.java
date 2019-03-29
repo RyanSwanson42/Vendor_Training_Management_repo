@@ -16,7 +16,7 @@ public class TrainingRequestAndStatusDAO {
 		temp = (JdbcTemplate) context.getBean("db");
 	}
 	
-	public List<TrainingRequestAndStatus> getTrainingRequestDetail100() {
+	public List<TrainingRequestAndStatus> getTrainingRequestDetail100(String vertical) {
 		
 		String sql = "select t.TRAINING_REQUEST_ID, e.first_name, e.last_name, t.request_training_module, t.request_training_module_scope, \r\n" + 
 				"t.request_training_mode, t.request_start_date, t.request_end_date, \r\n" + 
@@ -28,9 +28,9 @@ public class TrainingRequestAndStatusDAO {
 				"on e.employee_id = t.requester_id\r\n" + 
 				"inner join training_management_status tms \r\n" + 
 				"on t.training_request_id = tms.training_request_id\r\n" + 
-				"where tms.status = 100";
+				"where tms.status = 100 and t.vertical = ?";
 		
-		List<TrainingRequestAndStatus> trs = temp.query(sql, new TrainingRequestAndStatusMapper());
+		List<TrainingRequestAndStatus> trs = temp.query(sql,new Object[] {vertical}, new TrainingRequestAndStatusMapper());
 		
 		return trs;
 	}

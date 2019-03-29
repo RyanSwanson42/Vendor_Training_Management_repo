@@ -13,7 +13,7 @@ public class DDTTrainingDAO
 	public DDTTrainingDAO()
 	{
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
-		temp = (JdbcTemplate)context.getBean("jtemp");
+		temp = (JdbcTemplate)context.getBean("db");
 	}
 	public List<DDTTraining> getDDTTrainingList()
 	{

@@ -2,7 +2,7 @@ package trm.dt.bl;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import jt.MyTemplate;
+import trm.dt.jt.MyTemplate;
 
 public class SecurityCheck {
 	
