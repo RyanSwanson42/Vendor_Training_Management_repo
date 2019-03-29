@@ -53,30 +53,15 @@ $(document).ready(function(){
 				if(green.includes(stat.toString())){
 
 					$('#'+id).addClass("card-green");
-					$('.'+stat).popover({
-						trigger: "hover",
-						title:"Status",
-						placement:"bottom",
-						content:"Request in progress.",
-					});
+					
 					
 				}else if(yellow.includes(stat.toString())){
 					$('#'+id).addClass("card-yellow");
-					$('.'+stat).popover({
-						trigger: "hover",
-						title:"Status",
-						placement:"bottom",
-						content:"Waiting for Trainer Action.",
-					});
+					
 					
 				}else if(red.includes(stat.toString())){
 					$('#'+id).addClass("card-red");
-					$('.'+stat).popover({
-						trigger: "hover",
-						title:"Status",
-						placement:"bottom",
-						content:"Action Required.",
-					});
+
 				}
 			}
 			$(this).ready(function(){
@@ -89,10 +74,15 @@ $(document).ready(function(){
 				});
 				$('.expandDetails').popover({
 					title:"Details<br>",
-					placement:"bottom",
+					placement:"top",
 					
 				});
+				$('.status').popover({
+					title:"Log",
+					placement:"top",
+				});
 				$('.spocDetails').popover({
+					trigger: "hover",
 					title:"SPOC",
 				});
 				

@@ -32,12 +32,13 @@ import trm.dt.ddtProjectQueries.CallbackFunction;
 import trm.dt.trial.DDTProject.DTTProcessingCard;
 import trm.dt.trial.DDTProject.DTTdaoServices;
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatus;
+import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatusDAO;
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
 import trm.vt.dao.SpocChart.SpocChartDao;
 import trm.vt.dao.employee.Employee;
 import trm.vt.dao.employee.EmployeeDAO;
-import trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 import trm.vt.dao.trainingRequestAndStatus.TrainingRequestAndStatus;
 import trm.vt.dao.trainingRequestAndStatus.TrainingRequestAndStatusDAO;
 import trm.vt.dao.trainingSchedule.TrainingSchedule;
@@ -73,6 +74,11 @@ public class VendorController {
 		System.out.println("Login Error Controller");
 		return "login";
 	}
+	@RequestMapping(value = "/restricted")
+	public String invailduser(ModelMap map) {
+		System.out.println("Login Error Controller");
+		return "login";
+	}
 
 	@RequestMapping(value = "/report")
 	public String ChartJs(ModelMap map) {
@@ -97,10 +103,22 @@ public class VendorController {
 			return "redirect:/loginerror";
 		else {
 			request.getSession().setAttribute("username", request.getParameter("un"));
-			return "redirect:/dashboard";
+			request.getSession().setAttribute("password", request.getParameter("up"));
+			Employee user = new EmployeeDAO().getEmployeeByUsername(request.getParameter("un"));
+			String jobTitle = user.getJob_title();
+			if(jobTitle.equals("SPOC"))
+				return "redirect:/dashboard";
+			else if(jobTitle.equals("Project Manager"))
+				return "redirect:/pm/alltraining";
+			else
+				return "redirect:/restricted";
 		}
 	}
-
+	
+	@RequestMapping(value = "/firstpage")
+	public String PMView() {
+		return "firstpage";
+	}
 	@RequestMapping(value = "/dashboard")
 	public String dashboardView(ModelMap map, HttpServletRequest request) {
 		// Get Session of employee who logged in
@@ -119,29 +137,33 @@ public class VendorController {
 		map.addAttribute("trainingRequestList", list100);
 		
 		// Get vendor training requests 
-		List<VendorTrainingRequestAndStatus> list102 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail303(uservertical);
-		map.addAttribute("vendorTrainingRequestList2", list102);
-		List<VendorTrainingRequestAndStatus> list103 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail330(uservertical);
-		map.addAttribute("vendorTrainingRequestList3", list103);
+		List<VendorTrainingRequestAndStatus> list303 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail303(uservertical);
+		map.addAttribute("vendorTrainingRequestList2", list303);
+		List<VendorTrainingRequestAndStatus> list330 = new VendorTrainingRequestAndStatusDAO().getTrainingRequestDetail330(uservertical);
+		map.addAttribute("vendorTrainingRequestList3", list330);
 		
 		// Get list of all vendors in the system
 		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
 		map.addAttribute("vendorDetails", vendorDetails);
 
 		// ----------------------------  DT Team -------------------------------//
-		List<DTTProcessingCard> cards;
-		cards = new DTTdaoServices().getRequestsProcessing(uservertical);
-		map.addAttribute("TRM_DTT_Homepage", cards);
-		
-		List<ExecutiveWorkflow> wfCards;
+		List<DTTProcessingCard> cards;	
 		List<InTrainingCard> itc;
-		//wfCards = new ExecutiveWorkflowDAO().getExecutiveWorkflows();
-		itc = new InTrainingCardDAO().getInTrainingCardList();
-		//map.addAttribute("TRM_DTT_Homepage2", wfCards);
-		map.addAttribute("TRM_DTT_Homepage3", itc);
-		//System.out.println(wfCards.toString());
-		System.out.println(itc.toString());
-
+		
+		cards = new DTTdaoServices().getRequestsProcessing(uservertical);
+		itc = new InTrainingCardDAO().getInTrainingCardList(uservertical);
+		
+		map.addAttribute("TRM_DTT_Homepage", cards);
+		map.addAttribute("TRM_DTT_Homepage3", itc);		
+		
+		// ----------------------------  IT Team -------------------------------//
+		List<InternalTrainingRequestAndStatus> list103 = new InternalTrainingRequestAndStatusDAO().getTrainingRequestDetail103(uservertical);
+		map.addAttribute("internalTrainingRequestList2", list103);
+		List<InternalTrainingRequestAndStatus> list130 = new InternalTrainingRequestAndStatusDAO().getTrainingRequestDetail130(uservertical);
+		map.addAttribute("internalTrainingRequestList3", list130);
+		
+		System.out.println(list103.toString());
+		
 		return "index";
 	}
 	

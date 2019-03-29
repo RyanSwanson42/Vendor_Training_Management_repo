@@ -14,9 +14,9 @@ public class InTrainingCardDAO {
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
 		temp = (JdbcTemplate)context.getBean("db");
 	}
-	public List<InTrainingCard> getInTrainingCardList()
+	public List<InTrainingCard> getInTrainingCardList(String vertical)
 	{
-		List<InTrainingCard> InTrainingCardList =  temp.query("select tr.training_request_id,"
+		List<InTrainingCard> InTrainingCardList =  temp.query("select distinct tr.training_request_id,"
 				+ "tr.request_training_module,pm.first_name,pm.last_name,"
 				+ "ct.first_name as fn1,ct.last_name as ln1,ts.training_start_date,ts.training_end_date,"
 				+ "ex.*,s.status,dtr.dtt_training_id "
@@ -29,8 +29,8 @@ public class InTrainingCardDAO {
 					+ "dtr.trainer_request_id = dttr.dtt_trainer_request_id "
 					+ "join EMPLOYEE ct on ct.employee_id = dttr.trainer_id "
 					+ "join EXECUTIVE_WORKFLOW_STATUS  ex on ex.training_request_id = tr.training_request_id"
-					+ " where s.status = 100", 
-				new Object[]{},new InTrainingCardMapper());
+					+ " where s.status = 230 and tr.vertical = ?", 
+				new Object[]{vertical},new InTrainingCardMapper());
 		return InTrainingCardList;
 	}
 	

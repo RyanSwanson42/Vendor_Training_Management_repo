@@ -36,7 +36,15 @@ function Validation(){
       alert("Wrong username and/or password, please try again.");
  }
    //here you have login error
-      
+ function ValidationCheck(){
+	 var name = 'restricted';
+	 var regexS = "/"+name;
+	 var regex = new RegExp( regexS );
+	 var results = regex.exec( window.location.href );
+	 if( results != null ){
+	   //here you don't have login errors
+	      alert("Access Restricted.");
+	 }     
 }
 </script>
 <body>

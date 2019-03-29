@@ -1,8 +1,9 @@
 package trm.pm.bl;
 
-import trm.pm.jt.MyTemplate;
-
 import org.springframework.jdbc.core.JdbcTemplate;
+
+import trm.pm.dbo.EmployeeDAO;
+import trm.pm.jt.MyTemplate;
 
 public class SecurityCheck {
 	public static boolean isUserValid(String username, String userpassword)
@@ -19,9 +20,11 @@ public class SecurityCheck {
 		else
 			return false;
 	}
-	public static void main(String s[])
-	{
-	//	SecurityCheck obj = new SecurityCheck();
-	//	System.out.println(obj.isUserValid("901", "syntel123"));
-	}
+	public boolean checkNewPassword(String userName,String pass1, String pass2) {
+        EmployeeDAO ed = new EmployeeDAO();
+        if (pass1.equals(pass2)) {ed.updatePassword(userName,pass1);return true;}
+
+        return false;
+
+    }
 }

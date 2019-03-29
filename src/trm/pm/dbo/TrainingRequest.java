@@ -22,6 +22,10 @@ public class TrainingRequest {
 	private Timestamp time_requested;
 	private String justification_of_request;
 	
+	private String start_date;
+	private String end_date;
+	private String date_requested;
+	
 	private Employee spoc;
 	private TrainingManagementStatus status;
 	private List<TrainingRequestLog> log;
@@ -36,7 +40,32 @@ public class TrainingRequest {
 	public String testTrainingRequest(){
 		return training_request_id + " | " + requester_id + " | " + vertical + " | " + request_training_type + " | " + request_training_module + " | " + request_training_module_scope + " | " + request_training_mode + " | " + request_start_date + " | " + request_end_date + " | " + request_location + " | " + request_time_zone + " | " + request_approx_participant + " | " + request_project_spoc + " | " + time_requested + " | " + justification_of_request;
 	}
+
 	
+	public String getDate_requested() {
+		return date_requested;
+	}
+
+	public void setDate_requested(String date_requested) {
+		this.date_requested = date_requested;
+	}
+
+	public String getStart_date() {
+		return start_date;
+	}
+
+	public void setStart_date(String start_date) {
+		this.start_date = start_date;
+	}
+
+	public String getEnd_date() {
+		return end_date;
+	}
+
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+
 	public Employee getSpoc() {
 		return spoc;
 	}
@@ -168,5 +197,21 @@ public class TrainingRequest {
 	public void setTime_requested(Timestamp time_requested) {
 		this.time_requested = time_requested;
 	}
+
+	@Override
+	public String toString() {
+		return "\nTrainingRequest [training_request_id=" + training_request_id + ", requester_id=" + requester_id
+				+ ", vertical=" + vertical + ", request_training_type=" + request_training_type
+				+ ", request_training_module=" + request_training_module + ", request_training_module_scope="
+				+ request_training_module_scope + ", request_training_mode=" + request_training_mode
+				+ ", request_start_date=" + request_start_date + ", request_end_date=" + request_end_date
+				+ ", request_location=" + request_location + ", request_time_zone=" + request_time_zone
+				+ ", request_approx_participant=" + request_approx_participant + ", request_project_spoc="
+				+ request_project_spoc + ", time_requested=" + time_requested + ", justification_of_request="
+				+ justification_of_request + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", date_requested=" + date_requested + ", spoc=" + spoc + ", status=" + status + ", log=" + log
+				+ ", schedule=" + schedule + ", participantList=" + participantList + "]";
+	}
+	
 
 }

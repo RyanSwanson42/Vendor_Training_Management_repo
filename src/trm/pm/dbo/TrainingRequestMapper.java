@@ -2,6 +2,7 @@ package trm.pm.dbo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -26,6 +27,12 @@ public class TrainingRequestMapper implements RowMapper<TrainingRequest> {
 		tbuf.setRequest_project_spoc(rs.getInt(13));
 		tbuf.setTime_requested(rs.getTimestamp(14));
 		tbuf.setJustification_of_request(rs.getString(15));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		tbuf.setStart_date(sdf.format(tbuf.getRequest_start_date()));
+		tbuf.setEnd_date(sdf.format(tbuf.getRequest_end_date()));
+		tbuf.setDate_requested(sdf.format(tbuf.getTime_requested()));
+		
 		return tbuf;
 	}
 }

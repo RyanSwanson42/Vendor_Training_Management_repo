@@ -15,7 +15,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 		
-		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
 		<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
 		
@@ -24,10 +24,17 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     	<link href='<c:url value="/resources/css/temp.css" />' rel="stylesheet">
 		<script src="<c:url value="/resources/js/landing.js" />"></script>
+		<script>
+		$(document).ready(function () {
+		    $("#myForm").submit(function () {
+		        $(".mySubmit").attr("disabled", true);
+		    });
+		});
+		</script>
 </head>
 <body>
 	<h1>New Training Request:</h1>
-	<form action="trainingrequest">
+	<form action="trainingrequest" id="myForm" onsubmit="submit.disabled = true; return true;">
 	   <!-- id="exampleFormControlSelect1" -->
 	   
 	   		 <div class="container">     
@@ -41,6 +48,15 @@
 		            <option>Front End</option>
 		            <option>Mobile</option>
 		            <option>Other</option>
+		          </select>
+		   </div>
+		   <div class="container">     
+		         <label for="trainingType" ><b>Training Type</b></label>
+		          <select name = "trainingType" >
+		            <option>IT</option>
+		            <option>VTT</option>
+		            <option>DT</option>
+		            
 		          </select>
 		   </div>
 		   
@@ -90,7 +106,7 @@
 	      <input type="text" placeholder="Justification" name="justification" required> <br>
 	   
 	      
-	      <button type="submit">Request Training</button>
+	      <button id="mySubmit" type="submit" name="submit">Request Training</button>
 	      
 	    </div>
 	  </form>

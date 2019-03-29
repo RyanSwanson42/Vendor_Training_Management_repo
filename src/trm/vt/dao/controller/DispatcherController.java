@@ -1,4 +1,4 @@
-package controllers;
+package trm.vt.dao.controller;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -10,18 +10,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
-import bl.SecurityCheck;
-import dbo.*;
+import trm.pm.dbo.DatabaseUpdate;
+import trm.pm.dbo.Employee;
+import trm.pm.dbo.EmployeeDAO;
+import trm.pm.dbo.TrainingManagementStatusDAO;
+import trm.pm.dbo.TrainingRequest;
+import trm.pm.dbo.TrainingRequestDAO;
+import trm.pm.dbo.TrainingRequestLogDAO;
+import trm.pm.dbo.TrainingScheduleDAO;
+import trm.pm.dbo.Training_ParticipantsDAO;
 
 @Controller
+@RequestMapping(value="/pm")
 //@SessionAttributes ({"command", "Cards"})
 public class DispatcherController {
-	@RequestMapping(value="/")
+/*	@RequestMapping(value="/")
 	public String login_view() {
 		return "loginpage";
 	}
@@ -42,15 +47,18 @@ public class DispatcherController {
 	    else {
 	        return "error";
 	    }
-	}
+	}*/
 	 @RequestMapping(value="alltraining")
 	    public String alltraining_view(HttpServletRequest request, ModelMap model) {
 	        HttpSession session = request.getSession();
 	        String user = (String) session.getAttribute("username");
 	        String pass = (String) session.getAttribute("password");
+	        System.out.println(user + pass);
 	        Employee pm = new EmployeeDAO().getEmployee(user, pass);
 	        session.setAttribute("manager", pm);
+	        System.out.println(pm.testEmployee());
 	        List<TrainingRequest> reqList = new TrainingRequestDAO().getAllTrainingRequest(pm.getEmployee_id());
+	        System.out.println(reqList.toString());
 	        for (TrainingRequest req: reqList) {
 	            req.setSpoc(new EmployeeDAO().getEmployee(req.getRequest_project_spoc()));
 	            req.setStatus(new TrainingManagementStatusDAO().getTrainingManagementStatus(req.getTraining_request_id()).get(0));
@@ -60,13 +68,88 @@ public class DispatcherController {
 	        }
 	        //request.getSession().setAttribute("command", pm);
 	        //request.getSession().setAttribute("Cards", reqList);
-	        //System.out.println(reqList.size());
+	        System.out.println(reqList.size());
 	        model.addAttribute("manager", pm);
 	        model.addAttribute("Cards", reqList);
 	        //System.out.println(model.get("cards").getClass());
 	        return "firstpage";
 	    }
-	 	@RequestMapping(value="approval/{training_request_id}")
+	 
+	 
+	 @RequestMapping(value= "TrainingReq/")
+		public String NewTraining(HttpServletRequest request, ModelMap model) {
+			return "trainingrequest";
+		}
+		
+		public class spocValue {
+			public int spocVal(String spocString) {
+		        if(spocString.equals(null)) {return -1;}
+		        return Integer.parseInt(spocString);
+		    }
+		}
+		
+		@RequestMapping(value= "TrainingReq/trainingrequest")
+		public String addNewTraining(HttpServletRequest request, ModelMap model) throws java.text.ParseException{
+	        HttpSession session = request.getSession();
+	        String user = (String) session.getAttribute("username");
+	        Employee emp = (Employee) session.getAttribute("manager");
+			EmployeeDAO ES = new EmployeeDAO();
+			List<Employee> emps = ES.getTRInfo(user); // fix this
+			String vertical = null, location = null, state = null; int ID = 0; String timeZone=null;
+			for(Employee eemp : emps) {
+				vertical = eemp.getVertical();
+				location = eemp.getCity();
+				state = eemp.getState();
+				ID = eemp.getEmployee_id();
+			}
+			
+			timeZone = ES.getTimeZone(state);
+		
+			String trainingModule = request.getParameter("trainingModule");
+			String moduleScope = request.getParameter("trainingModuleScope");
+			String trainingMode = request.getParameter("trainingModuleMode");
+			String trainingType = request.getParameter("trainingType");
+			String spoc = request.getParameter("spoc");
+			if(spoc.equals("-1") || spoc.equals("0")){
+				spoc = "" + emp.getEmployee_id();
+			}
+			
+			String startDate2 = request.getParameter("startDate");
+			String endDate2 = request.getParameter("endDate");
+			SimpleDateFormat in = new SimpleDateFormat("yyyy-MM-dd");
+			Date startDate = in.parse(startDate2);
+			Date endDate = in.parse(endDate2);
+			
+			System.out.println("\n\n\n\n\n" + startDate.toString());
+			System.out.println(endDate.toString() + " \n\n\n\n\n\n");
+			
+			String participants = request.getParameter("participants");
+			String justification = request.getParameter("justification");
+			
+			DatabaseUpdate DU = new DatabaseUpdate();
+			
+			Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+			spocValue sv = new spocValue();
+			DU.insertTraining(ID,vertical,trainingType,trainingModule,moduleScope,trainingMode,startDate,endDate,location,
+					timeZone,Integer.parseInt(participants),sv.spocVal(spoc),timeNow,justification);
+			
+			
+			//
+			TrainingRequestDAO tr = new TrainingRequestDAO();
+	        int val = tr.getReqID(ID);
+	        TrainingManagementStatusDAO TMSD = new TrainingManagementStatusDAO();
+	        TMSD.insertTrainingManagementStatus(val,100);
+			//
+			//TrainingRequest tempCheckRequestID = new TrainingRequestDAO().getAllTrainingRequest(ID,vertical,"IT",trainingModule,moduleScope,trainingMode,sqlStartDate,sqlEndDate,location,
+			//		timeZone,Integer.parseInt(participants),sv.spocVal(spoc),timeNow,justification).get(0);
+			//TrainingManagementStatusDAO TMSD = new TrainingManagementStatusDAO();
+			//System.out.println(tempCheckRequestID.getTraining_request_id());
+			//TMSD.insertTrainingManagementStatus(tempCheckRequestID.getTraining_request_id(), 100);
+			//		
+			return "redirect:/pm/alltraining";
+		}
+	 
+	 	/*@RequestMapping(value="approval/{training_request_id}")
 		public String approval_view(@PathVariable("training_request_id") int tid, ModelMap map) {
 			map.addAttribute("tid", tid);
 			return "approve";
@@ -258,7 +341,7 @@ public class DispatcherController {
 	    else {
 	    	return "error";
 	    }
-	}
+	}*/
 }
 	
 	

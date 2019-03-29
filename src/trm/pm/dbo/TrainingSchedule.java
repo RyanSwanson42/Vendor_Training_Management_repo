@@ -1,5 +1,4 @@
 package trm.pm.dbo;
-
 import java.util.Date;
 
 public class TrainingSchedule {

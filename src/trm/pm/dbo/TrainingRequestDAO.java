@@ -9,9 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import trm.pm.dbo.TrainingRequest;
-import trm.pm.dbo.TrainingRequestMapper;
-
 public class TrainingRequestDAO {
 
 	ApplicationContext context;
@@ -22,6 +19,11 @@ public class TrainingRequestDAO {
 		temp = (JdbcTemplate)context.getBean("db");
 	}
 
+	public int getReqID(int eid){//
+
+        return temp.queryForInt("select max(training_request_id) from training_request where requester_id = ?",new Object[] {eid});
+    }
+	
 	public boolean insertTrainingRequest(int requester_id, String vertical, String request_training_type, String request_training_module, String request_training_module_scope, String request_training_mode, Timestamp request_start_date, Timestamp request_end_date, String request_location, String request_time_zone, int request_approx_participant, int request_project_spoc, Timestamp time_requested, String justification_of_request) {
 		String sql = "insert into training_request values(training_id_request_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		int num = temp.update(sql, new Object[]{requester_id, vertical, request_training_type, request_training_module, request_training_module_scope, request_training_mode, request_start_date, request_end_date, request_location, request_time_zone, request_approx_participant, request_project_spoc, time_requested, justification_of_request});
@@ -84,6 +86,7 @@ public class TrainingRequestDAO {
 			String justification_of_request) {
 		// TODO Auto-generated method stub
 		String sql = "update training_request set request_approx_participant=?, justification_of_request=? where training_request_id = ?"; 
+		System.out.println("TEST=============================================");
 		int num = temp.update(sql, new Object[]{request_approx_participant, justification_of_request, training_request_id});
 		if (num == 1) {
 			return true;

@@ -1,9 +1,8 @@
 package trm.pm.dbo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //import org.apache.jasper.tagplugins.jstl.core.Catch;
 import org.springframework.context.ApplicationContext;
@@ -13,9 +12,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class DatabaseUpdate {
 		ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
 		JdbcTemplate template = (JdbcTemplate)context.getBean("db");
+		
+		
 		public void insertTraining(int username, String vertical,String trainingType,String trainingModule,String moduleScope,
 				String trainingMode,Date startDate,Date endDate,String location, String timeZone,int participants,int spoc,
-				Date timestamp, String justification)
+				Timestamp timestamp, String justification)
 		{
 		
 		template.update("insert into TRAINING_REQUEST values(training_id_request_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",

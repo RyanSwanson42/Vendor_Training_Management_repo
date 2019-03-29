@@ -41,9 +41,9 @@ public class InternalTrainingRequestDAO {
 		temp.update(sql, new Object[]{internal_training_request_id});
 	}
 	
-	public void updateInternalTrainingRequest(int internal_training_request_id, int schedule_id, String type, int confirmed_trainer, int executive_id, String description){
-		String sql = "UPDATE internal_training_request SET schedule_id = ?, training_type = ? confirmed_trainer_id = ?, executive_id, description_of_status = ? WHERE internal_training_request_id = ?";
-		temp.update(sql, new Object[]{schedule_id, type, confirmed_trainer, executive_id, description, internal_training_request_id});
+	public void updateInternalTrainingRequest(int internal_training_request_id, int schedule_id, String type, int confirmed_trainer, String description){
+		String sql = "UPDATE internal_training_request SET schedule_id = ?, training_type = ? confirmed_trainer_id = ?, description_of_status = ? WHERE internal_training_request_id = ?";
+		temp.update(sql, new Object[]{schedule_id, type, confirmed_trainer, description, internal_training_request_id});
 	}
 	
 	public InternalTrainingRequest getInternalTrainingRequest(int internal_training_request_id){

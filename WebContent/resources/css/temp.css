@@ -94,3 +94,7 @@
 			.my-contain{
 				min-height:65vh;
 			}
+			.popover-body{
+				max-height:30vh;
+				overflow-y:scroll;
+			}

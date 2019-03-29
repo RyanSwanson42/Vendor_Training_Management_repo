@@ -1,7 +1,5 @@
 package trm.pm.dbo;
 
-import trm.pm.dbo.TrainingRequestLogDAO;
-
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
@@ -19,6 +17,7 @@ public class TrainingManagementStatusDAO {
 	public boolean insertTrainingManagementStatus(int training_request_id, int status) {
 		String sql = "insert into training_management_status values(trng_management_status_id_seq.nextval,?,?)";
 		int num = temp.update(sql, new Object[]{training_request_id, status});
+		new TrainingRequestLogDAO().insertTrainingRequestLog(training_request_id, 100, "created");
 		if (num == 1) {
 			return true;
 		}

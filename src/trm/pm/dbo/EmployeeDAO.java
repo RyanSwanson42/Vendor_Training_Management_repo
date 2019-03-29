@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class EmployeeDAO {
@@ -18,6 +17,12 @@ public class EmployeeDAO {
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
 		temp = (JdbcTemplate)context.getBean("db");
 	}
+	
+	public void updatePassword(String userName, String password) {
+
+        temp.update("update employee set password = ? where user_name = ?", new Object[] {password,userName} );
+
+    }
 
 	public boolean insertEmployee(String last_name, String first_name, String user_name, String password, String phone_number, String email, String street, String city, String state, String country, String job_title, String vertical, String project, int pid) {
 		String sql = "insert into employee values(emp_id_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
