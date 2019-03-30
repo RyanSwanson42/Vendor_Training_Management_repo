@@ -1,8 +1,11 @@
 package dao.vt.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -12,9 +15,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import SpocChartStatus.SpocChartStatus;
+import SpocChartStatus.SpocChartStatusDao;
+import aop.vt.cookieHandler.CookieHandlerAdvice;
+import aop.vt.cookieHandler.CookieHandlerPojo;
 import bl.SecurityCheck;
 import dao.employee.Employee;
 import dao.employee.EmployeeDAO;
+import dao.vt.SpocChart.SpocChart;
+import dao.vt.SpocChart.SpocChartDao;
+import dao.vt.SpocChartMonth.SpocChartMonth;
+import dao.vt.SpocChartMonth.SpocChartMonthDao;
 import dao.vt.vendorDetail.VendorDetail;
 import dao.vt.vendorDetail.VendorDetailDAO;
 import dao.vt.vendorTrainingRequestAndStatus.VendorTrainingRequestAndStatus;
@@ -28,13 +39,38 @@ public class VendorController {
 //		System.out.println("Login Controller");
 //		return "redirect:/";
 //	}
-	@RequestMapping(value="/login")
-	public String login(HttpServletRequest request, ModelMap model) {
+	@RequestMapping(value="/login",method = RequestMethod.POST)
+	public String login(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		
+		/****************************************************************
+		//check if there are any cookies already set
+		Cookie cookie = null;
+		Cookie[] cookies = request.getCookies();
+		if(cookies!=null){
+			System.out.println(cookies);
+		}
+		*****************************************************************/
+		
 		bl.SecurityCheck ob = new SecurityCheck();
 		boolean result = ob.isUserValid(request.getParameter("un"), request.getParameter("up"));
 		
 		if(result){
 			String uid = request.getParameter("un");
+			
+			
+			/*********************************************************************
+			 * Broken do not and we do not need. Wanted to do server side cookies
+			 * String upass = request.getParameter("up");
+			 * String rememberChecked = request.getParameterValues("remember")[0];
+			if(rememberChecked.equals("on")){
+				CookieHandlerPojo cook = new CookieHandlerPojo();
+				cook.setUsername(uid);
+				cook.setPassword(upass);
+				CookieHandlerAdvice cookadv = new CookieHandlerAdvice();
+				cookadv.setCookie(cook,response);				
+
+				}
+				*****************************************************************/
 			
 			Employee user = new EmployeeDAO().getEmployee(uid);
 			String uservertical = user.getVertical();
@@ -43,6 +79,7 @@ public class VendorController {
 			//model.addAttribute("newmessage", message);
 			System.out.println("login controller");
 			//return "redirect:/";
+			
 			return "index";
 		}else{
 			return "redirect:/loginerror";
@@ -55,6 +92,33 @@ public class VendorController {
 		System.out.println("Logout Controller");
 		return "login";
 	}
+	
+	@RequestMapping(value="/report")
+	public String ChartJs(ModelMap map) {
+		//replace all  " " with vertical provided by King Yosuf
+		System.out.println("Report Login");
+		List<SpocChart> sc = new SpocChartDao().getChartTrainingRequestInfo("");
+		List<SpocChart> sc1 = new SpocChartDao().GetTotalParticipants(" ");
+		List<SpocChartMonth> scm = new SpocChartMonthDao().getChartTrainingRequestInfo();
+
+		
+		List<SpocChartStatus> scp1 = new ArrayList<SpocChartStatus>();
+		scp1.add(new SpocChartStatusDao().GetStatusLeft("").get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusMiddle("").get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusRight("").get(0));
+		scp1.get(0).setStatus("PreProcessing");
+		scp1.get(1).setStatus("Processing");
+		scp1.get(2).setStatus("PostProcessing");
+		
+		
+		map.addAttribute("SpocChartList",sc);
+		map.addAttribute("spcParticipants",sc1);
+		map.addAttribute("Month",scm);
+		map.addAttribute("Status",scp1);
+
+		return "report";
+	}
+	
 	
 	@RequestMapping(value="/logout")
 	public String logout(ModelMap map) {

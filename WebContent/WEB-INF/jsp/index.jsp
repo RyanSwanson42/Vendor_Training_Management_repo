@@ -72,8 +72,9 @@
 					type="search" id="sb"
 					style="color: white; border-radius: 15px; border: #fff 2px solid; background-color: #3c8dbc; padding-top: 2px; padding-bottom: 3px"
 					required placeholder="  Filter..." /></li>
-				<li class="nav-item"><a class="nav-link" href="#">Run
-						Report</a></li>
+					<!-- Addedreporttoindex -->
+				<li class="nav-item"><a class="nav-link" onclick="location.href='/SpringApp/report'" style="cursor: pointer">
+					Run Report</a></li>
 				<li class="nav-item"><a class="nav-link" href="#" id="vm-open"
 					data-toggle="modal" data-target="#vm-modal" data-backdrop="static">Vendor
 						Management</a></li>
