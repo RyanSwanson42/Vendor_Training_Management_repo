@@ -31,9 +31,15 @@ import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
 import trm.dt.ddtProjectQueries.CallbackFunction;
 import trm.dt.trial.DDTProject.DTTProcessingCard;
 import trm.dt.trial.DDTProject.DTTdaoServices;
+import trm.it.bl.InputForm;
+import trm.it.bl.InputFormServices;
+import trm.it.dao.getName.GetName;
+import trm.it.dao.getName.GetNameDAO;
+import trm.it.dao.getStatus.GetStatusDAO;
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatus;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatusDAO;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
 import trm.vt.dao.SpocChart.SpocChartDao;
@@ -207,6 +213,34 @@ public class VendorController {
 		}
 		return "redirect:/dashboard";
 	}
+	//-----------------Change between training types
+	@RequestMapping(value="/changeProcessing/it/{req_id}")
+	public String changeProcessingIT(@PathVariable("req_id") int[] req_id){
+		for (int i=0; i< req_id.length; i++) {
+			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
+			new InternalTrainingRequestDAO().insertInternalTrainingRequest(req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 103);
+		}
+		return "redirect:/dashboard";
+	}
+	@RequestMapping(value="/changeProcessing/dt/{req_id}")
+	public String changeProcessingDT(@PathVariable("req_id") int [] req_id){
+		for (int i=0; i< req_id.length; i++) {
+			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
+			new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 203);
+		}
+		return "redirect:/dashboard";
+	}
+	@RequestMapping(value="/changeProcessing/vt/{req_id}")
+	public String changeProcessingVT(@PathVariable("req_id") int[] req_id){
+		for (int i=0; i< req_id.length; i++) {			
+			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
+			new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(req_id[i]);
+			new CallbackFunction().statusChange(req_id[i], 303);
+		}
+		return "redirect:/dashboard";
+	}
 
 	/*----------------------------- Modal and accordion services for Vendor Trainings ----------------------------*/
 	@RequestMapping(value = "/process", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -326,6 +360,67 @@ public class VendorController {
 	@RequestMapping(value = "/deleteVendor")
 	public String deleteVendor() {
 		return "";
+	}
+	
+/*	@RequestMapping(value="it/{trainingID}")
+	public String updateproduct(@PathVariable("trainingID") int trainingID, ModelMap map)
+	{
+		InputForm inputform = new InputFormServices().loadForm(trainingID);
+		map.addAttribute("command", inputform);
+		map.addAttribute("maheshFun", inputform);
+		
+		GetNameDAO nameDAO = new GetNameDAO();
+		List<GetName> alltrainers = nameDAO.getAllTrainers();
+		List<String> names = new ArrayList<String>();
+		for(GetName gn : alltrainers){
+			names.add(gn.getEmployee().getNames());
+		}
+		map.addAttribute("alltrainers", names);
+		
+		return "processInProgress";
+	}
+*/
+	
+	@RequestMapping(value = "it", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String processInProgressRedirect(ModelMap map) {
+		map.addAttribute("command", new InputForm());
+		return "processInProgress";
+	}
+	
+	@RequestMapping(value="itModal") 
+	public String updateproduct(@RequestParam("trainingID") int trainingID, ModelMap map)
+	{
+		InputForm inputform = new InputFormServices().loadForm(trainingID);
+		map.addAttribute("command", inputform);
+		map.addAttribute("maheshFun", inputform);
+		
+		GetNameDAO nameDAO = new GetNameDAO();
+		List<GetName> alltrainers = nameDAO.getAllTrainers();
+		List<String> names = new ArrayList<String>();
+		for(GetName gn : alltrainers){
+			names.add(gn.getEmployee().getNames());
+		}
+		System.out.println(names.toString());
+		map.addAttribute("alltrainers", names);
+		
+		return "processInProgress";
+	}
+
+	
+	@RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to root directory then go ahead
+	public String updateproductservice(@ModelAttribute("inputform") InputForm inputform, @PathVariable("trainingID") int trainingID)
+	{
+		GetStatusDAO gs = new GetStatusDAO();
+		TrainingManagementStatusDAO tsdao = new TrainingManagementStatusDAO();
+		new InputFormServices().saveForm(inputform.getTrainingID(), new GetNameDAO().getIdByName(inputform.getTrainerName()), inputform.getTrainerName(),
+				inputform.getMode(), inputform.getAddress(), inputform.getCity(),
+				inputform.getRoomNum(), inputform.getUrl(), inputform.getPhoneNum(),
+				inputform.getStartDate(), inputform.getEndDate(), inputform.getStartTime(),
+				inputform.getEndTime(), inputform.getDescription(), inputform.getState(),
+				inputform.getCountry(), inputform.getZipCode(), inputform.getTimeZone(),
+				inputform.getSchedBreakdown());
+	
+		return "redirect:/it/{trainingID}";
 	}
 
 }

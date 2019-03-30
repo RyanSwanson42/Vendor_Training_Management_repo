@@ -3,8 +3,15 @@ package trm.dt.ddtProjectQueries;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import trm.dt.dao.developTeamTrainingRequest.DDTTrainingDAO;
+import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 import trm.vt.dao.trainingRequestLog.TrainingRequestLogDAO;
+import trm.vt.dao.vendorTrainingRequest.VendorTrainingRequestDAO;
 
 public class CallbackFunction 
 {
@@ -150,4 +157,38 @@ public class CallbackFunction
         TrainingManagementStatusDAO ms = new TrainingManagementStatusDAO();
         ms.updateTrainingManagementStatusOnPid(status, training_id);
 	}
+public void clearPreviousTrainingRequset(int training_id)
+{
+	ApplicationContext context = new ClassPathXmlApplicationContext("spring-config.xml");
+	JdbcTemplate temp = (JdbcTemplate) context.getBean("db");
+	int status = temp.queryForInt("select s.status from training_management_status s join training_request tr on tr.training_request_id = s.training_request_id where s.training_request_id = ?",
+			new Object[]{training_id});
+	switch(status)
+	{
+	case 103:
+	case 104:
+	case 105:
+	case 106:
+	case 107:
+	case 108:
+	case 109:
+		new InternalTrainingRequestDAO().deleteInternalTrainingRequest(training_id);
+	case 203:
+	case 204:
+	case 205:
+	case 206:
+	case 207:
+	case 208:
+	case 209:
+		new DDTTrainingDAO().deleteDTTraining(training_id);
+	case 303:
+	case 304:
+	case 305:
+	case 306:
+	case 307:
+	case 308:
+	case 309:
+		new VendorTrainingRequestDAO().deleteVendorTrainingRequest(training_id);
+	}
+}
 }

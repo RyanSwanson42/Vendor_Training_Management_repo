@@ -251,9 +251,69 @@
 									<span> <i class="fa fa-id-card" aria-hidden="true"
 										style="color: #3c8dbc; float: inherit;"></i>
 										${pro2.getVendorTrainingRequest().vendor_training_request_id}
-									</span> <span style="float: right;"> <img
+									</span> <span style="float: right;"><!-- <img
 										style="margin-top: 27px;"
-										src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+										src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">-->
+										<a href="#" data-toggle="modal" data-target="#Process${newReqs.requestId}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/vendor-icon-placeholder.png'> </a>
+										<div class="modal" id="Process${newReqs.requestId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<h4 class="modal-title" id="myModalLabelDelete">Choose Training Type</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+								</div>
+
+								<!-- Modal body --><div class="modal-body">
+									<c:catch>
+										<!-- <form action="toProcess/${newReqs.requestId}"> -->
+											<a class="dropdown-item" id="it-link" href="changeProcessing/it/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/it-icon.png" />"> IT</a><br>
+										</form>
+
+										<form action="#">
+											<!-- <input type="submit" class="btn btn-primary" value="ITT" />-->
+											<a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/dt-icon.png" />"> DT
+						</a> <br>
+										</form>
+										<form action="#">
+											<!-- <input type="submit" class="btn btn-primary" value="VTT" />-->
+											<a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+							VT
+						</a><br>
+										</form>
+									</c:catch>
+								</div>
+								<!--  <div class="modal-body">
+									<div id="toProcessing-ddm" class="dropdown-menu"
+						style="min-width: 6rem">
+						<a class="dropdown-item" id="it-link" href="toProcessing/it/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/it-icon.png" />"> IT
+						</a> <a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/dt-icon.png" />"> DT
+						</a> <a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
+							style="padding-left: 10px; padding-right: 10px;"> <img
+							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+							VT
+						</a>
+					</div>
+								</div>-->
+
+								<!-- Modal footer -->
+								<div class="modal-footer">
+
+									<!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+								</div>
+							</div>
+						</div>
+					</div>
 									</span>
 								</h5>
 								<hr style="width: 90%; border-color: #b9b9b9;">
@@ -993,7 +1053,12 @@
 									</tr>
 								</table>
 								</p>
+								<i style="margin-left: 10px" id="modalIcons" title="Open"
+									class="fas fa-external-link-alt"
+									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i>
+								
 							</div>
+							
 						</div>
 					</c:forEach>
 
@@ -1567,6 +1632,24 @@
 						  	$("#vt-link").attr("href", vtl);
 						  /* alert("You selected: " + checkedIds.join(", ") + " to process"); */
 					    }
+					});   
+					$("#myModalLabelDelete").click(function(e){
+					    if($('input[type=checkbox]:checked').length == 0){
+					    	alert("Please select minimum one checkbox");
+					    	/* $('#toProcessing-ddm').hide(); */
+					    } else {
+					    	/* $('#toProcessing-ddm').show(); */
+					    	var checkedIds = $(".chk:checked").map(function() {
+							    return this.id.substring(11,16);
+							    }).toArray();		  
+				    		var itl = 'changeProcessing/it/'+checkedIds;
+			    		  	var dtl = 'changeProcessing/dt/'+checkedIds.join(",");
+						  	var vtl = 'changeProcessing/vt/'+checkedIds.join();
+						    $("#it-link2").attr("href", itl);
+					    	$("#dt-link2").attr("href", dtl);
+						  	$("#vt-link2").attr("href", vtl);
+						  /* alert("You selected: " + checkedIds.join(", ") + " to process"); */
+					    }
 					});
 					
 					$('#sb').change(
@@ -1685,6 +1768,18 @@
             }   
 		});
 	}
+	
+	function openItPage(id) {	
+		$.ajax({
+        	type: "POST",
+        	data: {id: id},
+            url : 'it',
+            success : function(data) {
+				window.open('http://localhost:9999/SpringApp/it');
+            } 
+		});
+	}
+	
 	
 	</script>
 	<!-- Yosuf ElSaadany - Script to

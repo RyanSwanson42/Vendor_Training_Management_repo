@@ -15,13 +15,22 @@ public class GetNameDAO {
 		temp = (JdbcTemplate) context.getBean("db");
 	}
 	
+	public int getIdByName(String name){
+		String names[] = name.split(" ");
+		String lastName = names[0].replace(",", ""); //substring(0, names[0].length() - 1);
+		String firstName = names[1];
+		System.out.println(lastName);
+		System.out.println(firstName);
+		String sql = "SELECT employee_id FROM employee WHERE last_name = ? AND first_name = ?";
+		int id = temp.queryForInt(sql, new Object[]{lastName, firstName});
+		return id;
+	}
 	public List<GetName> getSpocName(int id){
 		String sql = "SELECT DISTINCT last_name, first_name FROM Employee JOIN Spoc_Master ON employee_id = spoc_emp_id WHERE spoc_emp_id = ?";
 		List<GetName> name = temp.query(sql, new Object[]{id}, new GetNameMapper());
 		return name;
 	}
 	public List<GetName> getExecutiveName(int id){
-		//NOT FINISHED
 		String sql = "SELECT DISTINCT last_name, first_name FROM Employee JOIN Internal_training_request ON employee_id = executive_id WHERE executive_id = ?";
 		List<GetName> name = temp.query(sql, new Object[]{id}, new GetNameMapper());
 		return name;
