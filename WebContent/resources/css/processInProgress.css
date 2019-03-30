@@ -1,0 +1,56 @@
+.steps
+{
+    width: 38.5em;
+    margin-top: 1em;
+}
+.stepsmini
+{
+    width: 38.5em;
+    height: 2.5em;
+    margin-top: .3em;
+    background-color:skyblue;
+}
+.pending
+{
+    background-color: lightpink;
+}
+#modeVirtual
+{
+    display: none;
+}
+#checkboxes
+{
+    position: relative;
+    left: 4em;
+}
+#newTrainer
+{
+    display: none;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button1 {background-color: #f44336;}
+
+#saveButtonITForm {
+	background-color: teal;
+	color: silver;
+	font-size: x-large;
+	width: 40%;
+    height: 2.5em;
+    margin-top: .3em;
+    border-color: gold;
+    border-width: 3px;
+    margin-left: 30%;
+    
+}
