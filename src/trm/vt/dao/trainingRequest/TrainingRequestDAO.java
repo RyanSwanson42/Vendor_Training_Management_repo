@@ -51,4 +51,31 @@ public class TrainingRequestDAO {
 		
 		return tr.get(0);
 	}
+	
+	public int getTrainingRequestIdWithInternalTrainingRequestId(int internal_training_request_id) {
+		
+		String sql = "select itr.training_request_id from INTERNAL_TRAINING_REQUEST itr where itr.INTERNAL_TRAINING_ID = ?";
+		
+		int training_request_id = temp.queryForInt(sql, new Object[] {internal_training_request_id});
+		
+		return training_request_id;
+	}
+	
+	public int getTrainingRequestIdWithDevelopTrainingRequestId(int dtt_training_id) {
+		
+		String sql = "select dttr.training_request_id from DEVELOP_TEAM_TRAINING_REQUEST dttr where dttr.DTT_TRAINING_ID = ?";
+		
+		int training_request_id = temp.queryForInt(sql, new Object[] {dtt_training_id});
+		
+		return training_request_id;
+	}
+	
+	public int getTrainingRequestIdWithVendorTrainingRequestId(int vendor_training_request_id) {
+		
+		String sql = "select vtr.training_request_id from vendor_training_request vtr where vendor_training_request_id = ?";
+		
+		int training_request_id = temp.queryForInt(sql, new Object[] {vendor_training_request_id});
+		
+		return training_request_id;
+	}
 }

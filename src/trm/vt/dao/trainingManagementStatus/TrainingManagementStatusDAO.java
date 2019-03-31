@@ -65,4 +65,15 @@ public class TrainingManagementStatusDAO {
 		temp.update(sql, new Object[] {status, training_request_id});
 	}
 	
+	public TrainingManagementStatus getTrainingManagementStatusWithTrainingRequestID(int training_request_id) {
+
+		String sql = "select * from training_management_status where training_request_id = ?";
+
+		List<TrainingManagementStatus> tms = temp.query(sql, new Object[] { training_request_id },
+				new TrainingManagementStatusMapper());
+
+		return tms.get(0);
+	}
+
+	
 }

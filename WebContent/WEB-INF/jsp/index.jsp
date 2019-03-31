@@ -241,86 +241,48 @@
 				id="pd">
 				<h4>Processing</h4>
 				<div class="row" id="hp">
-					<c:forEach var="pro2" items="${vendorTrainingRequestList2}"
-						varStatus="theCount">
-						<div class="card"
-							style="margin-left: 10px; margin-top: 20px; width: 16rem;">
-							<div class="card-body">
-
-								<h5 class="card-title">
-									<span> <i class="fa fa-id-card" aria-hidden="true"
-										style="color: #3c8dbc; float: inherit;"></i>
-										${pro2.getVendorTrainingRequest().vendor_training_request_id}
-									</span> <span style="float: right;"><!-- <img
-										style="margin-top: 27px;"
-										src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">-->
-										<a href="#" data-toggle="modal" data-target="#Process${newReqs.requestId}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/vendor-icon-placeholder.png'> </a>
-										<div class="modal" id="Process${newReqs.requestId}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabelDelete">Choose Training Type</h4>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-								</div>
-
-								<!-- Modal body --><div class="modal-body">
-									<c:catch>
-										<!-- <form action="toProcess/${newReqs.requestId}"> -->
-											<a class="dropdown-item" id="it-link" href="changeProcessing/it/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/it-icon.png" />"> IT</a><br>
-										</form>
-
-										<form action="#">
-											<!-- <input type="submit" class="btn btn-primary" value="ITT" />-->
-											<a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/dt-icon.png" />"> DT
-						</a> <br>
-										</form>
-										<form action="#">
-											<!-- <input type="submit" class="btn btn-primary" value="VTT" />-->
-											<a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
-							VT
-						</a><br>
-										</form>
-									</c:catch>
-								</div>
-								<!--  <div class="modal-body">
-									<div id="toProcessing-ddm" class="dropdown-menu"
-						style="min-width: 6rem">
-						<a class="dropdown-item" id="it-link" href="toProcessing/it/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/it-icon.png" />"> IT
-						</a> <a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/dt-icon.png" />"> DT
-						</a> <a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
-							VT
-						</a>
-					</div>
-								</div>-->
-
-								<!-- Modal footer -->
-								<div class="modal-footer">
-
-									<!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> -->
+					<c:forEach var="pro2" items="${vendorTrainingRequestList2}" varStatus="theCount">
+						<div class="card" style="margin-left: 10px; margin-top: 20px; width: 16rem;">
+						<div class="card-body">
+						<h5 class="card-title">
+							<span> <i class="fa fa-id-card" aria-hidden="true" style="color: #3c8dbc; float: inherit;"></i>
+								${pro2.getVendorTrainingRequest().vendor_training_request_id}
+							</span> 
+							<span style="float: right;">
+							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='20px' height='20px'  src='.//resources/img/vendor-icon-placeholder.png'> </a>
+							<div class="modal" id="Process${pro2.getVendorTrainingRequest().vendor_training_request_id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
+								<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title" id="myModalLabelDelete">Choose Training Type</h4>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+										</div>
+										<!-- Modal body -->
+										<div class="modal-body">
+											<c:catch>
+												<form>
+													<a class="dropdown-item" id="it-link" href="changeProcessing/it/${pro2.getVendorTrainingRequest().vendor_training_request_id}/Vendor"
+													style="padding-left: 10px; padding-right: 10px;"> <img
+													src="<c:url value="/resources/img/it-icon.png" />"> IT</a>
+												</form>
+												<br>
+												<form>
+													<a class="dropdown-item" id="dt-link" href="changeProcessing/dt/${pro2.getVendorTrainingRequest().vendor_training_request_id}/Vendor"
+													style="padding-left: 10px; padding-right: 10px;"> <img
+													src="<c:url value="/resources/img/dt-icon.png" />"> DT
+													</a>
+												</form>
+												<br>
+											</c:catch>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-									</span>
-								</h5>
+						</span>
+					</h5>
 								<hr style="width: 90%; border-color: #b9b9b9;">
 
-								<%-- <h5 class="card-title">Vendor Request</h5>
-								<h6 class="card-subtitle mb-2 text-muted">ID:
-									${pro2.getVendorTrainingRequest().vendor_training_request_id}</h6> --%>
+								
 								<p class="card-text">
 								<table style="margin-bottom: -15px;">
 									<tr>
@@ -363,11 +325,11 @@
 
 								<!-- Yosuf ElSaadany 3/14/2019 1:47 pm Integration of Modal- DOM for Modal -->
 								<i style="margin-left: 10px" id="modalIcons" title="Open"
-									data-toggle="modal" data-target="#myModal${theCount.count}"
+									data-toggle="modal" data-target="#myModal${pro2.getVendorTrainingRequest().vendor_training_request_id}"
 									class="fas fa-external-link-alt"
 									onclick="ajax(${pro2.getVendorTrainingRequest().vendor_training_request_id});"></i>
 
-								<div class="modal" id="myModal${theCount.count}">
+								<div class="modal" id="myModal${pro2.getVendorTrainingRequest().vendor_training_request_id}">
 									<div class="modal-dialog modal-xl">
 										<div class="modal-content">
 											<!-- Modal Header -->
@@ -414,7 +376,7 @@
 																	</a>
 																</div>
 																<!-- Card body -->
-																<div id="collapseOne1" class="collapse show"
+																<div id="collapseOne1" class="collapse"
 																	role="tabpanel" aria-labelledby="headingOne1"
 																	data-parent="#accordionEx">
 																	<div class="card-body">
@@ -424,12 +386,13 @@
 																			<button onclick="openVendorModal(${pro2.getVendorTrainingRequest().vendor_training_request_id});" class="nav-link" href="#" id="vm-open"
 																			data-toggle="modal" data-target="#vm-modal"
 																			data-backdrop="static">Select Vendors</button> --%>
-																		<a
-																			href="vendormanagement/${pro2.getVendorTrainingRequest().vendor_training_request_id}">Select
-																			Vendors</a>
-																		<table id="vendorSPOC" class="table">
+																		<a href="vendormanagement/${pro2.getVendorTrainingRequest().vendor_training_request_id}" id="VMLink" data-placement="right" data-toggle="tooltip" title="" data-original-title="Click to select vendors for Request ID: ${pro2.getVendorTrainingRequest().vendor_training_request_id} from Vendor Management">
+																			Select Vendors
+																		</a><br>
+																		<table id="vendorSPOC" class="table" style="margin-top:10px;">
 																			<thead id="th1" class="thead-light">
 																				<tr>
+																					<th><!--checkbox col--></th>
 																					<th>Vendor</th>
 																					<th>Phone</th>
 																					<th>Email</th>
@@ -441,6 +404,11 @@
 
 																			</tbody>
 																		</table>
+																			<script>
+																				
+																			</script>
+																			<a href="#" onclick="$('#myModal${pro2.getVendorTrainingRequest().vendor_training_request_id}').modal({'backdrop': 'static'});"
+																			id="PTApprovedLink" data-modalnum="${pro2.getVendorTrainingRequest().vendor_training_request_id}" data-toggle="tooltip" data-placement="right" title="" data-original-title="Please choose checkboxes for Vendors that Procurment Team Approves">PT Approved</a>
 																	</div>
 																</div>
 															</div>
@@ -500,19 +468,11 @@
 																<div id="collapseThree3" class="collapse"
 																	role="tabpanel" aria-labelledby="headingThree3"
 																	data-parent="#accordionEx">
-																	<div class="card-body">Anim pariatur cliche
-																		reprehenderit, enim eiusmod high life accusamus terry
-																		richardson ad squid. 3 wolf moon officia aute, non
-																		cupidatat skateboard dolor brunch. Food truck quinoa
-																		nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-																		sunt aliqua put a bird on it squid single-origin
-																		coffee nulla assumenda shoreditch et. Nihil anim
-																		keffiyeh helvetica, craft beer labore wes anderson
-																		cred nesciunt sapiente ea proident. Ad vegan excepteur
-																		butcher vice lomo. Leggings occaecat craft beer
-																		farm-to-table, raw denim aesthetic synth nesciunt you
-																		probably haven't heard of them accusamus labore
-																		sustainable VHS.</div>
+																	<div class="card-body">
+																		<a href="PTListtoPM/${pro2.getVendorTrainingRequest().vendor_training_request_id}"  class="btn btn-info btn-lg btn-block">
+																			Send PT Approved List to PM
+																		</a>
+																	</div>
 																</div>
 															</div>
 															<div class="card">
@@ -536,7 +496,7 @@
 																	data-parent="#accordionEx">
 																	<div class="card-body">
 																		<form
-																			action="/trainingSchedule/${pro2.getVendorTrainingRequest().vendor_training_request_id}">
+																			action="trainingSchedule/${pro2.getVendorTrainingRequest().vendor_training_request_id}">
 																			<!-- <label>Training Dates</label> -->
 																			<div class="form-group">
 																				<div class="row">
@@ -545,8 +505,8 @@
 																						<label>Start Date</label>
 																					</div>
 																					<div class="col-4">
-																						<input id="StartDate" type="date"
-																							class="form-control-sm" name="startDate">
+																						<input id="StartDate" type="date" class="form-control-sm"
+																							name="startDate" data-requestID="${pro2.getVendorTrainingRequest().vendor_training_request_id}" >
 																					</div>
 																					<div class="col-3"></div>
 																				</div>
@@ -556,22 +516,543 @@
 																						<label>End Date</label>
 																					</div>
 																					<div class="col-4">
-																						<input id="EndDate" type="date"
-																							class="form-control-sm" name="endDate">
+																						<input id="EndDate" type="date" class="form-control-sm" 
+																							name="endDate" data-requestID="${pro2.getVendorTrainingRequest().vendor_training_request_id}" >
 																					</div>
 																					<div class="col-3"></div>
 																				</div>
 																				<script>
-																					document.getElementById("EndDate").addEventListener("change", function() {
-																					    var input = this.value;
-																					    var input2 = document.getElementById("StartDate").value;
-																					    var dateEntered = new Date(input);
-																					    var ins = "insertDates/${pro2.getVendorTrainingRequest().vendor_training_request_id}/" + input2 + "/" + input;
-																					    console.log(ins);
-																					    document.getElementById("insdates").setAttribute('href', ins);
-																					});
 																				</script>
-																				<a id="insdates" href="#">Button</a>
+																				<div style=" text-align: right;">
+																					<a id="insdates" href="#">Save Dates</a>
+																				</div>
+																			</div>
+																			<hr>
+																			<div class="row">
+																				<div class="col-3"></div>
+																				<div class="col-3">
+																					<label>Training Type</label>
+																				</div>
+																				<div class="col-3">
+																					<div class="form-check">
+																						<input class="form-check-input" type="radio"
+																							name="trainingType" id="online" value="online">
+																						<label class="form-check-label" for="online">
+																							Online </label>
+																					</div>
+																					<div class="form-check">
+																						<input class="form-check-input" type="radio"
+																							name="trainingType" id="classRoom"
+																							value="classroom"> <label
+																							class="form-check-label" for="classRoom">
+																							Class Room </label>
+																					</div>
+																				</div>
+																				<div class="col-3"></div>
+																			</div>
+																			
+																			<div id="classRoomForm" class="form-group">
+																				<div class="row">
+																					<div class="col">
+																						<br> <input name="city" placeholder="City"
+																							 type="text" class="form-control" id="classRoom-city">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="state" placeholder="State" 
+																							type="text" class="form-control" id="classRoom-state">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="country" placeholder="Country"
+																							 type="text" class="form-control"  id="classRoom-country">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="zipcode" placeholder="Zipcode"
+																							 type="number" pattern="\d*" max="99999"
+																							class="form-control" id="classRoom-zipcode">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="timezone" placeholder="Time Zone" required
+																							type="text" class="form-control" id="classRoom-timezone">
+																					</div>
+																				</div> 
+																				
+																				    <div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="location" placeholder="Location"
+																							 type="text" class="form-control" id="classRoom-location">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="room" placeholder="Room Number"
+																							 type="text" class="form-control" id="classRoom-roomNumber">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="breakdown"
+																							placeholder="Training Break Down" 
+																							type="text" class="form-control" id="classRoom-breakdown">
+																					</div>
+																				</div>
+																			</div>
+																			<div id="onlineForm" class="form-group">
+																				<div class="row">
+																					<div class="col">
+																						<br> <input name="url"
+																							placeholder="Training URL" type="text" 
+																							class="form-control" id="online-URL">
+																					</div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col">
+																						<input name="audio" placeholder="Training Audio"
+																							 type="text" class="form-control" id="online-audio">
+																					</div>
+																				</div>
+																			</div>
+																			<button style="float: right" type="submit"
+																				class="btn btn-primary">Submit</button>
+																			<br>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-- Accordion end -->
+													</div>
+													<div class="col-4">
+														<div id="card" class="card">
+															<div id="card-body" class="card-body">
+																<h5 class="card-title">Progress</h5>
+																<p class="card-text" id="progressSummary">Summary of the progress of this
+																	training request is shown below</p>
+															</div>
+															<ul class="list-group list-group-flush">
+																<li class="list-group-item">Shortlist Vendor <span
+																	id="dot-sec1" title="Completed" class="dot" style="background-color:green;"></span>
+																</li>
+																<li class="list-group-item">Procurement Team
+																	Shortlist <span id="dot-sec2" title="Completed"
+																	class="dot" style="background-color:green;"></span>
+																</li>
+																<li class="list-group-item">PM Approval <span
+																	id="dot-sec3" title="In Progress" class="dot"  style="background-color:yellow;"></span>
+																</li>
+																<li class="list-group-item">Training Schedule <span
+																	id="dot-sec4" title="Pending" class="dot"  style="background-color:red;"></span>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Modal footer -->
+											<div class="modal-footer">
+												<button class="btn btn-primary">Save</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- Yosuf ElSaadany 3/15/2019 11:06 pm Adding Approval Email Popup -->
+								<i id="modalIcons" title="Upload" data-toggle="modal"
+									data-target="#approval" class="fas fa-upload"></i>
+								<div class="modal" id="approval">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<div class="modal-title">Attach Approval Email</div>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<!-- Modal body -->
+											<div class="modal-body">
+												<input type="file" />
+											</div>
+											<!-- Modal footer -->
+											<div class="modal-footer">
+												<button class="btn btn-primary">Upload</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+
+
+					<!-- IT Team Cards -->
+					<c:forEach var="itList" items="${internalTrainingRequestList2}"
+						varStatus="theCount">
+						<div class="card"
+							style="margin-left: 10px; margin-top: 20px; width: 16rem;">
+							<div class="card-body">
+								<h5 class="card-title">
+									<span> <i class="fa fa-id-card" aria-hidden="true" style="color: #3c8dbc; float: inherit;"></i>
+										${itList.getInternalTrainingRequest().internal_training_id}
+									</span>
+										<span style="float: right;">
+										<a href="#" data-toggle="modal" data-target="#Process${itList.getInternalTrainingRequest().internal_training_id}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/it-icon.png'> </a>
+										<div class="modal" id="Process${itList.getInternalTrainingRequest().internal_training_id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabelDelete">Choose Training Type</h4>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<!-- Modal body -->
+													<div class="modal-body">
+														<c:catch>
+															<form>
+																<a class="dropdown-item" id="it-link" href="changeProcessing/dt/${itList.getInternalTrainingRequest().internal_training_id}/Internal"
+																style="padding-left: 10px; padding-right: 10px;"> <img
+																src="<c:url value="/resources/img/dt-icon.png" />"> DT</a>
+															</form>
+															<br>
+															<form>
+																<a class="dropdown-item" id="dt-link" href="changeProcessing/vt/${itList.getInternalTrainingRequest().internal_training_id}/Internal"
+																style="padding-left: 10px; padding-right: 10px;"> <img
+																src="<c:url value="/resources/img/vendor-icon-placeholder.png" />"> VT
+																</a>
+															</form>
+															<br>
+														</c:catch>
+													</div>
+												</div>
+											</div>
+										</div>
+									</span>
+								</h5>
+								<hr style="width: 90%; border-color: #b9b9b9;">
+
+								<%-- <h5 class="card-title">Vendor Request</h5>
+								<h6 class="card-subtitle mb-2 text-muted">ID:
+									${pro2.getVendorTrainingRequest().vendor_training_request_id}</h6> --%>
+								<p class="card-text">
+								<table style="margin-bottom: -15px;">
+									<tr>
+										<td style="text-align: center"><i class="fas fa-user"
+											style="color: #ff3232; float: inherit;"></i></td>
+										<td style="text-align: left; padding-left: 5px;">
+											${itList.getEmployee().first_name}
+											${itList.getEmployee().last_name}</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i
+											class="fas fa-network-wired"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;" id="n_">
+											${itList.getTrainingRequest().request_training_module}</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i
+											class="fas fa-map-marker-alt"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">
+											${itList.getTrainingRequest().request_location}</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i class="fas fa-users"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">
+											${itList.getTrainingRequest().request_approx_participant}</a>
+										</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i
+											class="fas fa-calendar-day"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">
+											${itList.getTrainingRequest().request_start_date}</td>
+									</tr>
+								</table>
+								</p>
+								<%-- <i style="margin-left: 10px" id="modalIcons" title="Open"
+									class="fas fa-external-link-alt"
+									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i> --%>
+									<a class="nav-link" href="it"><i style="margin-left: 10px; color:black;" id="modalIcons" title="Open"
+									class="fas fa-external-link-alt"
+									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i></a>
+							</div>
+							
+						</div>
+					</c:forEach>
+
+
+					<!-- DT Team Cards -->
+					<c:forEach var="inProcess" items="${inProcessList}" varStatus="index">
+						<div class="card" style="margin-left: 10px; margin-top: 20px; width: 16rem;">
+						
+							<div class="card-body">
+							<h5 class="card-title">
+							<span><i class="fa fa-id-card" aria-hidden="true"
+										style="color: #3c8dbc; float: inherit;"></i> ${inProcess.request.training_request_id}
+							</span> <span style="float: right;"> <img
+										style="margin-top: 27px;"
+										src="<c:url value="/resources/img/dt-icon.png" />">
+							</span>
+							</h5>
+							<hr style="width: 90%; border-color: #b9b9b9;">
+							<p class="card-text">
+								<table style="margin-bottom: -15px;">
+									<tr>
+										<td style="text-align: center"><i class="fas fa-user"
+											style="color: #ff3232; float: inherit;"></i>
+										</td>
+										<td style="text-align: left; padding-left: 5px;">${inProcess.projectManager.first_name} ${inProcess.projectManager.last_name}
+										</td>
+									</tr>
+									
+									<tr>
+										<td style="text-align: center"><i
+											class="fas fa-network-wired"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">${inProcess.request.request_training_type}</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i
+											class="fas fa-map-marker-alt"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">${inProcess.getRequest().getRequest_location()}</td>
+									</tr>									
+									<tr>
+										<td style="text-align: center"><i class="fas fa-users"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">${inProcess.request.request_approx_participant}</td>
+									</tr>
+									<tr>
+										<td style="text-align: center"><i class="fas fa-calendar-day"
+											style="float: inherit; color: #323232"></i></td>
+										<td style="text-align: left; padding-left: 5px;">${inProcess.request.request_start_date}</td>
+									</tr>
+								</table>
+								<div style="margin-top: 20px;"><i style="margin-left: 10px;" id="modalIcons" title="Open"
+									data-toggle="modal" data-target="#edit_steps${inProcess.request.training_request_id}"
+									class="fas fa-external-link-alt"></i>
+								</div>
+								</p>
+
+								<div class="modal" id="edit_steps${inProcess.request.training_request_id}">
+								<div style="margin-top: 125px;"
+									class="modal-dialog modal-dialog-centered modal-xl">
+									<div class="modal-content">
+
+										<div class="modal-header">
+											<h4 class="modal-title">Update Training Request</h4>
+											<button type="button" class="close" data-dismiss="modal">x</button>
+										</div>
+
+										<!-- Modal body -->
+										<div style="overflow-y: scroll" class="modal-body">
+											<div class="container">
+												<div class="row">
+													<div class="col-8">
+														<div
+															class="accordion md-accordion accordion-4 z-depth-1-half"
+															id="accordion" role="tablist" aria-multiselectable="true">
+
+
+															<div class="card-header" role="tab" id="heading4">
+																<a style="text-decoration: none" class="collapsed"
+																	data-toggle="collapse" data-parent="#accordion"
+																	href="#collapse4" aria-expanded="false"
+																	aria-controls="collapse4">
+																	<h5 class="mb-0">
+																		<i class="fa fa-database"></i> S.D.T.T <i
+																			id="modalIcons" class="fas fa-angle-down rotate-icon"></i>
+																	</h5>
+																</a>
+															</div>
+
+															<!-- Card body -->
+															<div id="collapse4" class="collapse" role="tabpanel"
+																aria-labelledby="heading4" data-parent="#accordion">
+																<div class="card-body pt-0">
+																	<p>
+																		<i class="hfas fas fa-user-tie"><label>Trainer</label></i>
+
+
+																		<datalist id="trainerdatalist">
+																		<option value="Mahesh Rajput"></option>
+																		<option value="Some Guy"></option>
+																		<option value="Copyrighted Character"></option>
+																		</datalist>
+																	<form action="updateTrainer">
+
+																		<input type="number" name="employee_id"> <input
+																			type="submit" />
+																	</form>
+																	</p>
+																	<!-- Search By ID -->
+																	<p>
+																		<label style="padding-left: 5px; font-size: 10px;">Search
+																			Employee By ID:</label> <input type="text" id="itV" /> <input
+																			type="button" id="EmpId"
+																			style="font-size: 14px; height: 25px; width: 70px;"
+																			value="Search">
+																	</p>
+
+																	<p>
+																		<i class="hfas fas fa-check"
+																			style="padding-right: 50px"><label>Trainer
+																				Acceptance</label></i> <input type="checkbox" />
+																	</p>
+																</div>
+															</div>
+															<div class="card">
+
+																<!-- Card header -->
+																<div class="card-header" role="tab" id="heading5">
+																	<a style="text-decoration: none" class="collapsed"
+																		data-toggle="collapse" data-parent="#accordion"
+																		href="#collapse5" aria-expanded="false"
+																		aria-controls="collapse5">
+																		<h5 class="mb-0">
+																			<i class="fa fa-code"></i> Date & Type<i
+																				id="modalIcons"
+																				class="fas fa-angle-down rotate-icon"></i>
+																		</h5>
+
+																	</a>
+																</div>
+
+																<!-- Card body -->
+																<div id="collapse5" class="collapse" role="tabpanel"
+																	aria-labelledby="heading5" data-parent="#accordion">
+																	<div class="card-body pt-0">
+																		<p>
+																		<div class="row">
+																			<div class="block">
+																				<label>Start</label>
+																			</div>
+																			<div class="block" style="padding-left: 50px">
+																				<input type="text" class="datepicker">
+																			</div>
+																		</div>
+																		</p>
+
+																		<p>
+																		<div class="row">
+																			<div class="block">
+																				<label>End</label>
+																			</div>
+																			<div class="block" style="padding-left: 50px">
+																				<input type="text" class="datepicker">
+																			</div>
+																		</div>
+																		</p>
+
+																		<p>
+																		<table>
+																			<tr>
+																				<td style="width: 100%">
+																					<div class="checkboxes">
+																						<label><input type="checkbox"
+																							name="Classroom" value="classroom">
+																							Classroom</label> <label><input type="checkbox"
+																							name="Online" value="online"> Online</label> <label><input
+																							type="checkbox" name="Virtual" value="classroom">
+																							Virtual</label>
+																					</div>
+																				</td>
+																			</tr>
+																		</table>
+																		</p>
+																	</div>
+																</div>
+															</div>
+															<div class="card">
+
+																<!-- Card header -->
+																<div class="card-header" role="tab" id="heading6">
+																	<a style="text-decoration: none" class="collapsed"
+																		data-toggle="collapse" data-parent="#accordion"
+																		href="#collapse6" aria-controls="collapse6">
+																		<h5 class="mb-0">
+																			<i class="hfas fas fa-check"></i> PM Approved <i
+																				id="modalIcons"
+																				class="fas fa-angle-down rotate-icon"></i>
+																		</h5>
+																	</a>
+																</div>
+
+																<!-- Card body -->
+																<div id="collapse6" class="collapse" role="tabpanel"
+																	aria-labelledby="heading6" data-parent="#accordion">
+																	<div class="card-body pt-0">
+																		<p>No Body needed</p>
+																	</div>
+																</div>
+															</div>
+
+															<div class="card">
+																<!-- Card header -->
+																<div class="card-header" role="tab" id="headingFour4">
+																	<a style="text-decoration: none" class="collapsed"
+																		data-toggle="collapse" data-parent="#accordion"
+																		href="#collapseFour4" aria-expanded="false"
+																		aria-controls="collapseFour4">
+																		<h5 class="mb-0">
+																			<i class="fas fa-cloud"></i> Training Schedule <i
+																				id="modalIcons"
+																				class="fas fa-angle-down rotate-icon"></i>
+																		</h5>
+																	</a>
+																</div>
+																<!-- Card body -->
+																<div id="collapseFour4" class="collapse" role="tabpanel"
+																	aria-labelledby="headingFour4" data-parent="#accordion">
+																	<div class="card-body">
+																		<form
+																			action="/trainingSchedule/${pro2.getVendorTrainingRequest().vendor_training_request_id}">
+																			<!-- <label>Training Dates</label> -->
+																			<div class="form-group">
+																				<div class="row">
+																					<div class="col-3"></div>
+																					<div class="col-2">
+																						<label>Start Date</label>
+																					</div>
+																					<div class="col-4">
+																						<input type="date" class="form-control-sm"
+																							name="startDate" required>
+																					</div>
+																					<div class="col-3"></div>
+																				</div>
+																				<div style="margin-top: 0.4rem;" class="row">
+																					<div class="col-3"></div>
+																					<div class="col-2">
+																						<label>End Date</label>
+																					</div>
+																					<div class="col-4">
+																						<input type="date" class="form-control-sm"
+																							name="endDate" required>
+																					</div>
+																					<div class="col-3"></div>
+																				</div>
+																			</div>
+																			<hr>
+																			<div class="form-group">
+																				<div class="row">
+																					<div class="col-3"></div>
+																					<div class="col-2">
+																						<label>Participants</label>
+																					</div>
+																					<div class="col-4">
+																						<input type="number" min="0" required
+																							placeholder="Participants Count"
+																							class="form-control-sm" name="participants">
+																					</div>
+																					<div class="col-2"></div>
+																				</div>
 																			</div>
 																			<hr>
 																			<div class="row">
@@ -596,30 +1077,29 @@
 																				</div>
 																				<div class="col-3"></div>
 																			</div>
-
 																			<div id="classRoomForm" class="form-group">
 																				<div class="row">
 																					<div class="col">
 																						<br> <input name="city" placeholder="City"
-																							type="text" class="form-control">
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input name="state" placeholder="State"
+																						<input name="state" placeholder="State" required
 																							type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="country" placeholder="Country"
-																							type="text" class="form-control">
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="zipcode" placeholder="Zipcode"
-																							type="number" pattern="\d*" max="99999"
+																							required type="number" pattern="\d*" max="99999"
 																							class="form-control">
 																					</div>
 																				</div>
@@ -632,7 +1112,7 @@
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<select name="timezone" class="form-control"
-																							id="timezone">
+																							id="timezone" required>
 																							<option selected="selected" disabled>Time
 																								Zone</option>
 																							<option timeZoneId="1" gmtAdjustment="GMT-12:00"
@@ -890,20 +1370,20 @@
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="location" placeholder="Location"
-																							type="text" class="form-control">
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="room" placeholder="Room Number"
-																							type="text" class="form-control">
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="breakdown"
-																							placeholder="Training Break Down" type="text"
-																							class="form-control">
+																							placeholder="Training Break Down" required
+																							type="text" class="form-control">
 																					</div>
 																				</div>
 																			</div>
@@ -911,14 +1391,14 @@
 																				<div class="row">
 																					<div class="col">
 																						<br> <input name="url"
-																							placeholder="Training URL" type="text"
+																							placeholder="Training URL" type="text" required
 																							class="form-control">
 																					</div>
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
 																						<input name="audio" placeholder="Training Audio"
-																							type="text" class="form-control">
+																							required type="text" class="form-control">
 																					</div>
 																				</div>
 																			</div>
@@ -930,442 +1410,35 @@
 																</div>
 															</div>
 														</div>
-														<!-- Accordion end -->
 													</div>
-													<div class="col-4">
-														<div id="card" class="card">
-															<div id="card-body" class="card-body">
-																<h5 class="card-title">Progress</h5>
-																<p class="card-text">Summary of the progress of this
-																	training request is shown below</p>
+
+
+
+													<div class="col-sm-4">
+														<div class="card proc-card">
+															<div class="card-header">${inProcess.request.training_request_id}</div>
+															<div class="card-body proc-card-body">
+																<i class="fas fa-chalkboard-teacher" title="Training"></i>
+																${inProcess.request.request_training_type}: ${inProcess.request.request_training_module}
+																(${inProcess.request.request_training_module_scope})<br> <i
+																	class="fas fa-user" title="Project Manager"></i>
+																${inProcess.projectManager.first_name} ${inProcess.projectManager.last_name}<br> <i
+																	class="fas fa-calendar-alt" title="Requested Dates"></i>
+																${inProcess.request.request_start_date} - ${inProcess.request.request_start_date}<br> <i
+																	class="fas fa-map-marker-alt" title="Location"></i> ${inProcess.request.request_location}<br>
+
+																<hr>
+																<i class="fas fa-building" title="Room Number"></i> <span
+																	style="font-style: italic">(Room)</span><br> or <br>
+																<i class="fas fa-link" title="Class URL"></i> <a
+																	href="https://www.atos-syntel.net/"
+																	title="Syntel University">https://www.atos-syntel.net/</a><br>
+																<i class="fas fa-scroll" title="Training Summary"></i> <span
+																	style="font-style: italic">Additional training
+																	summary or details go here.</span><br>
+																<hr>
+																<p id="status">Status:</p>
 															</div>
-															<ul class="list-group list-group-flush">
-																<li class="list-group-item">Shortlist Vendor <span
-																	id="completed" title="Completed" class="dot"></span>
-																</li>
-																<li class="list-group-item">Procurement Team
-																	Shortlist <span id="completed" title="Completed"
-																	class="dot"></span>
-																</li>
-																<li class="list-group-item">PM Approval <span
-																	id="inprogressdot" title="In Progress" class="dot"></span>
-																</li>
-																<li class="list-group-item">Training Schedule <span
-																	id="pending" title="Pending" class="dot"></span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Modal footer -->
-											<div class="modal-footer">
-												<button class="btn btn-primary">Save</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Yosuf ElSaadany 3/15/2019 11:06 pm Adding Approval Email Popup -->
-								<i id="modalIcons" title="Upload" data-toggle="modal"
-									data-target="#approval" class="fas fa-upload"></i>
-								<div class="modal" id="approval">
-									<div class="modal-dialog modal-md">
-										<div class="modal-content">
-											<!-- Modal Header -->
-											<div class="modal-header">
-												<div class="modal-title">Attach Approval Email</div>
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-											</div>
-											<!-- Modal body -->
-											<div class="modal-body">
-												<input type="file" />
-											</div>
-											<!-- Modal footer -->
-											<div class="modal-footer">
-												<button class="btn btn-primary">Upload</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</c:forEach>
-
-
-					<!-- IT Team Cards -->
-					<c:forEach var="itList" items="${internalTrainingRequestList2}"
-						varStatus="theCount">
-						<div class="card"
-							style="margin-left: 10px; margin-top: 20px; width: 16rem;">
-							<div class="card-body">
-
-								<h5 class="card-title">
-									<span> <i class="fa fa-id-card" aria-hidden="true"
-										style="color: #3c8dbc; float: inherit;"></i>
-										${itList.getInternalTrainingRequest().internal_training_id}
-									</span> <span style="float: right;"> <img
-										style="margin-top: 27px;"
-										src="<c:url value="/resources/img/it-icon.png" />">
-									</span>
-								</h5>
-								<hr style="width: 90%; border-color: #b9b9b9;">
-
-								<%-- <h5 class="card-title">Vendor Request</h5>
-								<h6 class="card-subtitle mb-2 text-muted">ID:
-									${pro2.getVendorTrainingRequest().vendor_training_request_id}</h6> --%>
-								<p class="card-text">
-								<table style="margin-bottom: -15px;">
-									<tr>
-										<td style="text-align: center"><i class="fas fa-user"
-											style="color: #ff3232; float: inherit;"></i></td>
-										<td style="text-align: left; padding-left: 5px;">
-											${itList.getEmployee().first_name}
-											${itList.getEmployee().last_name}</td>
-									</tr>
-									<tr>
-										<td style="text-align: center"><i
-											class="fas fa-network-wired"
-											style="float: inherit; color: #323232"></i></td>
-										<td style="text-align: left; padding-left: 5px;" id="n_">
-											${itList.getTrainingRequest().request_training_module}</td>
-									</tr>
-									<tr>
-										<td style="text-align: center"><i
-											class="fas fa-map-marker-alt"
-											style="float: inherit; color: #323232"></i></td>
-										<td style="text-align: left; padding-left: 5px;">
-											${itList.getTrainingRequest().request_location}</td>
-									</tr>
-									<tr>
-										<td style="text-align: center"><i class="fas fa-users"
-											style="float: inherit; color: #323232"></i></td>
-										<td style="text-align: left; padding-left: 5px;">
-											${itList.getTrainingRequest().request_approx_participant}</a>
-										</td>
-									</tr>
-									<tr>
-										<td style="text-align: center"><i
-											class="fas fa-calendar-day"
-											style="float: inherit; color: #323232"></i></td>
-										<td style="text-align: left; padding-left: 5px;">
-											${itList.getTrainingRequest().request_start_date}</td>
-									</tr>
-								</table>
-								</p>
-								<i style="margin-left: 10px" id="modalIcons" title="Open"
-									class="fas fa-external-link-alt"
-									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i>
-								
-							</div>
-							
-						</div>
-					</c:forEach>
-
-
-					<!-- DT Team Cards -->
-					<c:forEach var="requests" items="${TRM_DTT_Homepage}"
-						varStatus="index">
-						<div class="card proc-card proc-card-a">
-							<div class="card-header requestId">${requests.requestId}
-								<button type="button" class="summary-btn danger" href='#'
-									id="popover" data-html="true" data-toggle="popover"
-									data-trigger="hover" title="Summary"
-									data-content='
-                         <div class="card proc-card">
-    <div class="card-header">${requests.requestId}</div>
-    <div class="card-body proc-card-body">
-      <i class="fas fa-chalkboard-teacher" title="Training"></i> <span id="summary-training">${requests.trainingModule}</span><br>
-      <i class="fas fa-user" title="Project Manager"></i> <span id="summary-pm">${requests.firstName} ${requests.lastName}</span><br>
-      <i class="fas fa-calendar-alt" title="Start Date"></i> <span id="summary-start-date">${requests.startDate} - ${requests.endDate}</span><br>
-      <i class="fas fa-map-marker-alt" title="Location"></i> <span id="summary-location">${requests.location}</span><br>
-      <i class="fas fa-globe" title="Country"></i> <span id="summary-country">USA</span><br>
-      <hr>
-      <i class="fas fa-building" title="Room Number"></i> <span id="summary-room-no">Plaza Ballroom I</span>
-      <br> or <br>
-      <i class="fas fa-link" title="Class URL"></i> <span id="summary-url"><a href="https://www.atos-syntel.net/" title="Syntel University">https://www.atos-syntel.net/</a></span><br>
-      <i class="fas fa-scroll" title="Training Summary"></i> <span id="summary-sum">Additional training summary or details go here.</span><br>
-      <hr>
-      <p id="status">Status:</p>
-
-    </div>
-  </div>'>....</button>
-							</div>
-							<div class="card-body proc-card-body">
-								<table width="100%">
-									<tr>
-										<td class="proc-card-icon-col"><i class="fas fa-user"
-											title="Project Manager"></i></td>
-										<td class="pmname">${requests.firstName}
-											${requests.lastName}</td>
-
-										<td rowspan="5" class="align-bottom"><button
-												type="button" class="btn btn-primary proc-btn"
-												data-toggle="modal"
-												data-target="#edit_steps${requests.requestId}">Edit</button></td>
-									</tr>
-									<tr>
-										<td class="proc-card-icon-col"><i
-											class="fas fa-chalkboard-teacher" title="Training"></i></td>
-										<td class="trainingType">${requests.trainingType}:
-											${requests.trainingModule} (${requests.trainingModuleScope})</td>
-									</tr>
-									<tr>
-										<td class="proc-card-icon-col"><i
-											class="fas fa-calendar-alt" title="Start Date"></i></td>
-										<td class="startDate">${requests.startDate}</td>
-									</tr>
-									<tr>
-										<td class="proc-card-icon-col"><i class="fas fa-users"
-											title="Number of Participants"></i></td>
-										<td class="groupSize">${requests.approxParticipants}</td>
-									</tr>
-									<tr>
-										<td class="proc-card-icon-col"><i
-											class="fas fa-map-marker-alt" title="Location"></i></td>
-										<td class="location">${requests.location}</td>
-									</tr>
-								</table>
-
-
-								<div id="popover_content_wrapper1" style="display: none;">
-									<div class="card proc-card">
-										<div class="card-header">10001</div>
-										<div class="card-body proc-card-body">
-											<i class="fas fa-chalkboard-teacher" title="Training"></i> <span
-												id="summary-training">Java</span><br> <i
-												class="fas fa-user" title="Project Manager"></i> <span
-												id="summary-pm">${requests.firstName}</span><br> <i
-												class="fas fa-calendar-alt" title="Start Date"></i> <span
-												id="summary-start-date">02/13/2019 - 04/05/2019</span><br>
-											<i class="fas fa-map-marker-alt" title="Location"></i> <span
-												id="summary-location">2532 W Peoria Ave<br>
-												Phoenix, AZ 85029
-											</span><br> <i class="fas fa-globe" title="Country"></i> <span
-												id="summary-country">USA</span><br>
-											<hr>
-											<i class="fas fa-building" title="Room Number"></i> <span
-												id="summary-room-no">Plaza Ballroom I</span> <br> or <br>
-											<i class="fas fa-link" title="Class URL"></i> <span
-												id="summary-url"><a
-												href="https://www.atos-syntel.net/"
-												title="Syntel University">https://www.atos-syntel.net/</a></span><br>
-											<i class="fas fa-scroll" title="Training Summary"></i> <span
-												id="summary-sum">Additional training summary or
-												details go here.</span><br>
-											<hr>
-											<p id="status">Status:</p>
-
-										</div>
-									</div>
-								</div>
-
-								<div class="modal" id="edit_steps${requests.requestId}">
-									<div class="modal-dialog modal-dialog-centered modal-lg">
-										<div class="modal-content">
-
-											<div class="modal-header">
-												<h4 class="modal-title">Update Training Request</h4>
-												<button type="button" class="close" data-dismiss="modal">x</button>
-											</div>
-
-											<!-- Modal body -->
-											<div class="modal-body">
-												<div class="row">
-													<div class="col-sm-6">
-
-
-														<ul id="accordion" class="accordion">
-															<li>
-																<div class="link">
-																	<i class="fa fa-database"></i>S.D.T.T.<i
-																		class="fa fa-chevron-down"></i>
-																</div>
-																<ul class="submenu">
-																	<!--   Trainer Confirmation -->
-																	<li>
-																		<table>
-																			<tr>
-																				<div class="stupidLeft">
-																					<i class="hfas fas fa-user-tie"><label>Trainer</label></i>
-																				</div>
-																				<div class="stupidRight" style="padding-left: 10px">
-																					<datalist id="trainerdatalist">
-																					<option value="Mahesh Rajput"></option>
-																					<option value="Some Guy"></option>
-																					<option value="Copyrighted Character"></option>
-																					</datalist>
-																					<input class="trainerList" type="text"
-																						name="trainer" list="trainerdatalist" />
-																				</div>
-																			</tr>
-																			<tr>
-																				<td><i class="hfas fas fa-check"><label>Trainer
-																							Acceptance</label></i></td>
-																				<td><input type="checkbox" /></td>
-																			</tr>
-
-																		</table>
-																	</li>
-																	<!--   Schedule Confirmation  -->
-
-																	<li>
-																		<table>
-																			<tr>
-
-																				<div class="justwork">
-																					<label>Start</label>
-																				</div>
-																				<div class="justworkdate">
-																					<input type="text" class="datepicker">
-
-																				</div>
-																			</tr>
-																			<tr>
-																				<div class="justwork">
-																					<label>End</label>
-																				</div>
-																				<div class="justworkdate">
-																					<input type="text" class="datepicker">
-
-																				</div>
-																			</tr>
-																			<tr>
-																				<td style="width: 100%">
-																					<div class="checkboxes">
-																						<label><input type="checkbox"
-																							name="Classroom" value="classroom">
-																							Classroom</label> <label><input type="checkbox"
-																							name="Online" value="online"> Online</label> <label><input
-																							type="checkbox" name="Virtual" value="classroom">
-																							Virtual</label>
-																					</div>
-																				</td>
-																			</tr>
-																		</table>
-																	</li>
-																</ul>
-															</li>
-
-															<li>
-
-																<div class="link approval" data-dec="approved">
-																	<i class="fa fa-code"></i>P.M. Approved
-																</div>
-
-															</li>
-
-															<li>
-																<div class="link">
-																	<i class="fas fa-cloud"></i>Logistics<i
-																		class="fa fa-chevron-down"></i>
-																</div>
-																<ul class="submenu">
-																	<form>
-																		<div class="container">
-																			<table>
-																				<tr>
-																					<i class="hfas fas fa-map-marker" title="Location">Enter
-																						Location</i>
-																				</tr>
-																				<tr>
-																					<td align="right"><label class="location">City:
-																					</label></td>
-																					<td></td>
-																					<td align="left"><input type="text" value="" /></td>
-																				</tr>
-
-																				<tr>
-																					<td align="right"><label class="location">State:
-																					</label></td>
-																					<td align="left"><input type="text" /></td>
-																				</tr>
-
-																				<tr>
-																					<td align="right"><label class="location">Country:
-																					</label></td>
-																					<td align="left"><input type="text" /></td>
-																				</tr>
-
-																				<tr>
-																					<td align="right"><label class="location">Zip:
-																					</label></td>
-																					<td align="left"><input type="text" /></td>
-																				</tr>
-																			</table>
-																			<br>
-																			<table>
-																				<tr>
-
-																					<i class="hfas fas fa-book">Enter Room Number</i>
-
-																				</tr>
-																				<tr>
-																					<td align="right"><label class="location"
-																						style="padding-left: 68px"></label></td>
-																					<td align="left"><input type="text" /></td>
-																				</tr>
-																			</table>
-
-																			<br>
-
-
-																			<table>
-																				<tr>
-
-																					<i class="hfas fas fa-desktop" title="Online">Enter
-																						Class URL</i>
-
-																				</tr>
-																				<tr>
-																					<td align="right"><label class="location"
-																						style="padding-left: 68px"></label></td>
-																					<td align style=""><input type="text" /></td>
-																				</tr>
-																			</table>
-																			<br>
-																			<table>
-																				<tr>
-																					<td><i class="hfas fas">Training Summary:
-																							<br>
-																						<br>
-																						<textarea style="height: 140px"></textarea>
-																					</i></td>
-																				</tr>
-																			</table>
-																	</form>
-													</div>
-													</li>
-													</ul>
-													</ul>
-												</div>
-												<div class="col-sm-6">
-													<div class="card proc-card">
-														<div class="card-header">${requests.requestId}</div>
-														<div class="card-body proc-card-body">
-															<i class="fas fa-chalkboard-teacher" title="Training"></i>
-															${requests.trainingType}: ${requests.trainingModule}
-															(${requests.trainingModuleScope})<br> <i
-																class="fas fa-user" title="Project Manager"></i>
-															${requests.firstName} ${requests.lastName}<br> <i
-																class="fas fa-calendar-alt" title="Dates"></i>
-															${requests.startDate} - ${requests.endDate}<br> <i
-																class="fas fa-map-marker-alt" title="Location"></i> <span
-																style="font-style: italic">(Address)</span><br> <i
-																class="fas fa-globe" title="Country"></i>
-															${requests.location}<br>
-
-															<hr>
-															<i class="fas fa-building" title="Room Number"></i> <span
-																style="font-style: italic">(Room)</span><br> or <br>
-															<i class="fas fa-link" title="Class URL"></i> <a
-																href="https://www.atos-syntel.net/"
-																title="Syntel University">https://www.atos-syntel.net/</a><br>
-															<i class="fas fa-scroll" title="Training Summary"></i> <span
-																style="font-style: italic">Additional training
-																summary or details go here.</span><br>
-															<hr>
-															<p id="status">Status:</p>
 														</div>
 													</div>
 												</div>
@@ -1379,12 +1452,14 @@
 
 										</div>
 									</div>
-								</div>
+									<!-- DTT Modal End -->
+								
 							</div>
-
+							</div>
 						</div>
 				</div>
 				</c:forEach>
+			
 			</div>
 		</div>
 
@@ -1518,42 +1593,14 @@
 							else {
 								$(this).val(0);
 							}
-							
-							
 						});
-						
-						
-					});
-					
-					
+					});			
 					</script>
-
 							</div>
 						</div>
 					</div>
 				</c:catch>
 			</c:forEach>
-			<%-- <c:forEach var="pro3" items="${vendorTrainingRequestList3}">
-					<div class="card" style="margin-top: 20px; width: 14rem;">
-						<div class="card-body">
-							<h5 class="card-title">
-								<span> <i class="fa fa-id-card" aria-hidden="true"
-									style="color: #3c8dbc; float: inherit;"></i>
-									${pro3.getVendorTrainingRequest().vendor_training_request_id}
-								</span> <span style="float: right;"> <img id="vendor_icon2"
-									style="margin-top: 27px;"
-									src="<c:url value="/resources/img/vendor-icon-placeholder.png" />" />
-								</span>
-							</h5>
-							<hr style="width: 90%; border-color: #b9b9b9;">
-							<h6 class="card-subtitle mb-2 text-muted">
-								<i class="fas fa-network-wired"
-									style="float: none; margin-right: 5px;"></i>${pro3.getTrainingRequest().request_training_module}
-							</h6>
-							<p class="card-text">Take attendence</p>
-						</div>
-					</div>
-				</c:forEach> --%>
 		</div>
 	</div>
 	<br>
@@ -1578,22 +1625,6 @@
 	<script>
 		$(document).ready(
 				function() {
-					$('#hidebutton').click(function() {
-						if ($('#inprogress').is(':visible')) {
-							$('#inprogress').hide();
-							$('processing-col').removeClass("col-md-4");
-							$('processing-col').addClass("col-5");
-							$('#itog').removeClass("fa-toggle-on");
-							$('#itog').addClass("fa-toggle-off");
-						} else {
-							$('#inprogress').show();
-							$('processing-col').removeClass("col-5");
-							$('processing-col').addClass("col-md-4");
-							$('#itog').removeClass("fa-toggle-off");
-							$('#itog').addClass("fa-toggle-on");
-						}
-					});
-
 					$("[id^=p_module_icon]").hover(function() {
 						var id = this.id.substring(14, 15);
 						var vendis = $('#module-overlay-'+id);
@@ -1633,25 +1664,6 @@
 						  /* alert("You selected: " + checkedIds.join(", ") + " to process"); */
 					    }
 					});   
-					$("#myModalLabelDelete").click(function(e){
-					    if($('input[type=checkbox]:checked').length == 0){
-					    	alert("Please select minimum one checkbox");
-					    	/* $('#toProcessing-ddm').hide(); */
-					    } else {
-					    	/* $('#toProcessing-ddm').show(); */
-					    	var checkedIds = $(".chk:checked").map(function() {
-							    return this.id.substring(11,16);
-							    }).toArray();		  
-				    		var itl = 'changeProcessing/it/'+checkedIds;
-			    		  	var dtl = 'changeProcessing/dt/'+checkedIds.join(",");
-						  	var vtl = 'changeProcessing/vt/'+checkedIds.join();
-						    $("#it-link2").attr("href", itl);
-					    	$("#dt-link2").attr("href", dtl);
-						  	$("#vt-link2").attr("href", vtl);
-						  /* alert("You selected: " + checkedIds.join(", ") + " to process"); */
-					    }
-					});
-					
 					$('#sb').change(
 							function() {
 								$('.card').show();
@@ -1664,41 +1676,109 @@
 				});
 	</script>
 
-
-
 	<script>
-	$('.modal').on('hidden.bs.modal', function(e) {
-		$('#collapseOne1').collapse('hide');
-	})
+	$(document).ready(function(){
+		if (/.myModal+.....$/.test(window.location.href)) {
+
+	  		var myModal = window.location.hash.substr(1);
+	  		$('#' + myModal).modal('show');
+	  		
+	  		ajax(myModal.substr(7));
+	  		
+	  		
+		}
+		if (/.myModal+.....#2$/.test(window.location.href)) {
+			//open section 2
+			var val = window.location.hash.substr(1);
+			var myModal = val.substring(7,12)
+			console.log(myModal);
+
+	  		$('#myModal' + myModal).modal('show');
+	  		ajax(myModal);
+	  		section2(myModal);
+	  		$('#collapseTwo2').attr("class","collapse show");
+
+		}
+	});
+	</script>
+	<script>
+		document.getElementById("StartDate").addEventListener("change", function() {
+		    var strt = this.value;
+		    var end = document.getElementById("EndDate").value;
+		    var reqID = parseInt(this.dataset.requestid);
+		    var ins = "insertDates/"+ reqID +"/" + strt + "/" + end;
+		    document.getElementById("insdates").setAttribute('href', ins);
+		});
+		document.getElementById("EndDate").addEventListener("change", function() {
+		    var end = this.value;
+		    var strt = document.getElementById("StartDate").value;
+		    var reqID = parseInt(this.dataset.requestid);
+		    var ins = "insertDates/"+ reqID +"/" + strt + "/" + end;
+		    document.getElementById("insdates").setAttribute('href', ins);
+		});
 	</script>
 
-	<!-- Yosuf ElSaadany 3/24/2019 10:30pm -->
 	<!-- All Ajax Requests -->
 	<script>
-	
-	// Open Vendor Tab from SPOC Vendor Shortlist
-	function openVendorTab(id) {
+
+	// Open Modal
+	function ajax(id) {
+		console.log('id is : ' + id);
 		$.ajax({
         	type: "POST",
         	data: {id: id},
-            url : 'vendormanagementwithid',
-            success : function(data) {   
-           		alert('Vendor Tab Opened with id: ' + id);
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-            }   
-		});
-	}
-	
-	// Open Modal
-	function ajax(id) {
-		$.ajax({
-        	type: "POST",
-            url : 'process',
-            success : function(data) {   
-				//$("#th1").hide();
-				//$("#th2").hide();
+            url : 'progress',
+            success : function(data) {
+           		//titles: Completed In Progress Pending
+           		//styles: green     yellow      red
+           		//303 - nothing done
+            	//304 - SPOC Shortlist done
+            	//305 - PT Shortlist done 
+            	if(data.status === 303){
+            		$("#dot-sec1").attr("title", "In Progress");
+            		$("#dot-sec1").attr("style", "background-color:yellow;");
+            		$("#dot-sec2").attr("title", "Pending");
+            		$("#dot-sec2").attr("style", "background-color:red;");
+            		$("#dot-sec3").attr("title", "Pending");
+            		$("#dot-sec3").attr("style", "background-color:red;");
+            		$("#dot-sec4").attr("title", "Pending");
+            		$("#dot-sec4").attr("style", "background-color:red;"); 
+            		$("#progressSummary").text("Select Vendors for SPOC Shortlist from Vendor Management")
+            	}
+            	if(data.status === 304){
+            		$("#dot-sec1").attr("title", "Completed");
+            		$("#dot-sec1").attr("style", "background-color:green;");
+            		$("#dot-sec2").attr("title", "In Progress");
+            		$("#dot-sec2").attr("style", "background-color:yellow;");
+            		$("#dot-sec3").attr("title", "Pending");
+            		$("#dot-sec3").attr("style", "background-color:red;");
+            		$("#dot-sec4").attr("title", "Pending");
+            		$("#dot-sec4").attr("style", "background-color:red;"); 
+            		$("#progressSummary").text("Select Procurement Team approved Vendors from SPOC Shortlist")
+            	}
+            	if(data.status === 305){
+            		$("#dot-sec1").attr("title", "Completed");
+            		$("#dot-sec1").attr("style", "background-color:green;");
+            		$("#dot-sec2").attr("title", "Completed");
+            		$("#dot-sec2").attr("style", "background-color:green;");
+            		$("#dot-sec3").attr("title", "In Progress");
+            		$("#dot-sec3").attr("style", "background-color:yellow;");
+            		$("#dot-sec4").attr("title", "Pending");
+            		$("#dot-sec4").attr("style", "background-color:red;"); 
+            		$("#progressSummary").text("Send Procurement Team Shortlist to Project Manager")
+
+            	}
+            	if(data.status === 306){
+            		$("#dot-sec1").attr("title", "Completed");
+            		$("#dot-sec1").attr("style", "background-color:green;");
+            		$("#dot-sec2").attr("title", "Completed");
+            		$("#dot-sec2").attr("style", "background-color:green;");
+            		$("#dot-sec3").attr("title", "Completed");
+            		$("#dot-sec3").attr("style", "background-color:green;");
+            		$("#dot-sec4").attr("title", "In Progress");
+            		$("#dot-sec4").attr("style", "background-color:yellow;"); 
+            		$("#progressSummary").text("Complete Training Schedule")
+            	}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -1717,7 +1797,7 @@
             	//$("#th1").show();
             	for(var i = 0; i < data.length; i++){
     				var shortlistSPOC = data[i];
-            		var tr = '<tr><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
+            		var tr = '<tr><td><input class="SPOCchckbx form-check-input" type="checkbox" onchange="SPOCchkbx(this,'+id+')" name="'+shortlistSPOC.vendor_name+'" id="ckSPOC-'+shortlistSPOC.vendor_id+'"/></td><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
             		$('#table-body1').append(tr);
             	}      	
             },
@@ -1725,6 +1805,23 @@
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
             }   
 		});
+	}
+	
+	$('#PTApprovedLink').tooltip();
+	$('#VMLink').tooltip();
+	
+	function SPOCchkbx(checkboxElem, id) {
+		var checkedIds = $(".SPOCchckbx:checked").map(function() {
+		    return this.id.substring(7);
+		    }).toArray();
+		var checkedNames = $(".SPOCchckbx:checked").map(function() {
+		    return this.name;
+		    }).toArray();
+    	var xx = "Click to move " + checkedNames.join(", ") + " to PT shortlist";
+    	$('#PTApprovedLink').attr("data-original-title", xx);
+    	
+    	var yy = "vendor/PTApproved/" + id +"/" + checkedIds.join(",");
+    	$('#PTApprovedLink').attr("href", yy);
 	}
 	
 	// Section 2 accordion
@@ -1748,20 +1845,29 @@
 		});
 	}
 	
-	// Section 3 accordion
-	function section3() {
-	
-	}
-	
 	// Section 4 accordion
 	function section4(id) {
 		$.ajax({
         	type: "POST",
         	data: {id: id},
-            url : 'selectDates',
+            url : 'section4',
             success : function(data) {
 				$('#StartDate').val(data.training_start_date);
 				$('#EndDate').val(data.training_end_date);
+				
+				$('#classRoom-city').val(data.training_city);
+				$('#classRoom-state').val(data.training_state);
+				$('#classRoom-country').val(data.training_country);
+				$('#classRoom-zipcode').val(data.training_zipcode);
+				$('#classRoom-timezone').val(data.training_time_zone);
+				$('#timezone').val(data.training_time_zone);
+
+				$('#classRoom-location').val(data.training_location);
+				$('#classRoom-roomNumber').val(data.training_room_number)
+				$('#classRoom-breakdown').val(data.training_break_down);
+				
+				$('#online-URL').val(data.training_url);
+				$('#online-audio').val(data.training_phone);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -1769,6 +1875,12 @@
 		});
 	}
 	
+	</script>
+	
+	<!-- Yosuf ElSaadany 3/24/2019 10:30pm -->
+	<!-- All Ajax Requests -->
+	<script>
+	// Open IT TEAM JSP Page
 	function openItPage(id) {	
 		$.ajax({
         	type: "POST",
@@ -1778,27 +1890,8 @@
 				window.open('http://localhost:9999/SpringApp/it');
             } 
 		});
-	}
-	
-	
+	}	
 	</script>
-	<!-- Yosuf ElSaadany - Script to
-	prevent user from selecting an end
-	date less than the start date
-	<script>
-    var start = $('#startDate').val();
-    var end = $('#endDate').val();
-
-    $('#startDate').change(function () {
-      if (start)
-        end.attr("min",start);
-    }, false);
-
-    $('#endDate').change(function () {
-      if (end)
-        start.max = end.value;
-    }, false);
-  </script> -->
 
 </body>
 </html>

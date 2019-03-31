@@ -93,7 +93,7 @@
 					style="color: white; border-radius: 15px; border: #fff 2px solid; background-color: #3c8dbc; padding-top: 2px; padding-bottom: 3px"
 					required placeholder="  Filter..." /></li>
 				<li class="nav-item"><a class="nav-link"
-					onclick="location.href='/SpringApp/report'" style="cursor: pointer">
+					style="cursor: pointer">
 						Run Report</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="#">New Training Request</a></li>

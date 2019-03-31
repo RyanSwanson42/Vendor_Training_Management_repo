@@ -80,15 +80,26 @@
         </div>
     </div>
     </nav>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="vendor-add-pg">
-        <a href="vendormanagement"><button type="button"
+        <a href="vendormanagement/0"><button type="button"
                 class="btn btn-primary" id="return-btn">Return</button></a> &nbsp;
         <div class="container">
             <h3>Add a New Vendor Account</h3>
-            <form action="#" th:action="@{/vendorForm}" th:object="${vendorForm}" method="post" id="va-form" action="insertVendor">
+            <form:form method="post" id="va-form" action="insertVendor">
                 <div class="form-group">
-                    <label>Vendor Name</label> <input type="text" class="form-control"
-                        id="nameForm" placeholder="Enter Vendor name" name="v-name">
+                    <label>Vendor Name</label> <form type="text" class="form-control"
+                        id="nameForm" placeholder="Enter Vendor name" name="v-name" path="vname" />
                 </div>
                 <div class="form-group">
                     <label>Vendor Phone Number</label> <input type="text"
@@ -127,9 +138,9 @@
                 <br>
                 <div style="text-align: center; margin-bottom: 2vh;">
                     <input type="submit" id="submit-btn" class="btn btn-success">Submit
-                    </button>
+                    </input>
                 </div>
-            </form>
+            </form:form>
         </div>
     </div>
     <!-- Footer -->

@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import trm.dt.dao.developTeamTrainingRequest.DDTTrainingDAO;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflow;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
+import trm.dt.dao.inProcessCard.InProcessCard;
+import trm.dt.dao.inProcessCard.InProcessCardDAO;
 import trm.dt.dao.inTrainingCard.InTrainingCard;
 import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
 import trm.dt.ddtProjectQueries.CallbackFunction;
@@ -35,24 +37,30 @@ import trm.it.bl.InputForm;
 import trm.it.bl.InputFormServices;
 import trm.it.dao.getName.GetName;
 import trm.it.dao.getName.GetNameDAO;
-import trm.it.dao.getStatus.GetStatusDAO;
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatus;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatusDAO;
-import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
+/*import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;*/
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
 import trm.vt.dao.SpocChart.SpocChartDao;
+import trm.vt.dao.SpocChartMonth.SpocChartMonth;
+import trm.vt.dao.SpocChartMonth.SpocChartMonthDao;
+import trm.vt.dao.SpocChartStatus.SpocChartStatus;
+import trm.vt.dao.SpocChartStatus.SpocChartStatusDao;
 import trm.vt.dao.employee.Employee;
 import trm.vt.dao.employee.EmployeeDAO;
+import trm.vt.dao.trainingRequest.TrainingRequestDAO;
 import trm.vt.dao.trainingRequestAndStatus.TrainingRequestAndStatus;
 import trm.vt.dao.trainingRequestAndStatus.TrainingRequestAndStatusDAO;
 import trm.vt.dao.trainingSchedule.TrainingSchedule;
 import trm.vt.dao.trainingSchedule.TrainingScheduleDAO;
 import trm.vt.dao.vendorDetail.VendorDetail;
 import trm.vt.dao.vendorDetail.VendorDetailDAO;
+import trm.vt.dao.vendorShortListPt.VendorShortListPtDAO;
 import trm.vt.dao.vendorShortListPtAndVendorDetails.VendorShortListPtAndVendorDetails;
 import trm.vt.dao.vendorShortListPtAndVendorDetails.VendorShortListPtAndVendorDetailsDAO;
+import trm.vt.dao.vendorShortListSpoc.VendorShortListSpocDAO;
 import trm.vt.dao.vendorShortListSpocAndVendorDetails.VendorShortListSpocAndVendorDetails;
 import trm.vt.dao.vendorShortListSpocAndVendorDetails.VendorShortListSpocAndVendorDetailsDAO;
 import trm.vt.dao.vendorTrainingRequest.VendorTrainingRequestDAO;
@@ -87,18 +95,50 @@ public class VendorController {
 	}
 
 	@RequestMapping(value = "/report")
-	public String ChartJs(ModelMap map) {
-		System.out.println("Report Login");
-		List<SpocChart> sc = new SpocChartDao().getChartInformation("", "");
-		map.addAttribute("SpocChartList", sc);
+	public String ChartJs(ModelMap map, HttpServletRequest request) {
+		/****************************************************
+		 * Yosuf: Delete all my previous code from controller
+		 * Add the code you added below this
+		 ********************************************/
+		// Get Session of employee who logged in
+		String username = request.getSession().getAttribute("username").toString();
+		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
+		String vertical = user.getVertical();
+		map.addAttribute("username", username);
+		map.addAttribute("uservert", vertical);
+		
+		/************************************
+		 * Set all list for Chart Information
+		 ************************************/
+		List<SpocChart> sc = new SpocChartDao().getChartTrainingRequestInfo(vertical);
+		List<SpocChart> sc1 = new SpocChartDao().GetTotalParticipants(vertical);
+		List<SpocChartMonth> spm1 = new SpocChartMonthDao().getItChartTrainingRequestInfo(vertical);
+		List<SpocChartMonth> spm2 = new SpocChartMonthDao().getVtChartTrainingRequestInfo(vertical);
+		List<SpocChartMonth> spm3 = new SpocChartMonthDao().getDttChartTrainingRequestInfo(vertical);
+		
+		/***************************************
+		 * Adding All Chart Statuses to one list
+		 **************************************/
+		List<SpocChartStatus> scp1 = new ArrayList<SpocChartStatus>();
+		scp1.add(new SpocChartStatusDao().GetStatusLeft(vertical).get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusMiddle(vertical).get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusRight(vertical).get(0));
+		scp1.get(0).setStatus("PreProcessing");
+		scp1.get(1).setStatus("Processing");
+		scp1.get(2).setStatus("PostProcessing");
+		
+		/************************************************
+		 * Mapping All Chart Information To The Front End
+		 ************************************************/
+		map.addAttribute("SpocChartList",sc);
+		map.addAttribute("spcParticipants",sc1);
+		map.addAttribute("ITMonth",spm1);
+		map.addAttribute("VTMonth",spm2);
+		map.addAttribute("DTTMonth",spm3);
+		map.addAttribute("Status",scp1);
+		
 		return "report";
-	}
 
-	@RequestMapping(value = "/vendormanagement/{id}")
-	public String vendorManagementView(ModelMap map) {
-		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
-		map.addAttribute("vendorDetails", vendorDetails);
-		return "vendormanagement";
 	}
 
 	@RequestMapping(value = "/login")
@@ -153,14 +193,16 @@ public class VendorController {
 		map.addAttribute("vendorDetails", vendorDetails);
 
 		// ----------------------------  DT Team -------------------------------//
-		List<DTTProcessingCard> cards;	
+		List<InProcessCard> inProcess;	
 		List<InTrainingCard> itc;
 		
-		cards = new DTTdaoServices().getRequestsProcessing(uservertical);
+		inProcess = new InProcessCardDAO().getInProcessCardList(uservertical);
 		itc = new InTrainingCardDAO().getInTrainingCardList(uservertical);
 		
-		map.addAttribute("TRM_DTT_Homepage", cards);
-		map.addAttribute("TRM_DTT_Homepage3", itc);		
+		map.addAttribute("inProcessList", inProcess);
+		map.addAttribute("TRM_DTT_Homepage3", itc);	
+		
+		System.out.println(inProcess.toString());
 		
 		// ----------------------------  IT Team -------------------------------//
 		List<InternalTrainingRequestAndStatus> list103 = new InternalTrainingRequestAndStatusDAO().getTrainingRequestDetail103(uservertical);
@@ -168,7 +210,7 @@ public class VendorController {
 		List<InternalTrainingRequestAndStatus> list130 = new InternalTrainingRequestAndStatusDAO().getTrainingRequestDetail130(uservertical);
 		map.addAttribute("internalTrainingRequestList3", list130);
 		
-		System.out.println(list103.toString());
+		//System.out.println(list103.toString());
 		
 		return "index";
 	}
@@ -213,32 +255,44 @@ public class VendorController {
 		}
 		return "redirect:/dashboard";
 	}
-	//-----------------Change between training types
-	@RequestMapping(value="/changeProcessing/it/{req_id}")
-	public String changeProcessingIT(@PathVariable("req_id") int[] req_id){
-		for (int i=0; i< req_id.length; i++) {
-			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
-			new InternalTrainingRequestDAO().insertInternalTrainingRequest(req_id[i]);
-			new CallbackFunction().statusChange(req_id[i], 103);
-		}
+	//------------------------Change between training types----------------------------------//
+	
+	@RequestMapping(value="/changeProcessing/it/{req_id}/{type}")
+	public String changeProcessingIT(@PathVariable("req_id") int req_id, @PathVariable("type") String type){
+		int training_request_id = 0;
+		if(type.equals("Vendor"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
+		if(type.equals("Develop"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithDevelopTrainingRequestId(req_id);
+		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
+		new InternalTrainingRequestDAO().insertInternalTrainingRequest(training_request_id);
+		new CallbackFunction().statusChange(training_request_id, 103);
 		return "redirect:/dashboard";
 	}
-	@RequestMapping(value="/changeProcessing/dt/{req_id}")
-	public String changeProcessingDT(@PathVariable("req_id") int [] req_id){
-		for (int i=0; i< req_id.length; i++) {
-			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
-			new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i]);
-			new CallbackFunction().statusChange(req_id[i], 203);
-		}
+	
+	@RequestMapping(value="/changeProcessing/dt/{req_id}/{type}")
+	public String changeProcessingDT(@PathVariable("req_id") int req_id, @PathVariable("type") String type){
+		int training_request_id = 0;
+		if(type.equals("Vendor"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
+		if(type.equals("Internal"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
+		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
+		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id);
+		new CallbackFunction().statusChange(training_request_id, 203);
 		return "redirect:/dashboard";
 	}
-	@RequestMapping(value="/changeProcessing/vt/{req_id}")
-	public String changeProcessingVT(@PathVariable("req_id") int[] req_id){
-		for (int i=0; i< req_id.length; i++) {			
-			new CallbackFunction().clearPreviousTrainingRequset(req_id[i]);
-			new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(req_id[i]);
-			new CallbackFunction().statusChange(req_id[i], 303);
-		}
+	
+	@RequestMapping(value="/changeProcessing/vt/{req_id}/{type}")
+	public String changeProcessingVT(@PathVariable("req_id") int req_id, @PathVariable("type") String type){
+		int training_request_id = 0;
+		if(type.equals("Develop"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithDevelopTrainingRequestId(req_id);
+		if(type.equals("Internal"))
+				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
+		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
+		new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(training_request_id);
+		new CallbackFunction().statusChange(training_request_id, 303);
 		return "redirect:/dashboard";
 	}
 
@@ -248,119 +302,173 @@ public class VendorController {
 		return "redirect:/dashboard";
 	}
 
-	@RequestMapping(value = "/section1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody byte[] section1(@RequestParam("id") int id)
-			throws JsonGenerationException, JsonMappingException, IOException {
+	@RequestMapping(value="/progress", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody byte[] progress(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
+		
+		trm.vt.dao.trainingManagementStatus.TrainingManagementStatus status = new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().getTrainingManagementStatusWithTrainingRequestID(id);
+		System.out.println(status.toString() + "=============================");
+		
+		// Convert List to JSON using JacksonMapper
+	    final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    final ObjectMapper mapper = new ObjectMapper();
+	    mapper.writeValue(out, status);
+	    final byte[] JSON = out.toByteArray();
+	    System.out.println(new String(JSON));
+		return JSON;
+	}
+	
+	@RequestMapping(value="/section1", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody byte[] section1(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
 		// Get Complex Object
-		List<VendorShortListSpocAndVendorDetails> shortlistSPOC = new VendorShortListSpocAndVendorDetailsDAO()
-				.getShortListSpocForSpoc(id);
+		List<VendorShortListSpocAndVendorDetails> shortlistSPOC = new VendorShortListSpocAndVendorDetailsDAO().getShortListSpocForSpoc(id);
 		// Downcast it to get the List of VendorDetail
 		ArrayList<VendorDetail> vd = new ArrayList<VendorDetail>();
-		for (int i = 0; i < shortlistSPOC.size(); i++)
+		for(int i = 0; i < shortlistSPOC.size(); i++)
 			vd.add(shortlistSPOC.get(i).getVd());
 		// Convert List to JSON using JacksonMapper
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(out, vd);
-		final byte[] JSON = out.toByteArray();
-		System.out.println(new String(JSON));
+	    final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    final ObjectMapper mapper = new ObjectMapper();
+	    mapper.writeValue(out, vd);
+	    final byte[] JSON = out.toByteArray();
+	    System.out.println(new String(JSON));
 		return JSON;
 	}
-
-	@RequestMapping(value = "/section2", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody byte[] section2(@RequestParam("id") int id)
-			throws JsonGenerationException, JsonMappingException, IOException {
+	
+	@RequestMapping(value="/vendor/PTApproved/{training_req_id}/{vendor_ids}")
+	public String PTApproved(@PathVariable("training_req_id") int training_req_id, @PathVariable("vendor_ids") int[] vendor_ids){
+		System.out.println("Updating PT approved vendors from SPOC vendors for " + training_req_id);
+		for (int i=0; i< vendor_ids.length; i++) {
+			//move names[i] to SPOC list
+			new VendorShortListPtDAO().insertVendorShortListPt(training_req_id, vendor_ids[i]);
+			System.out.println(vendor_ids[i] + " added to PT ShortList");
+		}
+		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(305, training_req_id);
+		
+		String rtrn = "redirect:/dashboard#myModal" + training_req_id + "#2";
+		return rtrn; 
+	}
+	
+	@RequestMapping(value="/section2", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody byte[] section2(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
 		// Get Complex Object
-		List<VendorShortListPtAndVendorDetails> shortlistPT = new VendorShortListPtAndVendorDetailsDAO()
-				.getShortListPtForSpoc(id);
+		List<VendorShortListPtAndVendorDetails> shortlistPT = new VendorShortListPtAndVendorDetailsDAO().getShortListPtForSpoc(id);		
 		// Downcast it to get the List of VendorDetail
 		ArrayList<VendorDetail> vd = new ArrayList<VendorDetail>();
-		for (int i = 0; i < shortlistPT.size(); i++)
+		for(int i = 0; i < shortlistPT.size(); i++)
 			vd.add(shortlistPT.get(i).getVd());
 		// Convert List to JSON using JacksonMapper
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(out, vd);
-		final byte[] JSON = out.toByteArray();
-		System.out.println(new String(JSON));
+	    final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    final ObjectMapper mapper = new ObjectMapper();
+	    mapper.writeValue(out, vd);
+	    final byte[] JSON = out.toByteArray();
+	    System.out.println(new String(JSON));
 		return JSON;
 	}
-
-	@RequestMapping(value = "/selectDates", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody byte[] section3(@RequestParam("id") int id)
-			throws JsonGenerationException, JsonMappingException, IOException {
+	
+	@RequestMapping(value="/PTListtoPM/{id}")
+	public String insertTrainingSchedule(@PathVariable("id") int id) {
+		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(306, id);	
+		String rtrn = "redirect:/dashboard#myModal" + Integer.toString(id);
+		return rtrn;
+	} 
+	
+	@RequestMapping(value="/section4", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody byte[] section4(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
 		// Get Complex Object
-		TrainingSchedule dates = new TrainingScheduleDAO().getStartDateAndEndDate(id);
+		TrainingSchedule dates = new TrainingScheduleDAO().getTrainingSchedule(id);
 		dates.setTraining_start_date(dates.getTraining_start_date().split(" ")[0]);
 		dates.setTraining_end_date(dates.getTraining_end_date().split(" ")[0]);
-		System.out.println(dates.toString());
+	
 		// Convert List to JSON using JacksonMapper
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(out, dates);
-		final byte[] JSON = out.toByteArray();
-		System.out.println(new String(JSON));
+	    final ByteArrayOutputStream out = new ByteArrayOutputStream();
+	    final ObjectMapper mapper = new ObjectMapper();
+	    mapper.writeValue(out, dates);
+	    final byte[] JSON = out.toByteArray();
+	    System.out.println(new String(JSON));
 		return JSON;
 	}
-
-	/*
-	 * @RequestMapping(value="/section4", method = RequestMethod.POST, produces =
-	 * MediaType.APPLICATION_JSON_VALUE) public @ResponseBody byte[]
-	 * section4(@RequestParam("id") int id) throws JsonGenerationException,
-	 * JsonMappingException, IOException { // Get Complex Object
-	 * List<VendorShortListPtAndVendorDetails> shortlistSPOC = new
-	 * VendorShortListPtAndVendorDetailsDAO().getShortListPtForSpoc(id);
-	 * 
-	 * // Downcast it to get the List of VendorDetail ArrayList<VendorDetail> vd =
-	 * new ArrayList<VendorDetail>(); for(int i = 0; i < shortlistSPOC.size(); i++)
-	 * vd.add(shortlistSPOC.get(i).getVd());
-	 * 
-	 * // Convert List to JSON using JacksonMapper final ByteArrayOutputStream out =
-	 * new ByteArrayOutputStream(); final ObjectMapper mapper = new ObjectMapper();
-	 * mapper.writeValue(out, vd); final byte[] JSON = out.toByteArray();
-	 * System.out.println(new String(JSON)); return JSON; }
-	 */
-
-	@RequestMapping(value = "/insertDates/{id}/{start}/{end}")
-	public String insertTrainingSchedule(@PathVariable("id") int id, @PathVariable("start") String start,
-			@PathVariable("end") String end) {
+	
+	@RequestMapping(value="/insertDates/{id}/{start}/{end}")
+	public String insertTrainingSchedule(@PathVariable("id") int id, @PathVariable("start") String start, @PathVariable("end") String end) {
 		Timestamp startDate = Timestamp.valueOf(start + " 00:00:00");
 		Timestamp endDate = Timestamp.valueOf(end + " 00:00:00");
 		int schedule_id = new TrainingScheduleDAO().insertStartDateAndEndDate(startDate, endDate);
 		System.out.println("the id is : " + schedule_id);
 		new VendorTrainingRequestDAO().updateVendorTrainingRequestWithScheduleId(schedule_id, id);
-		return "redirect:/dashboard";
+		String rtrn = "redirect:/dashboard#myModal" + Integer.toString(id);
+		return rtrn;
 	}
+	
+	//--------------------------------------- Vendor Management --------------------------------------------------// 
+	@RequestMapping(value="/vendormanagement/{id}")
+    public String vendorManagementView(@PathVariable String id, ModelMap map, HttpServletRequest request) {
+        // Get Session
+        request.getSession().setAttribute("vid", id);
+        String username = request.getSession().getAttribute("username").toString();
+        Employee user = new EmployeeDAO().getEmployeeByUsername(username);
+        String uservertical = user.getVertical();
+        String userfname = user.getFirst_name();
+        String userlname = user.getLast_name();
+        map.addAttribute("username", username);
+        map.addAttribute("uservert", uservertical);
+        map.addAttribute("fname", userfname);
+        map.addAttribute("lname", userlname);
+        List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
+        map.addAttribute("vendorDetails", vendorDetails);
+        return "vendormanagement";
+    }
+    
+    @RequestMapping(value="vendormanagement/submitVendors", method = RequestMethod.POST)
+    @ResponseBody 
+    public String submitVendors(@RequestParam(value = "idList") List<String> idList, HttpServletRequest request) {
+        
+        System.out.println("Inside submitVendors service.");
+        
+        String vid = request.getSession().getAttribute("vid").toString();
+        
+        for (String id : idList)
+        {
+            new VendorShortListSpocDAO().insertVendorShortListSpoc(Integer.parseInt(vid), Integer.parseInt(id));
+        }
+        System.out.println(vid);
+        
+		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(304, Integer.parseInt(vid));
 
-	@RequestMapping(value = "/vendorForm")
-	public String formView() {
-		return "vendorForm";
-	}
-
-	@RequestMapping(value = "/insertVendor")
-	public String insertVendor(HttpServletRequest request, ModelMap model) {
-
-		String name = request.getParameter("v-name");
-		String phone = request.getParameter("v-phone");
-		String email = request.getParameter("v-email");
-		String city = request.getParameter("v-city");
-		String state = request.getParameter("v-state");
-		String country = request.getParameter("v-country");
-		String zipcode = request.getParameter("v-zipcode");
-		String timezone = request.getParameter("v-timezone");
-
-		System.out.println(request);
-		System.out.println(name);
-
-		new VendorDetailDAO().insertVendorDetail(name, phone, email, city, state, country, zipcode, timezone);
-
-		return "redirect:/vendormanagement{0}";
-	}
-
-	@RequestMapping(value = "/deleteVendor")
-	public String deleteVendor() {
-		return "";
-	}
+		String rtrn = "redirect:/dashboard#myModal" + vid;
+		return rtrn;
+    }
+    
+    @RequestMapping(value = "vendorForm", method = RequestMethod.GET)
+    public String formView(ModelMap map, HttpServletRequest request) {
+        // Get Session
+        //map.addAttribute("validation", new VendorValidation());
+        String username = request.getSession().getAttribute("username").toString();
+        Employee user = new EmployeeDAO().getEmployeeByUsername(username);
+        String uservertical = user.getVertical();
+        String userfname = user.getFirst_name();
+        String userlname = user.getLast_name();
+        map.addAttribute("username", username);
+        map.addAttribute("uservert", uservertical);
+        map.addAttribute("fname", userfname);
+        map.addAttribute("lname", userlname);
+        System.out.println("In Vendor Form Service");
+        return "vendorForm";
+    }
+    
+     @RequestMapping(value="/insertVendor")
+    public String insertVendor(HttpServletRequest request, ModelMap model) {
+        String name = request.getParameter("v-name");
+        String phone = request.getParameter("v-phone");
+        String email = request.getParameter("v-email");
+        String city = request.getParameter("v-city");
+        String state = request.getParameter("v-state");
+        String country = request.getParameter("v-country");
+        String zipcode = request.getParameter("v-zipcode");
+        String timezone = request.getParameter("v-timezone");
+        new VendorDetailDAO().insertVendorDetail(name, phone, email, city, state, country, zipcode, timezone);       
+        return "redirect:/vendormanagement/{0}";
+    }
+	//------------------------------- IT TEAM -------------------------------------------// 	
 	
 /*	@RequestMapping(value="it/{trainingID}")
 	public String updateproduct(@PathVariable("trainingID") int trainingID, ModelMap map)
@@ -407,7 +515,7 @@ public class VendorController {
 	}
 
 	
-	@RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to root directory then go ahead
+/*	@RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to root directory then go ahead
 	public String updateproductservice(@ModelAttribute("inputform") InputForm inputform, @PathVariable("trainingID") int trainingID)
 	{
 		GetStatusDAO gs = new GetStatusDAO();
@@ -422,5 +530,5 @@ public class VendorController {
 	
 		return "redirect:/it/{trainingID}";
 	}
-
+*/
 }

@@ -1,18 +1,21 @@
 package trm.dt.dao.inProcessCard;
 
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
 import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
 import trm.dt.dao.trainingRequest.TrainingRequest;
-import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.vt.dao.trainingSchedule.TrainingSchedule;
 
 public class InProcessCard 
 {
 	private DDTTraining training = new DDTTraining();
-	private TrainingRequest request = new TrainingRequest(); 
+	private TrainingRequest request = new TrainingRequest();
 	private TrainingSchedule schedule = new TrainingSchedule();
-	private ManagmentStatus status  = new ManagmentStatus();
-	private Employee employee = new Employee();
+	private	Employee projectManager = new Employee();
+	private DDTTrainer trainer = new DDTTrainer();
+	private Employee currentTrainer = new Employee();
+	private ManagmentStatus status = new ManagmentStatus();
 	
 	public DDTTraining getTraining() {
 		return training;
@@ -32,16 +35,35 @@ public class InProcessCard
 	public void setSchedule(TrainingSchedule schedule) {
 		this.schedule = schedule;
 	}
+	public Employee getProjectManager() {
+		return projectManager;
+	}
+	public void setProjectManager(Employee projectManager) {
+		this.projectManager = projectManager;
+	}
+	public DDTTrainer getTrainer() {
+		return trainer;
+	}
+	public void setTrainer(DDTTrainer trainer) {
+		this.trainer = trainer;
+	}
+	public Employee getCurrentTrainer() {
+		return currentTrainer;
+	}
+	public void setCurrentTrainer(Employee currentTrainer) {
+		this.currentTrainer = currentTrainer;
+	}
 	public ManagmentStatus getStatus() {
 		return status;
 	}
 	public void setStatus(ManagmentStatus status) {
 		this.status = status;
 	}
-	public Employee getEmployee() {
-		return employee;
+	@Override
+	public String toString() {
+		return "InProcessCard [training=" + training + ", request=" + request + ", schedule=" + schedule
+				+ ", projectManager=" + projectManager + ", trainer=" + trainer + ", currentTrainer=" + currentTrainer
+				+ ", status=" + status + "]";
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
+	
 }

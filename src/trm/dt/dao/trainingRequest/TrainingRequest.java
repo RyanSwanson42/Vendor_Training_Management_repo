@@ -13,8 +13,8 @@ public class TrainingRequest {
 	private String request_training_module;
 	private String request_training_module_scope;
 	private String request_training_mode;
-	private Timestamp request_start_date;
-	private Timestamp request_end_date;
+	private String request_start_date;
+	private String request_end_date;
 	private String request_location;
 	private String request_time_zone;
 	private int request_approx_participant;
@@ -72,16 +72,16 @@ public class TrainingRequest {
 	public void setRequest_training_mode(String request_training_mode) {
 		this.request_training_mode = request_training_mode;
 	}
-	public Timestamp getRequest_start_date() {
+	public String getRequest_start_date() {
 		return request_start_date;
 	}
-	public void setRequest_start_date(Timestamp request_start_date) {
+	public void setRequest_start_date(String request_start_date) {
 		this.request_start_date = request_start_date;
 	}
-	public Timestamp getRequest_end_date() {
+	public String getRequest_end_date() {
 		return request_end_date;
 	}
-	public void setRequest_end_date(Timestamp request_end_date) {
+	public void setRequest_end_date(String request_end_date) {
 		this.request_end_date = request_end_date;
 	}
 	public String getRequest_location() {

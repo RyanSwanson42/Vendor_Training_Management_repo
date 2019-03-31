@@ -2,49 +2,69 @@ package trm.dt.dao.inProcessCard;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
+import trm.dt.dao.inProcessCard.InProcessCard;
+import trm.vt.dao.trainingSchedule.TrainingScheduleMapper;
 import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
 import trm.dt.dao.trainingRequest.TrainingRequest;
-import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.vt.dao.trainingSchedule.TrainingSchedule;
 
-public class InProcessCardMapper implements RowMapper<InProcessCard>
+public class InProcessCardMapper implements RowMapper<InProcessCard> 
 {
 
 	@Override
 	public InProcessCard mapRow(ResultSet result, int arg1) throws SQLException {
-		InProcessCard ipc = new InProcessCard();
+		InProcessCard sl = new InProcessCard();
 		
-		DDTTraining dtr = new DDTTraining();
-		dtr.setDtt_training_id(result.getInt("dtt_training_id"));
-		ipc.setTraining(dtr);
+		DDTTraining training = new DDTTraining();
+		training.setDtt_training_id(result.getInt("dtt_training_id"));
+		sl.setTraining(training);
 		
-		TrainingRequest tr = new TrainingRequest();
-		tr.setTraining_request_id(result.getInt("training_request_id"));
-		tr.setRequest_training_type(result.getString("request_training_type"));
-		tr.setRequest_training_module(result.getString("request_training_module"));
-		ipc.setRequest(tr);
+		TrainingRequest request = new TrainingRequest();
+		request.setTraining_request_id(result.getInt("training_request_id"));
+		request.setRequest_training_type(result.getString("request_training_type"));
+		request.setRequest_training_module(result.getString("request_training_module"));
+		request.setRequest_training_module_scope(result.getString("request_training_module_scope"));
 		
-		TrainingSchedule ts = new TrainingSchedule();
-		ts.setTraining_start_date(result.getString("training_start_date"));
-		ts.setTraining_end_date(result.getString("training_end_date"));
-		ipc.setSchedule(ts);
+		String startdate = result.getString("request_start_date");
+		String[] start_date = startdate.split(" ");
+		request.setRequest_start_date(start_date[0]);
+		
+		request.setRequest_location(result.getString("request_location"));
+		request.setRequest_approx_participant(result.getInt("request_approx_participant"));		
+		sl.setRequest(request);
+		
+		TrainingSchedule schedule = new TrainingSchedule();
+		//schedule = new TrainingScheduleMapper().mapRow(result, arg1);
+		sl.setSchedule(schedule);
+		
+		Employee projectManager = new Employee();
+		projectManager.setFirst_name(result.getString("first_name"));
+		projectManager.setLast_name(result.getString("last_name"));
+		sl.setProjectManager(projectManager);
+		
+/*		DDTTrainer trainer = new DDTTrainer();
+		trainer.setRequest_sent_date(result.getTimestamp("request_sent_date"));
+		trainer.setResponse(result.getString("response"));
+		trainer.setActive_status(result.getInt("active_status"));
+		sl.setTrainer(trainer);*/
+		
+	/*	Employee currentTrainer = new Employee();
+		currentTrainer.setFirst_name(result.getString("first_name"));
+		currentTrainer.setLast_name(result.getString("last_name"));
+		sl.setCurrentTrainer(currentTrainer);*/
+/*		
+		ManagmentStatus status = new ManagmentStatus();
+		status.setStatus(result.getInt("status"));
+		sl.setStatus(status);*/
 
-		ManagmentStatus s  = new ManagmentStatus();
-		s.setStatus(result.getInt("status"));
-		ipc.setStatus(s);
-		
-		Employee e = new Employee();
-		e.setFirst_name(result.getString("first_name"));
-		e.setLast_name(result.getString("last_name"));
-		ipc.setEmployee(e);
-		
-		
-		
-		return ipc;
+		return sl;
 	}
 
 }

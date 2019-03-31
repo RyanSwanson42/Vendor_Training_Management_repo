@@ -36,9 +36,9 @@ public class InternalTrainingRequestDAO {
 		temp.update(sql, new Object[]{training_request_id});
 	}
 	
-	public void deleteInternalTrainingRequest(int internal_training_request_id){
-		String sql = "DELETE FROM internal_training_request WHERE internal_training_request_id = ?";
-		temp.update(sql, new Object[]{internal_training_request_id});
+	public void deleteInternalTrainingRequest(int training_request_id){
+		String sql = "DELETE FROM internal_training_request WHERE training_request_id = ?";
+		temp.update(sql, new Object[]{training_request_id});
 	}
 	
 	public void updateInternalTrainingRequest(int internal_training_request_id, int schedule_id, String type, int confirmed_trainer, String description){

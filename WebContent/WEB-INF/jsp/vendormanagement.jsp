@@ -26,23 +26,23 @@
 <link href="<c:url value="/resources/css/vtm-modal.css"/>"
     rel="stylesheet">
 <!-- Bootstrap core JavaScript -->
-<script src="<c:url value="resources/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
 <script
-    src="<c:url value="resources/vendor/bootstrap/js/bootstrap.bundle.min.js" /> "></script>
+    src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" /> "></script>
 <script
     src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
     integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
 <!-- Local js scripts-->
-<script src="<c:url value="resources/js/vtm.js" />"></script>
-<script src="<c:url value="resources/js/trainingType.js" />"></script>
+<script src="<c:url value="/resources/js/vtm.js" />"></script>
+<script src="<c:url value="/resources/js/trainingType.js" />"></script>
 </head>
 <body style="padding-top: 70px">
     <!-- Navigation -->
     <nav class="main-header navbar navbar-expand-lg navbar-dark fixed-top"
         style="background-color: #3c8dbc">
     <div class="container">
-        <img src="<c:url value="resources/img/AtosSyntelLogoMedWhite.png" />"
+        <img src="<c:url value="/resources/img/AtosSyntelLogoMedWhite.png" />"
             height="30" /> <a class="navbar-brand" href="<c:url value="/dashboard" />"> <!--<b>Atos</b>Syntel-->
             <i>Vendor <b>TRM</b>
         </i>
@@ -58,18 +58,18 @@
                     type="search" id="sb"
                     style="color: white; border-radius: 15px; border: #fff 2px solid; background-color: #3c8dbc; padding-top: 2px; padding-bottom: 3px"
                     required placeholder="  Filter..." /></li>
-                <li class="nav-item"><a class="nav-link" href="#">Run
+                <li class="nav-item"><a class="nav-link" onclick="location.href='/SpringApp/report'">Run
                         Report</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" >Vendor
                         Management</a></li>
-                <li class="nav-item dropdown"><a
+               <li class="nav-item dropdown"><a
                     class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
                     role="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false"> <i class="fas fa-user-circle"
-                        style="float: none;"></i> ${userid}
+                    style="float: none;"></i> ${username}
                 </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <span class="dropdown-item">Welcome, SPOC</span> <span
+                        <span class="dropdown-item">Welcome, ${fname} ${lname}</span><span
                             class="dropdown-item">Your Vertical: ${uservert}</span>
                         <div class="dropdown-divider"></div>
                         <a onclick="location.href='/SpringApp/logout'"
@@ -90,20 +90,16 @@
     
     
     
-    
-    
-    
-    
-    
     <!-- Vendor List Page -->
     <div class="vendor-list-pg" style="margin-right:10vw;">
         <input type="search" id="v-search" required placeholder="    Search" />
-        <a href="vendorForm"><button type="button" class="btn btn-info" id="nv-btn" href="newVendor">New Vendor</button></a>      
+        <a id= "submitlink" href="../dashboard"><button type="button" class="btn btn-info" id="submit-btn-2">Submit</button></a>
+        <a href="../vendorForm"><button type="button" class="btn btn-info" id="nv-btn">New Vendor</button></a>
         <!-- Begin Container -->
         <div class="container-fluid vm-grid-container">
             <c:forEach var="v" items="${vendorDetails}">
                 <!-- Begin for loop -->
-                <div class="row vm-row">
+                <div class="row vm-row" id="${v.vendor_id}">
                     <div class="col vm-col chkbox-col">
                         <label class="chkbox-container"> <input type="checkbox">
                             <span class="checkmark"></span>
@@ -158,6 +154,60 @@
     </div>
     </div>
     </footer> -->
+    
+    <!-- ... -->
+    
+    
+    
+    <script>
+    $(document).ready(function(){
+    	var value = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+    	if (value.length > 1) {
+    		var val = "../dashboard#myModal" + value;
+    		$("#submitlink").attr("href", val);
+    	}
+	});
+    </script>
+    
+    
+    <script>
+            $(document).ready(function () {
+                $("#submit-btn-2").on("click", function () {
+                    var idList = [];
+                    $(".vm-row").has(":checkbox:checked").each(function() {
+                        idList.push($(this).attr('id'));            
+                    });
+                    idList.forEach(function(element) {
+                      console.log(element);
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: "submitVendors",
+                        data: {"idList":idList.toString()},
+                        success: function(id) {
+                            console.log("SUCCESS: ", idList);                             
+                        },
+                        error : function(xhr, status, error) {
+                             // alert(error);
+                        },
+                        done : function(e) {
+                            console.log("DONE")
+                        }
+                    })
+                });
+            });
+    </script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- Ryan AJAX to get all trainers -->
     <!-- <script>
     function getTrainers(id) {

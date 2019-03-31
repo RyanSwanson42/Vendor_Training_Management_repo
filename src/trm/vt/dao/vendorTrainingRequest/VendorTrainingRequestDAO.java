@@ -29,11 +29,11 @@ public class VendorTrainingRequestDAO {
 		temp.update(sql, new Object[]{training_request_id,confirmed_vendor_id,vendor_trainer_id,schedule_id,executive_id,po_status,vendor_confimation_email_path,description_of_status});
 	}
 	
-	public void deleteVendorTrainingRequest(int vendor_training_request_id){
+	public void deleteVendorTrainingRequest(int training_request_id){
 		
-		String sql = "delete from vendor_training_request where vendor_training_request_id = ?";
+		String sql = "delete from vendor_training_request where training_request_id = ?";
 		
-		temp.update(sql, new Object[]{vendor_training_request_id});
+		temp.update(sql, new Object[]{training_request_id});
 	}
 	
 	public void updateVendorTrainingRequest(int vendor_training_request_id,int training_request_id, int confirmed_vendor_id, int vendor_trainer_id, int schedule_id, int executive_id, String po_status, String vendor_confimation_email_path, String description_of_status){
