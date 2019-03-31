@@ -1,6 +1,5 @@
-<%@page import="bl.GetRequest"%>
+<%@page import="trm.it.bl.GetRequest"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -277,9 +276,6 @@
                 </tr>
             </tbody>
         </table>
-        <button class="button button1" >Move to DT</button>
-        <button class="button button1">Move to VT</button>
-<%--         <a href="updateproduct/${allproduct.pid}">Update</a> --%>
         
     </div>
 </div>
