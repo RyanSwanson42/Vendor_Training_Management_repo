@@ -297,15 +297,16 @@ public class VendorController {
 	}
 
 	/*----------------------------- Modal and accordion services for Vendor Trainings ----------------------------*/
-	@RequestMapping(value = "/process", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+/*	@RequestMapping(value = "/process", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String process() {
 		return "redirect:/dashboard";
-	}
+	}*/
 
 	@RequestMapping(value="/progress", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody byte[] progress(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
 		
-		trm.vt.dao.trainingManagementStatus.TrainingManagementStatus status = new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().getTrainingManagementStatusWithTrainingRequestID(id);
+		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(id);
+		trm.vt.dao.trainingManagementStatus.TrainingManagementStatus status = new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().getTrainingManagementStatusWithTrainingRequestID(training_request_id);
 		System.out.println(status.toString() + "=============================");
 		
 		// Convert List to JSON using JacksonMapper
@@ -334,17 +335,18 @@ public class VendorController {
 		return JSON;
 	}
 	
-	@RequestMapping(value="/vendor/PTApproved/{training_req_id}/{vendor_ids}")
-	public String PTApproved(@PathVariable("training_req_id") int training_req_id, @PathVariable("vendor_ids") int[] vendor_ids){
-		System.out.println("Updating PT approved vendors from SPOC vendors for " + training_req_id);
-		for (int i=0; i< vendor_ids.length; i++) {
+	@RequestMapping(value="/vendor/PTApproved/{req_id}/{vendor_ids}")
+	public String PTApproved(@PathVariable("req_id") int req_id, @PathVariable("vendor_ids") int[] vendor_ids){
+		System.out.println("Updating PT approved vendors from SPOC vendors for " + req_id);
+				for (int i=0; i< vendor_ids.length; i++) {
 			//move names[i] to SPOC list
-			new VendorShortListPtDAO().insertVendorShortListPt(training_req_id, vendor_ids[i]);
+			new VendorShortListPtDAO().insertVendorShortListPt(req_id, vendor_ids[i]);
 			System.out.println(vendor_ids[i] + " added to PT ShortList");
 		}
-		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(305, training_req_id);
+		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
+		new CallbackFunction().statusChange(training_request_id, 305);	
 		
-		String rtrn = "redirect:/dashboard#myModal" + training_req_id + "#2";
+		String rtrn = "redirect:/dashboard#myModal" + req_id + "#2";
 		return rtrn; 
 	}
 	
@@ -367,7 +369,8 @@ public class VendorController {
 	
 	@RequestMapping(value="/PTListtoPM/{id}")
 	public String insertTrainingSchedule(@PathVariable("id") int id) {
-		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(306, id);	
+		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(id);
+		new CallbackFunction().statusChange(training_request_id, 310);	
 		String rtrn = "redirect:/dashboard#myModal" + Integer.toString(id);
 		return rtrn;
 	} 
@@ -375,7 +378,8 @@ public class VendorController {
 	@RequestMapping(value="/section4", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody byte[] section4(@RequestParam("id") int id) throws JsonGenerationException, JsonMappingException, IOException {
 		// Get Complex Object
-		TrainingSchedule dates = new TrainingScheduleDAO().getTrainingSchedule(id);
+		int tid = new TrainingScheduleDAO().getTrainingScheduleID(id);
+		TrainingSchedule dates = new TrainingScheduleDAO().getTrainingSchedule(tid);
 		dates.setTraining_start_date(dates.getTraining_start_date().split(" ")[0]);
 		dates.setTraining_end_date(dates.getTraining_end_date().split(" ")[0]);
 	
@@ -432,8 +436,8 @@ public class VendorController {
         }
         System.out.println(vid);
         
-		new trm.vt.dao.trainingManagementStatus.TrainingManagementStatusDAO().updateTrainingManagementStatusOnPid(304, Integer.parseInt(vid));
-
+        int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(Integer.parseInt(vid));
+		new CallbackFunction().statusChange(training_request_id, 304);	
 		String rtrn = "redirect:/dashboard#myModal" + vid;
 		return rtrn;
     }

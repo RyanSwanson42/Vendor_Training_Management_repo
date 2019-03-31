@@ -249,7 +249,7 @@
 								${pro2.getVendorTrainingRequest().vendor_training_request_id}
 							</span> 
 							<span style="float: right;">
-							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='20px' height='20px'  src='.//resources/img/vendor-icon-placeholder.png'> </a>
+							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/vendor-icon-placeholder.png'> </a>
 							<div class="modal" id="Process${pro2.getVendorTrainingRequest().vendor_training_request_id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
 								<div class="modal-dialog modal-dialog-centered" role="document">
 									<div class="modal-content">
@@ -451,9 +451,7 @@
 															</div>
 															<div class="card">
 																<!-- Card header -->
-																<div
-																	onclick="javascript:section3(${pro2.getVendorTrainingRequest().vendor_training_request_id});"
-																	class="card-header" role="tab" id="headingThree3">
+																<div class="card-header" role="tab" id="headingThree3">
 																	<a style="text-decoration: none" class="collapsed"
 																		data-toggle="collapse" data-parent="#accordionEx"
 																		href="#collapseThree3" aria-expanded="false"
@@ -579,7 +577,7 @@
 																				</div>
 																				<div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
-																						<input name="timezone" placeholder="Time Zone" required
+																						<input name="timezone" placeholder="Time Zone"
 																							type="text" class="form-control" id="classRoom-timezone">
 																					</div>
 																				</div> 
@@ -1680,7 +1678,10 @@
 	$(document).ready(function(){
 		if (/.myModal+.....$/.test(window.location.href)) {
 
+			
 	  		var myModal = window.location.hash.substr(1);
+	  		
+	  		console.log("opeining model "+myModal);
 	  		$('#' + myModal).modal('show');
 	  		
 	  		ajax(myModal.substr(7));
@@ -1735,49 +1736,49 @@
             	//304 - SPOC Shortlist done
             	//305 - PT Shortlist done 
             	if(data.status === 303){
-            		$("#dot-sec1").attr("title", "In Progress");
-            		$("#dot-sec1").attr("style", "background-color:yellow;");
-            		$("#dot-sec2").attr("title", "Pending");
-            		$("#dot-sec2").attr("style", "background-color:red;");
-            		$("#dot-sec3").attr("title", "Pending");
-            		$("#dot-sec3").attr("style", "background-color:red;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Select Vendors for SPOC Shortlist from Vendor Management")
+            		$("[id=dot-sec1]").attr("title", "In Progress");
+            		$("[id=dot-sec1]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec2]").attr("title", "Pending");
+            		$("[id=dot-sec2]").attr("style", "background-color:red;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Select Vendors for SPOC Shortlist from Vendor Management")
             	}
             	if(data.status === 304){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "In Progress");
-            		$("#dot-sec2").attr("style", "background-color:yellow;");
-            		$("#dot-sec3").attr("title", "Pending");
-            		$("#dot-sec3").attr("style", "background-color:red;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Select Procurement Team approved Vendors from SPOC Shortlist")
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "In Progress");
+            		$("[id=dot-sec2]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Select Procurement Team approved Vendors from SPOC Shortlist")
             	}
             	if(data.status === 305){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "Completed");
-            		$("#dot-sec2").attr("style", "background-color:green;");
-            		$("#dot-sec3").attr("title", "In Progress");
-            		$("#dot-sec3").attr("style", "background-color:yellow;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Send Procurement Team Shortlist to Project Manager")
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "In Progress");
+            		$("[id=dot-sec3]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Send Procurement Team Shortlist to Project Manager")
 
             	}
-            	if(data.status === 306){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "Completed");
-            		$("#dot-sec2").attr("style", "background-color:green;");
-            		$("#dot-sec3").attr("title", "Completed");
-            		$("#dot-sec3").attr("style", "background-color:green;");
-            		$("#dot-sec4").attr("title", "In Progress");
-            		$("#dot-sec4").attr("style", "background-color:yellow;"); 
-            		$("#progressSummary").text("Complete Training Schedule")
+            	if(data.status === 310){
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Completed");
+            		$("[id=dot-sec3]").attr("style", "background-color:green;");
+            		$("[id=dot-sec4]").attr("title", "In Progress");
+            		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
+            		$("[id=progressSummary]").text("Complete Training Schedule")
             	}
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1795,10 +1796,11 @@
             url : 'section1',
             success : function(data) {
             	//$("#th1").show();
+             	$('[id=table-body1]').html("");
             	for(var i = 0; i < data.length; i++){
     				var shortlistSPOC = data[i];
-            		var tr = '<tr><td><input class="SPOCchckbx form-check-input" type="checkbox" onchange="SPOCchkbx(this,'+id+')" name="'+shortlistSPOC.vendor_name+'" id="ckSPOC-'+shortlistSPOC.vendor_id+'"/></td><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
-            		$('#table-body1').append(tr);
+            		var tr = '<tr><td><input class="SPOCchckbx form-check-input" type="checkbox" onchange="SPOCchkbx(this,'+id+')" name="'+shortlistSPOC.vendor_name+'" id="'+shortlistSPOC.vendor_id+'"/></td><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
+            		$('[id=table-body1]').append(tr);
             	}      	
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1811,15 +1813,23 @@
 	$('#VMLink').tooltip();
 	
 	function SPOCchkbx(checkboxElem, id) {
+		console.log('The vendor training request id is: ' + id);
 		var checkedIds = $(".SPOCchckbx:checked").map(function() {
-		    return this.id.substring(7);
+		    return this.id;
 		    }).toArray();
+		
+		console.log('The checked ids are: ' + checkedIds);
+		
 		var checkedNames = $(".SPOCchckbx:checked").map(function() {
 		    return this.name;
 		    }).toArray();
+		
+		console.log('The checked names are: ' + checkedNames);
+		
     	var xx = "Click to move " + checkedNames.join(", ") + " to PT shortlist";
     	$('#PTApprovedLink').attr("data-original-title", xx);
     	
+    	//console.log('')
     	var yy = "vendor/PTApproved/" + id +"/" + checkedIds.join(",");
     	$('#PTApprovedLink').attr("href", yy);
 	}
