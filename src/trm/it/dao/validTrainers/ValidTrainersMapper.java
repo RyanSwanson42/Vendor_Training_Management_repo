@@ -3,8 +3,8 @@ package trm.it.dao.validTrainers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import dao.it.internalTrainer.InternalTrainer;
-import dao.trainingSchedule.TrainingSchedule;
+import trm.it.dao.internalTrainer.InternalTrainer;
+import trm.it.dao.trainingSchedule.TrainingSchedule;
 
 public class ValidTrainersMapper {
 	public ValidTrainers mapRow(ResultSet result, int arg1) throws SQLException{
