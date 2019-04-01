@@ -1,4 +1,4 @@
-package trm.it.dao.validTrainers;
+package trm.it.dao.it.validTrainers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

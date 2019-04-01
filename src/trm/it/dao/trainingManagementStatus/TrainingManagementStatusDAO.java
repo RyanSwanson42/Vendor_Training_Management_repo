@@ -1,4 +1,4 @@
-package trm.it.trainingManagementStatus;
+package trm.it.dao.trainingManagementStatus;
 
 import java.util.List;
 
