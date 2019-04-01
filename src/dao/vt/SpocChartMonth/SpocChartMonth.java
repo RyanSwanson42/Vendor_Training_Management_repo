@@ -2,10 +2,7 @@ package dao.vt.SpocChartMonth;
 
 public class SpocChartMonth {
 	private int month;
-	private int IT;
-	private int DTT;
-	private int VT;
-	
+	private int amount;
 	
 	public int getMonth() {
 		return month;
@@ -13,25 +10,15 @@ public class SpocChartMonth {
 	public void setMonth(int month) {
 		this.month = month;
 	}
-	public int getIT() {
-		return IT;
+	public int getAmount() {
+		return amount;
 	}
-	public void setIT(int iT) {
-		IT = iT;
+	public void setAmount(int amount) {
+		this.amount = amount;
 	}
-	public int getDTT() {
-		return DTT;
-	}
-	public void setDTT(int dTT) {
-		DTT = dTT;
-	}
-	public int getVT() {
-		return VT;
-	}
-	public void setVT(int vT) {
-		VT = vT;
-	}
+
 	
 	
+
 	
 }

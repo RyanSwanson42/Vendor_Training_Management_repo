@@ -24,9 +24,9 @@ public class SpocChartDao {
 				+ "inner join SPOC_MASTER sm"
 				+ " on e.EMPLOYEE_ID = sm.SPOC_EMP_ID "
 				+ "inner join TRAINING_REQUEST tr "
-				+ "on e.VERTICAL = tr.VERTICAL "
+				+ "on e.VERTICAL = ? "
 				+ "group by e.FIRST_NAME";
-		List<SpocChart> sc = temp.query(sql,/*new Object[]{vertical}, */  new SpocChartMapper());
+		List<SpocChart> sc = temp.query(sql,new Object[]{vertical},  new SpocChartMapper());
 
 
 		return sc;
@@ -41,9 +41,9 @@ public class SpocChartDao {
 				+ " inner join EMPLOYEE e"
 				+ " on sm.SPOC_EMP_ID = e.EMPLOYEE_ID"
 				+ " inner join TRAINING_REQUEST tr"
-				+ " on sm.SPOC_VERTICAL = tr.VERTICAL"
+				+ " on sm.SPOC_VERTICAL = ?"
 				+ " GROUP BY tr.REQUEST_TRAINING_TYPE";
-		List<SpocChart> sc = temp.query(sql,/*new Object[]{vertical}, */ new SpocChartMapper());
+		List<SpocChart> sc = temp.query(sql,new Object[]{vertical},  new SpocChartMapper());
 
 
 		return sc;

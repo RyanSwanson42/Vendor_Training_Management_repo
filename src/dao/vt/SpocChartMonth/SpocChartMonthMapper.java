@@ -11,9 +11,8 @@ public class SpocChartMonthMapper implements RowMapper<SpocChartMonth> {
 		
 		SpocChartMonth scm = new SpocChartMonth();
 		scm.setMonth(result.getInt(1));
-		scm.setIT(result.getInt(2));
-		scm.setDTT(result.getInt(3));
-		scm.setVT(result.getInt(4));
+		scm.setAmount(result.getInt(2));
+	
 			
 		return scm;
 	}

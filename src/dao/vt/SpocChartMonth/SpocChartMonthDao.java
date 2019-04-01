@@ -16,19 +16,47 @@ public class SpocChartMonthDao {
 	}
 
 
-	public List<SpocChartMonth> getChartTrainingRequestInfo() {
-
-		String sql = "select EXTRACT(month from request_start_date) \"Months\", count(itr.INTERNAL_TRAINING_ID) \"IT Requests\", count(dttr.DTT_TRAINING_ID) \"DTT Requests\", count(vtr.VENDOR_TRAINING_REQUEST_ID) \"VT Requests\" from training_request tr\r\n" + 
-				"inner join INTERNAL_TRAINING_REQUEST itr\r\n" + 
+	public List<SpocChartMonth> getItChartTrainingRequestInfo(String vertical) {
+		String sql = "select EXTRACT(month from request_start_date) \"Months\", count(itr.INTERNAL_TRAINING_ID) \"IT Requests\" from training_request tr\r\n" + 
+				"left join INTERNAL_TRAINING_REQUEST itr\r\n" + 
 				"on tr.TRAINING_REQUEST_ID = itr.TRAINING_REQUEST_ID\r\n" + 
-				"left join DEVELOP_TEAM_TRAINING_REQUEST dttr\r\n" + 
-				"on tr.TRAINING_REQUEST_ID = dttr.TRAINING_REQUEST_ID\r\n" + 
-				"inner join VENDOR_TRAINING_REQUEST vtr\r\n" + 
-				"on tr.TRAINING_REQUEST_ID = vtr.TRAINING_REQUEST_ID\r\n" + 
+				"where tr.VERTICAL = ?\r\n" + 
 				"group by EXTRACT(month from request_start_date)\r\n" + 
 				"order by \"Months\"";
-		//List<SpocChart> sc = temp.query(sql, new Object[] { name, vertical }, new SpocChartMapper());
-		List<SpocChartMonth> scm = temp.query(sql,  new SpocChartMonthMapper());
+	
+		List<SpocChartMonth> scm = temp.query(sql,new Object[]{vertical},   new SpocChartMonthMapper());
+
+
+		return scm;
+
+	}
+
+
+public List<SpocChartMonth> getDttChartTrainingRequestInfo(String vertical) {
+	
+	String sql  ="select EXTRACT(month from request_start_date) \"Months\", count(dttr.DTT_TRAINING_ID) \"DTT Requests\" from training_request tr\r\n" + 
+			"left join DEVELOP_TEAM_TRAINING_REQUEST dttr\r\n" + 
+			"on tr.TRAINING_REQUEST_ID = dttr.TRAINING_REQUEST_ID\r\n" + 
+			"where tr.VERTICAL = ?\r\n" + 
+			"group by EXTRACT(month from request_start_date)\r\n" + 
+			"order by \"Months\"";
+	List<SpocChartMonth> scm = temp.query(sql, new Object[]{vertical},   new SpocChartMonthMapper());
+
+
+	return scm;
+
+
+}
+
+	public List<SpocChartMonth> getVtChartTrainingRequestInfo(String vertical) {
+		String sql = "select EXTRACT(month from request_start_date) \"Months\", count(vtr.VENDOR_TRAINING_REQUEST_ID) \"VT Requests\" from training_request tr\r\n" + 
+				"left join VENDOR_TRAINING_REQUEST vtr\r\n" + 
+				"on tr.TRAINING_REQUEST_ID = vtr.TRAINING_REQUEST_ID\r\n" + 
+				"where tr.VERTICAL = ?\r\n" + 
+				"group by EXTRACT(month from request_start_date)\r\n" + 
+				"order by \"Months\"";
+	
+		List<SpocChartMonth> scm = temp.query(sql, new Object[]{vertical},   new SpocChartMonthMapper());
 
 
 		return scm;

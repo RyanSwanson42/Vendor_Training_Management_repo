@@ -95,25 +95,43 @@ public class VendorController {
 	
 	@RequestMapping(value="/report")
 	public String ChartJs(ModelMap map) {
-		//replace all  " " with vertical provided by King Yosuf
-		System.out.println("Report Login");
-		List<SpocChart> sc = new SpocChartDao().getChartTrainingRequestInfo("");
-		List<SpocChart> sc1 = new SpocChartDao().GetTotalParticipants(" ");
-		List<SpocChartMonth> scm = new SpocChartMonthDao().getChartTrainingRequestInfo();
+		
+		/****************************************************
+		 * Yosuf: Delete all my previous code from controller
+		 * Add the code you added below this
+		 ********************************************/
+		String vertical = "BNFS";
+		
+		/************************************
+		 * Set all list for Chart Information
+		 ************************************/
+		List<SpocChart> sc = new SpocChartDao().getChartTrainingRequestInfo(vertical);
+		List<SpocChart> sc1 = new SpocChartDao().GetTotalParticipants(vertical);
+		List<SpocChartMonth> spm1 = new SpocChartMonthDao().getItChartTrainingRequestInfo(vertical);
+		List<SpocChartMonth> spm2 = new SpocChartMonthDao().getVtChartTrainingRequestInfo(vertical);
+		List<SpocChartMonth> spm3 = new SpocChartMonthDao().getDttChartTrainingRequestInfo(vertical);
 
 		
+		
+		/***************************************
+		 * Adding All Chart Statuses to one list
+		 **************************************/
 		List<SpocChartStatus> scp1 = new ArrayList<SpocChartStatus>();
-		scp1.add(new SpocChartStatusDao().GetStatusLeft("").get(0));
-		scp1.add(new SpocChartStatusDao().GetStatusMiddle("").get(0));
-		scp1.add(new SpocChartStatusDao().GetStatusRight("").get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusLeft(vertical).get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusMiddle(vertical).get(0));
+		scp1.add(new SpocChartStatusDao().GetStatusRight(vertical).get(0));
 		scp1.get(0).setStatus("PreProcessing");
 		scp1.get(1).setStatus("Processing");
 		scp1.get(2).setStatus("PostProcessing");
 		
-		
+		/************************************************
+		 * Mapping All Chart Information To The Front End
+		 ************************************************/
 		map.addAttribute("SpocChartList",sc);
 		map.addAttribute("spcParticipants",sc1);
-		map.addAttribute("Month",scm);
+		map.addAttribute("ITMonth",spm1);
+		map.addAttribute("VTMonth",spm2);
+		map.addAttribute("DTTMonth",spm3);
 		map.addAttribute("Status",scp1);
 
 		return "report";

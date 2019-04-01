@@ -9,10 +9,44 @@
 <html>
 
 <head>
+<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet'>
+
 <style>
-buttion{
-background-color: black;
-color: white;
+.btn { /*dent around button*/
+	display: inline-block;
+	position: relative;
+	width: 75%; height : 100%;
+	background: #fff7f7;
+	box-shadow: inset 0 0 4px rgba(155, 33, 0, 0.08);
+	height: 100%;
+}
+
+.btn .fa { /*Button itself*/
+	content: normal;
+	width: 100%;
+	height: 40px;
+	background-image: -webkit-linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+	background-image: linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+	box-shadow: inset 4px 2px 4px rgba(255, 255, 255, 0.5), 0 2px 2px
+		rgba(0, 0, 0, 0.19);
+	border-bottom: solid 2px #b5b5b5;
+}
+
+.btn .fa .txt {
+	width: inherit;
+	height: inherit;
+	margin-top: 13px;
+	text-align: center;
+	font-family: 'Ubuntu', sans-serif;
+	color: #6495ED;
+	
+}
+
+.btn .fa:active {
+	background-image: -webkit-linear-gradient(#efefef 0%, #d6d6d6 100%);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 2px 2px
+		rgba(0, 0, 0, 0.50);
+	border-bottom: solid 2px #d8d8d8;
 }
 }
 </style>
@@ -103,35 +137,43 @@ color: white;
 	<div class="container">
 		<div class="row">
 			<div id="buttDiv" class="col">
-				<button id="TrPerSpoc" type="button">TRequest</button>
+				<button id="TrPerSpoc" class="btn" type="button">
+					<span class="fa"><div class="txt">Training Req.</div></span>
+				</button>
 			</div>
 			<div id="buttDiv" class="col">
-				<button id="numpar" type="button">Participants</button>
+				<button id="numpar" class="btn" type="button">
+					<span class="fa"><div class="txt">Participants</div></span>
+				</button>
 			</div>
 			<div id="buttDiv" class="col">
-				<button id="ReqPerDiv" type="button">ReqPerDiv</button>
+				<button id="ReqPerDiv" class="btn" type="button">
+					<span class="fa"><div class="txt">Executive Req.</div>.</span>
+				</button>
 			</div>
 			<div id="buttDiv" class="col">
-				<button id="StatusDiv" type="button">Status</button>
+				<button id="StatusDiv" class="btn" type="button">
+					<span class="fa"><div class="txt">Status</div></span>
+				</button>
 			</div>
-			
+
 
 		</div>
 		<div class="row">
 
 			<div id="chartDiv" class="col-10" style="display: block;">
-				<canvas id=myChart title="HEllo"> </canvas>
+				<canvas id=myChart > </canvas>
 			</div>
 
 			<div id="chartDiv2" class="col-10" style="display: none;">
-				<canvas id=myChart2 title="HEllo"></canvas>
+				<canvas id=myChart2 ></canvas>
 			</div>
 
 			<div id="chartDiv3" class="col-10" style="display: none;">
-				<canvas id=myChart3 title="HEllo"></canvas>
+				<canvas id=myChart3 ></canvas>
 			</div>
-				<div id="chartDiv4" class="col-10" style="display: none;">
-				<canvas id=myChart4 title="HEllo"></canvas>
+			<div id="chartDiv4" class="col-10" style="display: none;">
+				<canvas id=myChart4 ></canvas>
 			</div>
 		</div>
 	</div>
@@ -325,18 +367,26 @@ color: white;
 
 							var months = new Array();
 							var Chart3IT = new Array();
-							var Chart3DTT = new Array();
 							var Chart3VT = new Array();
+							var Chart3DTT = new Array();
 
-							<c:forEach var="chartIndex3" items="${Month}" varStatus="ChartCount" >
-							months.push(a["${chartIndex3.getMonth()}" - 1]);
+							<c:forEach var="ITIndex" items="${ITMonth}" varStatus="ChartCount" >
+							months.push(a["${ITIndex.getMonth()}" - 1]);
 							Chart3IT
-									.push(parseInt("${chartIndex3.getIT()}", 10));
-							Chart3DTT.push(parseInt("${chartIndex3.getDTT()}",
-									10));
-							Chart3VT
-									.push(parseInt("${chartIndex3.getVT()}", 10));
+									.push(parseInt("${ITIndex.getAmount()}", 10));
 							</c:forEach>
+
+							<c:forEach var="DTTIndex" items="${DTTMonth}" varStatus="ChartCount" >
+							Chart3IT
+							Chart3DTT.push(parseInt("${DTTIndex.getAmount()}",
+									10));
+							</c:forEach>
+
+							<c:forEach var="VTIndex" items="${VTMonth}" varStatus="ChartCount" >
+							Chart3VT
+									.push(parseInt("${VTIndex.getAmount()}", 10));
+							</c:forEach>
+
 							var backgroundColor1 = createColors(new Array(3));
 							//Third Configuration chart
 							var Chart3ItData = {
@@ -423,15 +473,15 @@ color: white;
 							};
 
 							//ending of Third configuration
-							
+
 							//BeginningOfFourth
 							var ctx4 = document.getElementById('myChart4');
 							var StatusLabels = new Array();
 							var StatusData = new Array();
 
 							<c:forEach var="chartIndex4" items="${Status}" varStatus="ChartCount" >
-								StatusLabels.push("${chartIndex4.getStatus()}");
-								StatusData.push("${chartIndex4.getSum()}");
+							StatusLabels.push("${chartIndex4.getStatus()}");
+							StatusData.push("${chartIndex4.getSum()}");
 							</c:forEach>
 							var backgroundColor1 = createColors(new Array(3));
 							var datalistDic = [];
@@ -439,15 +489,16 @@ color: white;
 								var jsonObj = {
 									label : StatusLabels[i],
 									backgroundColor : backgroundColors1[i],
-									data : [StatusData]
+									data : [ StatusData[i] ]
 								}
 								datalistDic.push(jsonObj);
 							}
-						
+							console.log(datalistDic);
+
 							var config4 = {
 								type : 'bar',
 								data : {
-									labels : StatusLabels,
+									labels : [ "Status" ],
 									datasets : datalistDic
 
 								},
@@ -504,21 +555,17 @@ color: white;
 									}
 								}
 							}; //endingOfFourth
-						
 
 							var myChart = new Chart(ctx, config);
 							var myChart2 = new Chart(ctx2, config2);
 							var myChart3 = new Chart(ctx3, config3);
 							var myChart4 = new Chart(ctx4, config4);
 
-					
-						
 							$("#TrPerSpoc").click(function() {
 								$("#chartDiv").css("display", "block");
 								$("#chartDiv2").css("display", "none");
 								$("#chartDiv3").css("display", "none");
 								$("#chartDiv4").css("display", "none");
-
 
 							});
 							$("#numpar").click(function() {
@@ -526,7 +573,6 @@ color: white;
 								$("#chartDiv2").css("display", "block");
 								$("#chartDiv3").css("display", "none");
 								$("#chartDiv4").css("display", "none");
-
 
 							});
 							$("#ReqPerDiv").click(function() {
@@ -542,9 +588,8 @@ color: white;
 								$("#chartDiv3").css("display", "none");
 								$("#chartDiv4").css("display", "block");
 
+							});
 
-						});
-							
 						});
 	</script>
 
@@ -555,8 +600,8 @@ color: white;
 			var backgroundColorsArr = new Array();
 			for (var i = 0; i < datalist.length; i++) {
 				randomColor = Math.floor((Math.random() * 255) + 1);
-				randomColor2 = Math.floor((Math.random() * 255) + 1);
-				randomColor3 = Math.floor((Math.random() * 255) + 1);
+				randomColor2 = Math.floor((Math.random() * 150) + 1);
+				randomColor3 = Math.floor((Math.random() * 150) + 1);
 
 				backgroundColorsArr.push('rgba(' + randomColor + ','
 						+ randomColor2 + ',' + randomColor3 + ', .8)');
