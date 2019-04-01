@@ -137,7 +137,7 @@
 							src="<c:url value="/resources/img/dt-icon.png" />"> DT
 						</a> <a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
 							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+							src="<c:url value="/resources/img/Icon Vender.png" />">
 							VT
 						</a>
 					</div>
@@ -248,7 +248,7 @@
 								${pro2.getTrainingRequest().training_request_id}
 							</span> 
 							<span style="float: right;">
-							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/vendor-icon-placeholder.png'> </a>
+							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='75px' height='75px' style="margin-top: 5px;" src='.//resources/img/Icon Vender.png'> </a>
 							<div class="modal" id="Process${pro2.getVendorTrainingRequest().vendor_training_request_id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabelUpdate">
 								<div class="modal-dialog modal-dialog-centered" role="document">
 									<div class="modal-content">
@@ -721,7 +721,7 @@
 															<form>
 																<a class="dropdown-item" id="dt-link" href="changeProcessing/vt/${itList.getInternalTrainingRequest().internal_training_id}/Internal"
 																style="padding-left: 10px; padding-right: 10px;"> <img
-																src="<c:url value="/resources/img/vendor-icon-placeholder.png" />"> VT
+																src="<c:url value="/resources/img/Icon Vender.png" />"> VT
 																</a>
 															</form>
 															<br>
@@ -1777,10 +1777,16 @@
             		$("[id=dot-sec3]").attr("style", "background-color:orange;");
             		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
-            		$("[id=progressSummary]").text("Sent to PM for approval");
-            		$("#pmApproval").hide();
-            		//pendingApproval
-            		//add to div
+            		$("[id=progressSummary]").text("Sent to Project Manager for approval");
+            		
+            		// Hide button after sending to PM for approval
+            		$("[id=pmApproval]").hide();
+            		
+            		// Show icon for message sent
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/office/40/000000/outbox.png">Sent')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/reading-confirmation.png">Received')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ios/50/000000/data-pending.png">Pending')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/ok.png">Approved');
             	}
             	if(data.status === 320){
             		$("[id=dot-sec1]").attr("title", "Completed");
@@ -1790,9 +1796,11 @@
             		$("[id=dot-sec3]").attr("title", "Pending");
             		$("[id=dot-sec3]").attr("style", "background-color:orange;");
             		$("[id=dot-sec4]").attr("title", "Pending");
-            		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
-            		$("[id=progressSummary]").text("PM Received Request");
-            		// add to div
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Received by Project Manager<br>Pending approval");
+            		
+            		// Show icon for message read
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/reading-confirmation.png">Received')
             	}
             	if(data.status === 321){
             		$("[id=dot-sec1]").attr("title", "Declined");
@@ -1802,9 +1810,11 @@
             		$("[id=dot-sec3]").attr("title", "Declined");
             		$("[id=dot-sec3]").attr("style", "background-color:red;");
             		$("[id=dot-sec4]").attr("title", "Declined");
-            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=dot-sec4]").attr("style", "background-color:red;");
             		$("[id=progressSummary]").text("Request has been declined by the Project Manager");
-            		$("#pmApproval").show();
+            		
+            		// Show icon for Pending approval
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ios/50/000000/data-pending.png">Pending')
             	}
             	if(data.status === 322){
             		$("[id=dot-sec1]").attr("title", "Completed");
@@ -1815,8 +1825,10 @@
             		$("[id=dot-sec3]").attr("style", "background-color:green;");
             		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
-            		$("[id=progressSummary]").text("Request has been approved by the Project Manager");
+            		$("[id=progressSummary]").text("Request has been approved by the Project Manager");  
             		
+            		// Show icon for Approved
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/ok.png">Approved');
             	}
             	if(data.status === 330){
             		$("[id=dot-sec1]").attr("title", "Completed");
@@ -1895,6 +1907,7 @@
             	//$("#th2").show();
             	for(var i = 0; i < data.length; i++){
     				var shortlistPT = data[i];
+    				console.log('the shortlist data: ' + shortlistPT.vendor_name);
             		var tr='<tr><td>' + shortlistPT.vendor_name +  '</td><td>' + shortlistPT.vendor_phone +  '</td><td>' + shortlistPT.vendor_email +  '</td><td>' + shortlistPT.vendor_city +  '</td><td>' + shortlistPT.vendor_state +  '</td></tr>';
             		$('#table-body2').append(tr);
             	}       
