@@ -34,8 +34,5 @@ public class GetStatus {
 	}
 	public void setTrequest(TrainingRequest trequest) {
 		this.trequest = trequest;
-	}
-	
-	
-	
+	}	
 }

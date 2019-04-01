@@ -5,15 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import trm.it.dao.employee.Employee;
-import trm.it.dao.employee.EmployeeMapper;
-import trm.it.dao.it.internalTrainer.InternalTrainer;
-import trm.it.dao.it.internalTrainer.InternalTrainerMapper;
-import trm.it.dao.trainingRequest.TrainingRequest;
-import trm.it.dao.trainingRequest.TrainingRequestMapper;
-import trm.it.dao.trainingSchedule.TrainingSchedule;
-import trm.it.dao.trainingSchedule.TrainingScheduleMapper;
-
 public class InternalTrainingRequestMapper implements RowMapper<InternalTrainingRequest>{
 	/*
 	  internal_training_id number(5) primary key,
@@ -28,6 +19,7 @@ public class InternalTrainingRequestMapper implements RowMapper<InternalTraining
 		InternalTrainingRequest itr = new InternalTrainingRequest();
 		itr.setInternal_training_id(result.getInt("internal_training_id"));
 		itr.setTRI(result.getInt("training_request_id"));
+		itr.setTraining_type(result.getString("training_type"));
 		itr.setSchedule(result.getInt("schedule_id"));
 		itr.setConfirmed_trainer(result.getInt("confirmed_trainer_id"));
 		itr.setExecutive(result.getInt("executive_id"));

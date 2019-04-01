@@ -14,6 +14,13 @@ public class GetStatusDAO {
 		context = new ClassPathXmlApplicationContext("spring-config.xml");
 		temp = (JdbcTemplate) context.getBean("db");
 	}
+	
+	public int getStatusByTrainingRequest(int trainingid){
+		String sql = "SELECT s.status FROM training_management_status s WHERE training_request_id = ?";
+		int status = temp.queryForInt(sql, new Object[]{trainingid});
+		return status;
+	}
+	
 	public List<GetStatus> getNew(){
 		System.out.println("getNew Start");
 		String sql = "SELECT s.spoc_vertical, tm.status, tm.training_request_id, tr.training_request_id, tr.vertical "
