@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.employee.EmployeeDAO;
 import trm.dt.dao.trainingSchedule.TrainingSchedule;
-import trm.dt.dao.trainingSchedule.TrainingScheduleDAO;
+import trm.dt.dao.trainingSchedule.DDTTrainingScheduleDAO;
 
 public class DDTTrainer {
 	private int dtt_trainer_request_id;
@@ -26,7 +26,7 @@ public class DDTTrainer {
 	
 	public TrainingSchedule getSchedule(int schedule_id)
 	{
-		TrainingScheduleDAO tsd = new TrainingScheduleDAO();
+		DDTTrainingScheduleDAO tsd = new DDTTrainingScheduleDAO();
 		TrainingSchedule ts = tsd.getTrainingSchedule(schedule_id);
 		return ts;
 	}

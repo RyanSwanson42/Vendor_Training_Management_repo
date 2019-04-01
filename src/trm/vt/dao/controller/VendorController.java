@@ -3,6 +3,7 @@ package trm.vt.dao.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainerDOA;
 import trm.dt.dao.developTeamTrainingRequest.DDTTrainingDAO;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflow;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
@@ -30,6 +32,7 @@ import trm.dt.dao.inProcessCard.InProcessCard;
 import trm.dt.dao.inProcessCard.InProcessCardDAO;
 import trm.dt.dao.inTrainingCard.InTrainingCard;
 import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
+import trm.dt.dao.trainingSchedule.DDTTrainingScheduleDAO;
 import trm.dt.ddtProjectQueries.CallbackFunction;
 import trm.dt.trial.DDTProject.DTTProcessingCard;
 import trm.dt.trial.DDTProject.DTTdaoServices;
@@ -202,7 +205,7 @@ public class VendorController {
 		}
 		return "redirect:/dashboard";
 	}
-
+/*
 	// Change from status 100 to 203 (DT Training)
 	@RequestMapping(value = "/toProcessing/dt/{req_id}")
 	public String toProcessingDT(@PathVariable("req_id") int[] req_id) {
@@ -212,8 +215,33 @@ public class VendorController {
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Dev Team Trainer");
 		}
 		return "redirect:/dashboard";
-	}
+	}*/
 
+	@RequestMapping(value = "/toProcessing/dt/{req_id}")
+    public String toProcessingDT(@PathVariable("req_id") int[] req_id) {
+        Instant instant = Instant.now();
+        Timestamp timestamp = Timestamp.from(instant);
+        for (int i = 0; i < req_id.length; i++) {
+            
+            
+            int DDTScheduleId = new DDTTrainingScheduleDAO().getScheduleId();
+            new DDTTrainingScheduleDAO().insertTrainingSchedule(DDTScheduleId, null, null, null, null, null, null, null, null, null, null, null, 0);
+            
+            int DDTTrainerReqId = new DDTTrainerDOA().getTrainerRequestId();
+            new DDTTrainerDOA().insertDTTrainer(DDTTrainerReqId, timestamp, 1000000, DDTScheduleId, null, null, null, 0);
+            
+            System.out.println("Schedule ID: " + DDTScheduleId);
+            System.out.println("DDTTrainer ID: " + DDTTrainerReqId);
+            
+            new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i],DDTScheduleId, DDTTrainerReqId);
+            new CallbackFunction().statusChange(req_id[i], 203);
+            System.out.println("Updating Status for Training Request: " + req_id[i] + " to Dev Team Trainer");
+            
+            
+        }
+        return "redirect:/dashboard";
+    }
+	
 	// Change from status 100 to 303 (VT Training)
 	@RequestMapping(value = "/toProcessing/vt/{req_id}")
 	public String toProcessingVT(@PathVariable("req_id") int[] req_id) {
@@ -230,7 +258,7 @@ public class VendorController {
 	/**--------------- Services switching between request types  --------------**/
 	/****************************************************************************/
 
-	// Change from IT to (DT or VT)
+	// Change to IT from (DT or VT)
 	@RequestMapping(value = "/changeProcessing/it/{req_id}/{type}")
 	public String changeProcessingIT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
 		int training_request_id = 0;
@@ -244,21 +272,30 @@ public class VendorController {
 		return "redirect:/dashboard";
 	}
 
-	// Change from DT to (IT or VT)
+	// Change to DT from (IT or VT)
 	@RequestMapping(value = "/changeProcessing/dt/{req_id}/{type}")
 	public String changeProcessingDT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
+		Instant instant = Instant.now();
+        Timestamp timestamp = Timestamp.from(instant);
+		
+		int DDTScheduleId = new DDTTrainingScheduleDAO().getScheduleId();
+        new DDTTrainingScheduleDAO().insertTrainingSchedule(DDTScheduleId, null, null, null, null, null, null, null, null, null, null, null, 0);
+        
+        int DDTTrainerReqId = new DDTTrainerDOA().getTrainerRequestId();
+        new DDTTrainerDOA().insertDTTrainer(DDTTrainerReqId, timestamp, 1000000, DDTScheduleId, null, null, null, 0);
+		
 		int training_request_id = 0;
 		if (type.equals("Vendor"))
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
 		if (type.equals("Internal"))
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
 		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
-		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id);
+		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id,DDTScheduleId, DDTTrainerReqId);
 		new CallbackFunction().statusChange(training_request_id, 203);
 		return "redirect:/dashboard";
 	}
 
-	// Change from VT to (DT or IT)
+	// Change to VT from (DT or IT)
 	@RequestMapping(value = "/changeProcessing/vt/{req_id}/{type}")
 	public String changeProcessingVT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
 		int training_request_id = 0;
@@ -352,6 +389,7 @@ public class VendorController {
 		ArrayList<VendorDetail> vd = new ArrayList<VendorDetail>();
 		for (int i = 0; i < shortlistSPOC.size(); i++)
 			vd.add(shortlistSPOC.get(i).getVd());
+		
 		// Convert List to JSON using JacksonMapper
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 		final ObjectMapper mapper = new ObjectMapper();
@@ -534,6 +572,19 @@ public class VendorController {
 	/****************************************************************************/
 	/** ----------------- Develop Team Training Services ------------------ **/
 	/****************************************************************************/
+
+	// DT Accordion Update
+	@RequestMapping(value = "updateTrainer/{dtt_trainer_request_id}")
+	public String updateCurrentTrainer(@ModelAttribute("Employee") Employee emp,
+			@PathVariable("dtt_trainer_request_id") int dtt_trainer_request_id) {
+		int empId = emp.getEmployee_id();
+
+		new DDTTrainerDOA().updateTrainerId(dtt_trainer_request_id, empId);
+		System.out.println("dtt_trainer_req_id: " + dtt_trainer_request_id);
+		System.out.println("Trainer_id: " + empId);
+		System.out.println(emp.getCity());
+		return "redirect:/dashboard";
+	}
 
 	// DT Team update executive workflow status
 	@RequestMapping(value = "updateWorkflowStatus/{executive_workflow_status_id}")
