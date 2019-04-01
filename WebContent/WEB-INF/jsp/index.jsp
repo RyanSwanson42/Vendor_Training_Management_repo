@@ -51,7 +51,6 @@
 <script src="<c:url value="resources/js/trainingType.js" />"></script>
 
 <!-- DT TEAM -->
-<script src="<c:url value="/resources/js/jquery-3.3.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/main.js" />"></script>
 <script src="<c:url value="/resources/js/popper.min.js" />"></script>
 
@@ -246,7 +245,7 @@
 						<div class="card-body">
 						<h5 class="card-title">
 							<span> <i class="fa fa-id-card" aria-hidden="true" style="color: #3c8dbc; float: inherit;"></i>
-								${pro2.getVendorTrainingRequest().vendor_training_request_id}
+								${pro2.getTrainingRequest().training_request_id}
 							</span> 
 							<span style="float: right;">
 							<a href="#" data-toggle="modal" data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/vendor-icon-placeholder.png'> </a>
@@ -336,7 +335,7 @@
 											<div class="modal-header">
 												<div class="col-lg-4">
 													<p>
-														<b>Training Request ID:</b>
+														<b>Vendor Training Request ID:</b>
 														${pro2.getVendorTrainingRequest().vendor_training_request_id}
 													</p>
 												</div>
@@ -696,7 +695,7 @@
 							<div class="card-body">
 								<h5 class="card-title">
 									<span> <i class="fa fa-id-card" aria-hidden="true" style="color: #3c8dbc; float: inherit;"></i>
-										${itList.getInternalTrainingRequest().internal_training_id}
+										${itList.getTrainingRequest().training_request_id}
 									</span>
 										<span style="float: right;">
 										<a href="#" data-toggle="modal" data-target="#Process${itList.getInternalTrainingRequest().internal_training_id}"><img width='20px' height='20px' style="margin-top: 27px;" src='.//resources/img/it-icon.png'> </a>
@@ -1680,8 +1679,7 @@
 
 			
 	  		var myModal = window.location.hash.substr(1);
-	  		
-	  		console.log("opeining model "+myModal);
+	  			  		
 	  		$('#' + myModal).modal('show');
 	  		
 	  		ajax(myModal.substr(7));
@@ -1696,8 +1694,9 @@
 
 	  		$('#myModal' + myModal).modal('show');
 	  		ajax(myModal);
+	  		
 	  		section2(myModal);
-	  		$('#collapseTwo2').attr("class","collapse show");
+	  		$('[id=collapseTwo2]').attr("class","collapse show");
 
 		}
 	});
@@ -1880,7 +1879,7 @@
 				$('#online-audio').val(data.training_phone);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
             }   
 		});
 	}

@@ -38,6 +38,7 @@ public class InternalTrainingRequestAndStatusMapper implements RowMapper<Interna
 		tr.setRequest_approx_participant(result.getInt(10));
 		tr.setTime_requested(result.getString(11));
 		tr.setJustification_of_request(result.getString(12));
+		tr.setTraining_request_id(result.getInt(13));
 		
 		InternalTrainingRequestAndStatus trs = new InternalTrainingRequestAndStatus();
 		trs.setEmployee(employee);

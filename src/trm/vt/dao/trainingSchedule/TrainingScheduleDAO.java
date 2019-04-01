@@ -1,5 +1,6 @@
 package trm.vt.dao.trainingSchedule;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -26,11 +27,15 @@ public class TrainingScheduleDAO {
 		return TrainingScheduleList;
 	}
 	
-	public void insertTrainingSchedule(String training_city, String training_state, String training_country, String training_zipcode, String training_time_zone, String training_location, String training_room_number, String training_start_date, String training_end_date, String training_break_down, String training_url, String training_phone){
+	public int insertTrainingSchedule(String training_city, String training_state, String training_country, String training_zipcode, String training_time_zone, String training_location, String training_room_number, Timestamp training_start_date, Timestamp training_end_date, String training_break_down, String training_url, String training_phone){
 		
 		String sql = "insert into training_schedule values(training_schedule_id_seq.nextval, ?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		temp.update(sql, new Object[]{training_city,training_state,training_country, training_zipcode,training_time_zone,training_location,training_room_number, training_start_date, training_end_date, training_break_down, training_url, training_phone});
+	
+		int scheduleId = temp.queryForInt("select max(training_schedule_id) from training_schedule");
+		
+		return scheduleId;
 	}
 	
 	public void deleteTrainingSchedule(int training_schedule_id){
@@ -71,7 +76,6 @@ public class TrainingScheduleDAO {
 	public int insertStartDateAndEndDate(String startDate, String endDate) {
 		
 		String sql  = "insert into training_schedule(training_schedule_id, training_start_date, training_end_date) values (training_schedule_id_seq.nextval, ?, ?)";
-	
 		
 		temp.update(sql, new Object[] {startDate,endDate});
 		
