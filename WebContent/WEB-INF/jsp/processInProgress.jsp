@@ -1,4 +1,3 @@
-<%@page import="trm.it.bl.GetRequest"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,7 +18,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-<%-- 	<spring:url value="/resources/css/processInProgress.css" var="processInProgressITCss" /> --%>
+	<spring:url value="/resources/css/processInProgress.css" var="processInProgressITCss" />
 	<spring:url value="/resources/js/processInProgress.js" var="processInProgressITJs" />
 	
 	<link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
@@ -229,10 +228,10 @@
 	            </div>
 	        </div>
 	
-	        <a href="#step2Collapse" class="btn btn-info steps" data-toggle="collapse">
+	        <a href="#step2Collapse" class="btn btn-info steps" data-toggle="collapse" >
 	            Step 2
 	        </a>
-	        <div id="step2Collapse" class="collapse">
+	        <div id="step2Collapse" class="collapse" >
 	            <form>
 	            	<div>
 	            		Complete the Executive Functions from the Executive Column
@@ -248,7 +247,7 @@
 	                    <th>${maheshFun.trainingID }</th>
 	                </tr>
 	            </thead>
-	            <tbody style="background-color:fuchsia; ">
+	            <tbody id="TrainerBlock">
 	            	<tr>
 	                    <td>Training Type:</td>
 	                    <td>Internal Training</td>
@@ -263,7 +262,7 @@
 	                </tr>
 	            </tbody>
 	            	
-	            <tbody style="background-color: olive;">
+	            <tbody id="ScheduleBlock">
 	                <tr>
 	                    <td>Start Date</td>
 	                    <td>${maheshFun.startDate }</td>
@@ -281,7 +280,7 @@
 	                    <td>${maheshFun.endTime }</td>
 	                </tr>
 	                </tbody>
-	                <tbody style='background-color:lime;'>
+	                <tbody id="ModeBlock">
 	                <tr>
 	                    <td>Mode:</td>
 	                    <td>${maheshFun.mode }</td>
@@ -320,13 +319,11 @@
 	                </tr>
 	            </tbody>
 	        </table>
-	        <button class="button button1" >Move to DT</button>
-	        <button class="button button1">Move to VT</button>
-	<%--         <a href="updateproduct/${allproduct.pid}">Update</a> --%>
-	        
 	    </div>
 	</div>
 	<div class="modal-footer">
+<!-- 	Should include a drop-down select or buttons to move -->
+<!--      between a IT card and DT/VT cards -- should be included in everyone's footer -->
 		<button type="button" class="btn btn-danger"
 			data-dismiss="modal">Close</button>
 
