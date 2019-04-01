@@ -1,7 +1,7 @@
 package trm.it.dao.getName;
 
 import trm.it.dao.employee.Employee;
-import trm.it.dao.it.internalTrainer.InternalTrainer;
+import trm.it.dao.internalTrainer.InternalTrainer;
 
 public class GetName {
 	Employee employee;

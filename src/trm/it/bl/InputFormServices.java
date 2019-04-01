@@ -5,8 +5,8 @@ import java.util.Date;
 
 import trm.it.dao.getName.GetNameDAO;
 import trm.it.dao.getStatus.GetStatusDAO;
-import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequest;
-import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.internalTrainingRequest.InternalTrainingRequest;
+import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.it.dao.trainingManagementStatus.TrainingManagementStatus;
 import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 import trm.it.dao.trainingRequestLog.TrainingRequestLogDAO;
@@ -59,7 +59,7 @@ public class InputFormServices
 //			message = "Internal Training Request ";
 //			break;
 		case 110:
-			message = "Internal Training Request awaiting PM for Final Approval";
+			message = "Internal Training Request at PM for Final Approval";
 			//function to ask PM to choose
 			break;
 		case 121:
@@ -418,8 +418,6 @@ public class InputFormServices
 			}
 		}
 		
-		
-		
 		iForm.setTrainingID(trainingID);
 		int trainerid = itr.getConfirmed_trainer();
 		if(trainerid > 0){
@@ -476,7 +474,6 @@ public class InputFormServices
 		}
 		iForm.setStatusdesc(statusdesc);
 		
-
 		return iForm;
 	}
 }

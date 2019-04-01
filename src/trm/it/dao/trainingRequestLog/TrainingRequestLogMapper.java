@@ -5,10 +5,6 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import trm.it.dao.trainingRequest.TrainingRequest;
-import trm.it.dao.trainingRequest.TrainingRequestDAO;
-import trm.it.dao.trainingRequest.TrainingRequestMapper;
-
 public class TrainingRequestLogMapper implements RowMapper<TrainingRequestLog>{
 	/*
 	  request_log_id varchar(10) primary key,

@@ -3,7 +3,7 @@ package trm.it.bl;
 public class InputForm
 {
 	private int trainingID;
-	private int trainerID;
+	private String trainerID;
 	private String trainerName;	
 	private String mode;
 	private String address;
@@ -21,7 +21,7 @@ public class InputForm
 	private String zipCode;
 	private String timeZone;
 	private String schedBreakdown;
-	
+	private String statusdesc;
 	/*********************
 	 * GENERATED GETTERS *
 	 *********************/
@@ -29,7 +29,7 @@ public class InputForm
 	{
 		return trainingID;
 	}
-	public int getTrainerID()
+	public String getTrainerID()
 	{
 		return trainerID;
 	}
@@ -110,7 +110,7 @@ public class InputForm
 	{
 		this.trainingID = trainingID;
 	}
-	public void setTrainerID(int trainerID)
+	public void setTrainerID(String trainerID)
 	{
 		this.trainerID = trainerID;
 	}
@@ -182,6 +182,32 @@ public class InputForm
 	{
 		this.schedBreakdown = schedBreakdown;
 	}
-	
-	
+	public String getStatusdesc() {
+		return statusdesc;
+	}
+	public void setStatusdesc(String statusdesc) {
+		this.statusdesc = statusdesc;
+	}
+	public void display() {
+		System.out.println("Input form display: ");
+		System.out.println("Training ID: "+ trainingID);
+		System.out.println("Trainer ID: " + trainerID);
+		System.out.println("Name: " + trainerName);	
+		System.out.println("Mode: " + mode);
+		System.out.println("Address: " + address);
+		System.out.println("City: " + city);
+		System.out.println("Room: " + roomNum);
+		System.out.println("url: " + url);
+		System.out.println("Phone: " + phoneNum);
+		System.out.println("Start date: " + startDate);
+		System.out.println("End Date: " + endDate);
+		System.out.println("Start time: " + startTime);
+		System.out.println("End time: " + endTime);
+		System.out.println("Description: " + description);
+		System.out.println("State: " + state);
+		System.out.println("Country: " + country);
+		System.out.println("Zip: " + zipCode);
+		System.out.println("Time Zone: " + timeZone);
+		System.out.println("Breakdown: " + schedBreakdown);	
+	}	
 }

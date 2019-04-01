@@ -3,7 +3,7 @@ package trm.it.dao.validTrainers;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import trm.it.dao.it.internalTrainer.InternalTrainer;
+import trm.it.dao.internalTrainer.InternalTrainer;
 import trm.it.dao.trainingSchedule.TrainingSchedule;
 
 public class ValidTrainersMapper {
