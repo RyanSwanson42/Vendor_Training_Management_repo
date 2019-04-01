@@ -466,9 +466,12 @@
 																	role="tabpanel" aria-labelledby="headingThree3"
 																	data-parent="#accordionEx">
 																	<div class="card-body">
-																		<a href="PTListtoPM/${pro2.getVendorTrainingRequest().vendor_training_request_id}"  class="btn btn-info btn-lg btn-block">
+																		<a href="PTListtoPM/${pro2.getVendorTrainingRequest().vendor_training_request_id}" id="pmApproval" class="btn btn-info btn-lg btn-block">
 																			Send PT Approved List to PM
 																		</a>
+																		<div id="pendingApproval">
+																			
+																		</div>
 																	</div>
 																</div>
 															</div>
@@ -875,15 +878,9 @@
 																aria-labelledby="heading4" data-parent="#accordion">
 																<div class="card-body pt-0">
 																	<p>
-																		<i class="hfas fas fa-user-tie"><label>Trainer</label></i>
+																		<i class="hfas fas fa-user-tie"><label>Trainer </label></i>
 
-
-																		<datalist id="trainerdatalist">
-																		<option value="Mahesh Rajput"></option>
-																		<option value="Some Guy"></option>
-																		<option value="Copyrighted Character"></option>
-																		</datalist>
-																	<form action="updateTrainer">
+																	<form action="updateTrainer/${inProcess.trainer.getDtt_trainer_request_id()}">
 
 																		<input type="number" name="employee_id"> <input
 																			type="submit" />
@@ -891,12 +888,13 @@
 																	</p>
 																	<!-- Search By ID -->
 																	<p>
+																<!-- 	
 																		<label style="padding-left: 5px; font-size: 10px;">Search
 																			Employee By ID:</label> <input type="text" id="itV" /> <input
 																			type="button" id="EmpId"
 																			style="font-size: 14px; height: 25px; width: 70px;"
 																			value="Search">
-																	</p>
+																	</p>  -->
 
 																	<p>
 																		<i class="hfas fas fa-check"
@@ -956,9 +954,11 @@
 																						<label><input type="checkbox"
 																							name="Classroom" value="classroom">
 																							Classroom</label> <label><input type="checkbox"
-																							name="Online" value="online"> Online</label> <label><input
+																							name="Online" value="online"> Online</label> 
+																							
+																				<!--  			<label><input
 																							type="checkbox" name="Virtual" value="classroom">
-																							Virtual</label>
+																							Virtual</label> -->
 																					</div>
 																				</td>
 																			</tr>
@@ -1743,7 +1743,7 @@
             		$("[id=dot-sec3]").attr("style", "background-color:red;");
             		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
-            		$("[id=progressSummary]").text("Select Vendors for SPOC Shortlist from Vendor Management")
+            		$("[id=progressSummary]").text("Select Vendors for SPOC Shortlist from Vendor Management");
             	}
             	if(data.status === 304){
             		$("[id=dot-sec1]").attr("title", "Completed");
@@ -1754,7 +1754,7 @@
             		$("[id=dot-sec3]").attr("style", "background-color:red;");
             		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
-            		$("[id=progressSummary]").text("Select Procurement Team approved Vendors from SPOC Shortlist")
+            		$("[id=progressSummary]").text("Select Procurement Team approved Vendors from SPOC Shortlist");
             	}
             	if(data.status === 305){
             		$("[id=dot-sec1]").attr("title", "Completed");
@@ -1765,7 +1765,7 @@
             		$("[id=dot-sec3]").attr("style", "background-color:yellow;");
             		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
-            		$("[id=progressSummary]").text("Send Procurement Team Shortlist to Project Manager")
+            		$("[id=progressSummary]").text("Send Procurement Team Shortlist to Project Manager");
 
             	}
             	if(data.status === 310){
@@ -1773,12 +1773,63 @@
             		$("[id=dot-sec1]").attr("style", "background-color:green;");
             		$("[id=dot-sec2]").attr("title", "Completed");
             		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:orange;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Sent to PM for approval");
+            		$("#pmApproval").hide();
+            		//pendingApproval
+            		//add to div
+            	}
+            	if(data.status === 320){
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:orange;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
+            		$("[id=progressSummary]").text("PM Received Request");
+            		// add to div
+            	}
+            	if(data.status === 321){
+            		$("[id=dot-sec1]").attr("title", "Declined");
+            		$("[id=dot-sec1]").attr("style", "background-color:red;");
+            		$("[id=dot-sec2]").attr("title", "Declined");
+            		$("[id=dot-sec2]").attr("style", "background-color:red;");
+            		$("[id=dot-sec3]").attr("title", "Declined");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Declined");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Request has been declined by the Project Manager");
+            		$("#pmApproval").show();
+            	}
+            	if(data.status === 322){
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
             		$("[id=dot-sec3]").attr("title", "Completed");
             		$("[id=dot-sec3]").attr("style", "background-color:green;");
-            		$("[id=dot-sec4]").attr("title", "In Progress");
+            		$("[id=dot-sec4]").attr("title", "Pending");
             		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
-            		$("[id=progressSummary]").text("Complete Training Schedule")
+            		$("[id=progressSummary]").text("Request has been approved by the Project Manager");
+            		
             	}
+            	if(data.status === 330){
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Completed");
+            		$("[id=dot-sec3]").attr("style", "background-color:green;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:green;"); 
+            		$("[id=progressSummary]").text("Training schedule has been submitted");
+            	}
+            	
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 

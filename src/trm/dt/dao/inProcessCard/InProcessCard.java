@@ -1,11 +1,12 @@
 package trm.dt.dao.inProcessCard;
 
 import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
+
 import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
 import trm.dt.dao.trainingRequest.TrainingRequest;
-import trm.vt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.*;
 
 public class InProcessCard 
 {

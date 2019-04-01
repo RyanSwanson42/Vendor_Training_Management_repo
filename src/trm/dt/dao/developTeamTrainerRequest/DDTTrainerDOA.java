@@ -29,11 +29,22 @@ public class DDTTrainerDOA
 				+ "comments=?,response=?,active_status=? where Dtt_training_id=?", 
 				new Object[]{trainer_id,schedule_id,topic,comments,response,active_status,dtt_trainer_request_id});
 	}
-	public void insertDTTrainer(int dtt_trainer_request_id,Timestamp request_sent_date,int trainer_id,
+	public void updateTrainerId(int dtt_trainer_request_id,int trainer_id)
+	{
+		temp.update("update DEVELOP_TEAM_TRAINER_REQUEST set trainer_id=? where DTT_TRAINER_REQUEST_ID=?", 
+				new Object[]{trainer_id, dtt_trainer_request_id});
+	}
+	@SuppressWarnings("deprecation")
+	public int getTrainerRequestId()
+	{
+		int result = temp.queryForInt("select dtt_trainer_request_id_seq.nextval from dual");
+		return result;
+	}
+	public void insertDTTrainer(int trainerRequestId, Timestamp request_sent_date,int trainer_id,
 			int schedule_id,String topic,String comments,String response,int active_status)
 	{
-		temp.update("insert into Develop_Team_Trainier_Request values(dtt_trainer_request_id_seq.nextval,?,?,?,?,?,?,?)",
-				new Object[]{request_sent_date,trainer_id,schedule_id,topic,comments,response,active_status});
+		temp.update("insert into DEVELOP_TEAM_TRAINER_REQUEST values(?,?,?,?,?,?,?,?)",
+				new Object[]{trainerRequestId,request_sent_date,trainer_id,schedule_id,topic,comments,response,active_status});
 	}
 	public void deleteDTTrainer(int dtt_trainer_request_id)
 	{
@@ -46,5 +57,12 @@ public class DDTTrainerDOA
 				("select * from Develop_Team_Trainier_Request where dtt_trainer_request_id=?", 
 				new Object[]{dtt_trainer_request_id},new DDTTrainerMapper());
 		return trainingRequest.get(0);
+	}
+	
+	public static void main(String[] args) {
+		DDTTrainerDOA doa = new DDTTrainerDOA();
+		System.out.println("hello");
+		doa.updateTrainerId(10042, 1000001);
+		System.out.println("hello again.");
 	}
 }

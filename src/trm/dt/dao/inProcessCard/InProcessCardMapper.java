@@ -2,18 +2,16 @@ package trm.dt.dao.inProcessCard;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import org.springframework.jdbc.core.RowMapper;
 
 import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
-import trm.dt.dao.inProcessCard.InProcessCard;
-import trm.vt.dao.trainingSchedule.TrainingScheduleMapper;
 import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
 import trm.dt.dao.trainingRequest.TrainingRequest;
-import trm.vt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingSchedule.TrainingScheduleMapper;
 
 public class InProcessCardMapper implements RowMapper<InProcessCard> 
 {
@@ -24,6 +22,7 @@ public class InProcessCardMapper implements RowMapper<InProcessCard>
 		
 		DDTTraining training = new DDTTraining();
 		training.setDtt_training_id(result.getInt("dtt_training_id"));
+		training.setSchedule_id(result.getInt("schedule_id"));
 		sl.setTraining(training);
 		
 		TrainingRequest request = new TrainingRequest();
@@ -41,7 +40,7 @@ public class InProcessCardMapper implements RowMapper<InProcessCard>
 		sl.setRequest(request);
 		
 		TrainingSchedule schedule = new TrainingSchedule();
-		//schedule = new TrainingScheduleMapper().mapRow(result, arg1);
+		schedule = new TrainingScheduleMapper().mapRow(result, arg1);
 		sl.setSchedule(schedule);
 		
 		Employee projectManager = new Employee();
@@ -49,20 +48,21 @@ public class InProcessCardMapper implements RowMapper<InProcessCard>
 		projectManager.setLast_name(result.getString("last_name"));
 		sl.setProjectManager(projectManager);
 		
-/*		DDTTrainer trainer = new DDTTrainer();
+		DDTTrainer trainer = new DDTTrainer();
+		trainer.setDtt_trainer_request_id(result.getInt("dtt_trainer_request_id"));
 		trainer.setRequest_sent_date(result.getTimestamp("request_sent_date"));
 		trainer.setResponse(result.getString("response"));
 		trainer.setActive_status(result.getInt("active_status"));
-		sl.setTrainer(trainer);*/
+		sl.setTrainer(trainer);
 		
-	/*	Employee currentTrainer = new Employee();
-		currentTrainer.setFirst_name(result.getString("first_name"));
-		currentTrainer.setLast_name(result.getString("last_name"));
-		sl.setCurrentTrainer(currentTrainer);*/
-/*		
+		Employee currentTrainer = new Employee();
+		currentTrainer.setFirst_name(result.getString("ctfn"));
+		currentTrainer.setLast_name(result.getString("ctln"));
+		sl.setCurrentTrainer(currentTrainer);
+		
 		ManagmentStatus status = new ManagmentStatus();
 		status.setStatus(result.getInt("status"));
-		sl.setStatus(status);*/
+		sl.setStatus(status);
 
 		return sl;
 	}
