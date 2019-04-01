@@ -1,4 +1,4 @@
-package trm.it.dao.internalTrainingRequest;
+package trm.it.dao.it.internalTrainingRequest;
 
 import java.util.List;
 
@@ -32,18 +32,18 @@ public class InternalTrainingRequestDAO {
 	}
 	
 	public void insertInternalTrainingRequest(int training_request_id){
-		String sql = "INSERT INTO Internal_Training_Request (internal_training_id,training_request_id) values(internal_training_id_seq.nextval, ?)";
+		String sql = "INSERT INTO Internal_Training_Request values(internal_training_id_seq.nextval, ?, null, null, null, getRandExec, null)";
 		temp.update(sql, new Object[]{training_request_id});
 	}
 	
-	public void deleteInternalTrainingRequest(int training_request_id){
-		String sql = "DELETE FROM internal_training_request WHERE training_request_id = ?";
-		temp.update(sql, new Object[]{training_request_id});
+	public void deleteInternalTrainingRequest(int internal_training_request_id){
+		String sql = "DELETE FROM internal_training_request WHERE internal_training_request_id = ?";
+		temp.update(sql, new Object[]{internal_training_request_id});
 	}
 	
-	public void updateInternalTrainingRequest(int internal_training_request_id, int schedule_id, String type, int confirmed_trainer, String description){
-		String sql = "UPDATE internal_training_request SET schedule_id = ?, training_type = ? confirmed_trainer_id = ?, description_of_status = ? WHERE internal_training_request_id = ?";
-		temp.update(sql, new Object[]{schedule_id, type, confirmed_trainer, description, internal_training_request_id});
+	public void updateInternalTrainingRequest(int internal_training_request_id, int schedule_id, String type, int confirmed_trainer, int executive_id, String description){
+		String sql = "UPDATE internal_training_request SET schedule_id = ?, training_type = ? confirmed_trainer_id = ?, executive_id, description_of_status = ? WHERE internal_training_request_id = ?";
+		temp.update(sql, new Object[]{schedule_id, type, confirmed_trainer, executive_id, description, internal_training_request_id});
 	}
 	
 	public InternalTrainingRequest getInternalTrainingRequest(int internal_training_request_id){

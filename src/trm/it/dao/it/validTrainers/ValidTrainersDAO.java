@@ -1,4 +1,4 @@
-package trm.it.dao.it.validTrainers;
+package trm.it.dao.validTrainers;
 
 public class ValidTrainersDAO {
 

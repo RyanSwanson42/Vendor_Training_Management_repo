@@ -1,4 +1,4 @@
-package trm.it.dao.internalTrainer;
+package trm.it.dao.it.internalTrainer;
 
 import trm.it.dao.employee.Employee;
 

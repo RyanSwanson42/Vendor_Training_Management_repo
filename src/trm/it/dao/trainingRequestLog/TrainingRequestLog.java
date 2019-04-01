@@ -2,6 +2,8 @@ package trm.it.dao.trainingRequestLog;
 
 import java.sql.Time;
 
+import trm.it.dao.trainingRequest.TrainingRequest;
+
 public class TrainingRequestLog
 {
 	/*

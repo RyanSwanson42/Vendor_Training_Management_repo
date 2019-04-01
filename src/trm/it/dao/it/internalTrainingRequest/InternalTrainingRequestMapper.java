@@ -1,4 +1,4 @@
-package trm.it.dao.internalTrainingRequest;
+package trm.it.dao.it.internalTrainingRequest;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +28,7 @@ public class InternalTrainingRequestMapper implements RowMapper<InternalTraining
 		InternalTrainingRequest itr = new InternalTrainingRequest();
 		itr.setInternal_training_id(result.getInt("internal_training_id"));
 		itr.setTRI(result.getInt("training_request_id"));
+		itr.setTraining_type("training_type");
 		itr.setSchedule(result.getInt("schedule_id"));
 		itr.setConfirmed_trainer(result.getInt("confirmed_trainer_id"));
 		itr.setExecutive(result.getInt("executive_id"));

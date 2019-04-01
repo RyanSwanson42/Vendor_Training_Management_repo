@@ -5,6 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.trainingRequest.TrainingRequestMapper;
+
 public class TrainingManagementStatusMapper implements RowMapper<TrainingManagementStatus> {
 	/*
 	  training_management_status_id number(5) primary key,

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequest;
-import trm.it.dao.employee.Employee;
-import trm.it.dao.trainingRequest.TrainingRequest;
+import trm.vt.dao.employee.Employee;
+import trm.vt.dao.trainingRequest.TrainingRequest;
 
 public class InternalTrainingRequestAndStatusMapper implements RowMapper<InternalTrainingRequestAndStatus>{
 
@@ -38,6 +38,7 @@ public class InternalTrainingRequestAndStatusMapper implements RowMapper<Interna
 		tr.setRequest_approx_participant(result.getInt(10));
 		tr.setTime_requested(result.getString(11));
 		tr.setJustification_of_request(result.getString(12));
+		tr.setTraining_request_id(result.getInt(13));
 		
 		InternalTrainingRequestAndStatus trs = new InternalTrainingRequestAndStatus();
 		trs.setEmployee(employee);
@@ -47,4 +48,5 @@ public class InternalTrainingRequestAndStatusMapper implements RowMapper<Interna
 		
 		return trs;
 	}
+
 }
