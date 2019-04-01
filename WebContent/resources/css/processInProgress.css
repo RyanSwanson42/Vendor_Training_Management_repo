@@ -43,7 +43,10 @@
   cursor: pointer;
 }
 
-.button1 {background-color: #f44336;}
+.btn {
+	color: white;
+	background-color; blue:
+}
 
 #saveButtonITForm {
 	background-color: blue;

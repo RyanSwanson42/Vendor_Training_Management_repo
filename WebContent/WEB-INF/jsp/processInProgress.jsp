@@ -36,7 +36,7 @@
 
 	<div class="modal-header">
 		<h4 class="modal-title">Update Training Request</h4>
-		<button type="button" class="close" data-dismiss="modal">x</button>
+		<button type="button" class="close" onclick="close()">x</button>
 	</div>
 	<div class="modal-body">
 	    <div class="col-md-6">
@@ -324,8 +324,9 @@
 	<div class="modal-footer">
 <!-- 	Should include a drop-down select or buttons to move -->
 <!--      between a IT card and DT/VT cards -- should be included in everyone's footer -->
-		<button type="button" class="btn btn-danger"
-			data-dismiss="modal">Close</button>
+		<button type="button" class="btn"
+			onclick="">Save</button>
+<!-- 			this button save should save via the method implemented in other button -->
 
 	</div>
 
