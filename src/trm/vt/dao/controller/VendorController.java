@@ -43,8 +43,6 @@ import trm.it.dao.getName.GetNameDAO;
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatus;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatusDAO;
-import trm.pm.dbo.TrainingRequestLog;
-import trm.pm.dbo.TrainingRequestLogDAO;
 /*import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;*/
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
@@ -164,7 +162,7 @@ public class VendorController {
 				.getTrainingRequestDetail330(uservertical);
 		map.addAttribute("vendorTrainingRequestList3", list330);
 		
-		//System.out.println("-----------------------" + list303.toString());
+		System.out.println("-----------------------" + list303.toString());
 
 		// Get list of all vendors in the system
 		List<VendorDetail> vendorDetails = new VendorDetailDAO().getAllVendorDetail();
@@ -176,10 +174,11 @@ public class VendorController {
 
 		inProcess = new InProcessCardDAO().getInProcessCardList(uservertical);
 		itc = new InTrainingCardDAO().getInTrainingCardList(uservertical);
-		System.out.println(inProcess.toString());
+
 		map.addAttribute("inProcessList", inProcess);
 		map.addAttribute("TRM_DTT_Homepage3", itc);
-	
+
+		System.out.println(inProcess.toString());
 
 		// ---------------------------- IT Team Cards -------------------------------//
 		List<InternalTrainingRequestAndStatus> list103 = new InternalTrainingRequestAndStatusDAO()
@@ -189,27 +188,7 @@ public class VendorController {
 				.getTrainingRequestDetail130(uservertical);
 		map.addAttribute("internalTrainingRequestList3", list130);
 
-		//System.out.println(list103.toString());
-		
 		return "index";
-	}
-	
-	// Get Progress/Status of the Vendor Training Request
-	@RequestMapping(value = "/logs", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody byte[] getLogs(@RequestParam("id") int id, ModelMap map) throws JsonGenerationException, JsonMappingException, IOException {
-		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(id);
-		List<trm.vt.dao.trainingRequestLog.TrainingRequestLog> logs =  new trm.vt.dao.trainingRequestLog.TrainingRequestLogDAO().getTrainingRequestLog(training_request_id);
-		System.out.println("THE LOGS ARE --------------------- " + logs.toString());
-		
-		map.addAttribute("vendorLogs", logs);
-		
-		// Convert List to JSON using JacksonMapper
-		final ByteArrayOutputStream out = new ByteArrayOutputStream();
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.writeValue(out, logs);
-		final byte[] JSON = out.toByteArray();
-		System.out.println(new String(JSON));
-		return JSON;
 	}
 
 	/****************************************************************************/
@@ -218,16 +197,10 @@ public class VendorController {
 
 	// Change from status 100 to 103 (IT Training)
 	@RequestMapping(value = "/toProcessing/it/{req_id}")
-	public String toProcessingIT(@PathVariable("req_id") int[] req_id, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
-
+	public String toProcessingIT(@PathVariable("req_id") int[] req_id) {
 		for (int i = 0; i < req_id.length; i++) {
 			new InternalTrainingRequestDAO().insertInternalTrainingRequest(req_id[i]);
-			new CallbackFunction().statusChange(req_id[i], 103, firstName, lastName);
+			new CallbackFunction().statusChange(req_id[i], 103);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Internal Trainer");
 		}
 		return "redirect:/dashboard";
@@ -245,15 +218,9 @@ public class VendorController {
 	}*/
 
 	@RequestMapping(value = "/toProcessing/dt/{req_id}")
-    public String toProcessingDT(@PathVariable("req_id") int[] req_id, HttpServletRequest request) {
+    public String toProcessingDT(@PathVariable("req_id") int[] req_id) {
         Instant instant = Instant.now();
         Timestamp timestamp = Timestamp.from(instant);
-    	// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
-        
         for (int i = 0; i < req_id.length; i++) {
             
             
@@ -267,7 +234,7 @@ public class VendorController {
             System.out.println("DDTTrainer ID: " + DDTTrainerReqId);
             
             new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i],DDTScheduleId, DDTTrainerReqId);
-            new CallbackFunction().statusChange(req_id[i], 203, firstName, lastName);
+            new CallbackFunction().statusChange(req_id[i], 203);
             System.out.println("Updating Status for Training Request: " + req_id[i] + " to Dev Team Trainer");
             
             
@@ -277,16 +244,11 @@ public class VendorController {
 	
 	// Change from status 100 to 303 (VT Training)
 	@RequestMapping(value = "/toProcessing/vt/{req_id}")
-	public String toProcessingVT(@PathVariable("req_id") int[] req_id, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String toProcessingVT(@PathVariable("req_id") int[] req_id) {
 		for (int i = 0; i < req_id.length; i++) {
 			// TODO: update status of red_id[i]
 			new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(req_id[i]);
-			new CallbackFunction().statusChange(req_id[i], 303, firstName, lastName);
+			new CallbackFunction().statusChange(req_id[i], 303);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Vendor Trainer");
 		}
 		return "redirect:/dashboard";
@@ -298,12 +260,7 @@ public class VendorController {
 
 	// Change to IT from (DT or VT)
 	@RequestMapping(value = "/changeProcessing/it/{req_id}/{type}")
-	public String changeProcessingIT(@PathVariable("req_id") int req_id, @PathVariable("type") String type, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String changeProcessingIT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
 		int training_request_id = 0;
 		if (type.equals("Vendor"))
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
@@ -311,18 +268,13 @@ public class VendorController {
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithDevelopTrainingRequestId(req_id);
 		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
 		new InternalTrainingRequestDAO().insertInternalTrainingRequest(training_request_id);
-		new CallbackFunction().statusChange(training_request_id, 103, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 103);
 		return "redirect:/dashboard";
 	}
 
 	// Change to DT from (IT or VT)
 	@RequestMapping(value = "/changeProcessing/dt/{req_id}/{type}")
-	public String changeProcessingDT(@PathVariable("req_id") int req_id, @PathVariable("type") String type, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String changeProcessingDT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
 		Instant instant = Instant.now();
         Timestamp timestamp = Timestamp.from(instant);
 		
@@ -339,18 +291,13 @@ public class VendorController {
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
 		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
 		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id,DDTScheduleId, DDTTrainerReqId);
-		new CallbackFunction().statusChange(training_request_id, 203, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 203);
 		return "redirect:/dashboard";
 	}
 
 	// Change to VT from (DT or IT)
 	@RequestMapping(value = "/changeProcessing/vt/{req_id}/{type}")
-	public String changeProcessingVT(@PathVariable("req_id") int req_id, @PathVariable("type") String type, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String changeProcessingVT(@PathVariable("req_id") int req_id, @PathVariable("type") String type) {
 		int training_request_id = 0;
 		if (type.equals("Develop"))
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithDevelopTrainingRequestId(req_id);
@@ -358,7 +305,7 @@ public class VendorController {
 			training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
 		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
 		new VendorTrainingRequestDAO().insertVendorTrainingRequestWithTRID(training_request_id);
-		new CallbackFunction().statusChange(training_request_id, 303, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 303);
 		return "redirect:/dashboard";
 	}
 	
@@ -454,12 +401,7 @@ public class VendorController {
 
 	// Shortlists the SPOC's Vendor Shortlist by inserting into the PT Shortlist Table and changes status
 	@RequestMapping(value = "/vendor/PTApproved/{req_id}/{vendor_ids}")
-	public String PTApproved(@PathVariable("req_id") int req_id, @PathVariable("vendor_ids") int[] vendor_ids, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String PTApproved(@PathVariable("req_id") int req_id, @PathVariable("vendor_ids") int[] vendor_ids) {
 		System.out.println("Updating PT approved vendors from SPOC vendors for " + req_id);
 		for (int i = 0; i < vendor_ids.length; i++) {
 			// move names[i] to SPOC list
@@ -467,7 +409,7 @@ public class VendorController {
 			System.out.println(vendor_ids[i] + " added to PT ShortList");
 		}
 		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(req_id);
-		new CallbackFunction().statusChange(training_request_id, 305, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 305);
 
 		String rtrn = "redirect:/dashboard#myModal" + req_id + "#2";
 		return rtrn;
@@ -495,14 +437,9 @@ public class VendorController {
 
 	// Sends PT Team Shortlist to the Project Manager
 	@RequestMapping(value = "/PTListtoPM/{id}")
-	public String insertTrainingSchedule(@PathVariable("id") int id, HttpServletRequest request) {
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
+	public String insertTrainingSchedule(@PathVariable("id") int id) {
 		int training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithVendorTrainingRequestId(id);
-		new CallbackFunction().statusChange(training_request_id, 310, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 310);
 		String rtrn = "redirect:/dashboard#myModal" + Integer.toString(id);
 		return rtrn;
 	}
@@ -585,11 +522,6 @@ public class VendorController {
 	@ResponseBody
 	public String submitVendors(@RequestParam(value = "idList") List<String> idList, HttpServletRequest request) {
 
-		// Get Session of employee who logged in
-		String username = request.getSession().getAttribute("username").toString();
-		Employee user = new EmployeeDAO().getEmployeeByUsername(username);
-		String firstName = user.getFirst_name();
-		String lastName = user.getLast_name();
 		System.out.println("Inside submitVendors service.");
 
 		String vid = request.getSession().getAttribute("vid").toString();
@@ -601,7 +533,7 @@ public class VendorController {
 
 		int training_request_id = new TrainingRequestDAO()
 				.getTrainingRequestIdWithVendorTrainingRequestId(Integer.parseInt(vid));
-		new CallbackFunction().statusChange(training_request_id, 304, firstName, lastName);
+		new CallbackFunction().statusChange(training_request_id, 304);
 		String rtrn = "redirect:/dashboard#myModal" + vid;
 		return rtrn;
 	}

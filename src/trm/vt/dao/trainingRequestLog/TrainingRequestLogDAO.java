@@ -47,21 +47,12 @@ public class TrainingRequestLogDAO {
 		temp.update(sql, new Object[]{training_request_id, status_changed_to, status_change_time, description, request_log_id});
 	}
 	
-	/*public TrainingRequestLog getTrainingRequestLog(int request_log_id){
+	public TrainingRequestLog getTrainingRequestLog(int request_log_id){
 		
 		String sql = "select * from training_request_log where request_log_id = ?";
 		
 		List<TrainingRequestLog> trl = temp.query(sql, new Object[]{request_log_id}, new TrainingRequestLogMapper());
 		
 		return trl.get(0);
-	}
-	*/
-	public List<TrainingRequestLog> getTrainingRequestLog(int training_request_id){
-		
-		String sql = "select * from training_request_log where training_request_id = ?";
-		
-		List<TrainingRequestLog> trl = temp.query(sql, new Object[]{training_request_id}, new TrainingRequestLogMapper());
-		
-		return trl;
 	}
 }

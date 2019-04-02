@@ -20,13 +20,6 @@ public class Employee {
 	public int getEmployee_id() {
 		return employee_id;
 	}
-	@Override
-	public String toString() {
-		return "Employee [employee_id=" + employee_id + ", last_name=" + last_name + ", first_name=" + first_name
-				+ ", user_name=" + user_name + ", password=" + password + ", phone_number=" + phone_number + ", email="
-				+ email + ", street=" + street + ", city=" + city + ", state=" + state + ", country=" + country
-				+ ", job_title=" + job_title + ", vertical=" + vertical + ", project=" + project + ", pid=" + pid + "]";
-	}
 	public void setEmployee_id(int employee_id) {
 		this.employee_id = employee_id;
 	}

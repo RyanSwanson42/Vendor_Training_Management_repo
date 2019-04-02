@@ -26,14 +26,6 @@ public class DDTTraining {
 		return e;	
 	}
 	
-	@Override
-	public String toString() {
-		return "DDTTraining [Dtt_training_id=" + Dtt_training_id + ", training_request_id=" + training_request_id
-				+ ", trainer_request_id=" + trainer_request_id + ", schedule_id=" + schedule_id + ", executive_id="
-				+ executive_id + ", trainer_approval_mail=" + trainer_approval_mail + ", trainer_manager_approval_mail="
-				+ trainer_manager_approval_mail + ", description_of_status=" + description_of_status + "]";
-	}
-
 	public TrainingRequest getRequest(int training_request_id)
 	{
 		TrainingRequestDAO trd = new TrainingRequestDAO();
