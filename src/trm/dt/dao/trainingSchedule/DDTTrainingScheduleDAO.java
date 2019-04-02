@@ -39,6 +39,7 @@ public class DDTTrainingScheduleDAO
 						training_room_number, training_start_date, training_end_date, training_break_down, 
 						training_url, training_phone,training_schedule_id});
 	}
+
 	
 	
 	public void updateTrainingSchedule(int training_schedule_id, String training_city, String training_state, String training_country, String training_zipcode, String training_time_zone, String training_location, String training_room_number,String training_break_down, String training_url, double training_phone){
@@ -47,7 +48,7 @@ public class DDTTrainingScheduleDAO
 		
 		temp.update(sql, new Object[]{training_city,training_state,training_country, training_zipcode,training_time_zone,training_location,training_room_number,training_break_down, training_url, training_phone,training_schedule_id});
 	}
-	
+
 	@SuppressWarnings("deprecation")
 	public int getScheduleId()
 	{

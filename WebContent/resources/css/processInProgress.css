@@ -2,13 +2,16 @@
 {
     width: 38.5em;
     margin-top: 1em;
+    background-color:blue;
+    color:white;
 }
 .stepsmini
 {
     width: 38.5em;
     height: 2.5em;
     margin-top: .3em;
-    background-color:skyblue;
+    background-color:blue;
+    color:white;
 }
 .pending
 {
@@ -40,10 +43,13 @@
   cursor: pointer;
 }
 
-.button1 {background-color: #f44336;}
+.btn {
+	color: white;
+	background-color; blue:
+}
 
 #saveButtonITForm {
-	background-color: teal;
+	background-color: blue;
 	color: silver;
 	font-size: x-large;
 	width: 40%;
@@ -51,6 +57,5 @@
     margin-top: .3em;
     border-color: gold;
     border-width: 3px;
-    margin-left: 30%;
-    
+    margin-left: 30%;   
 }

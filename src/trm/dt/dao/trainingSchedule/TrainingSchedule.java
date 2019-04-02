@@ -18,6 +18,16 @@ public class TrainingSchedule {
 	private String training_url;
 	private String training_phone;
 	
+	@Override
+	public String toString() {
+		return "TrainingSchedule [training_schedule_id=" + training_schedule_id + ", training_city=" + training_city
+				+ ", training_state=" + training_state + ", training_country=" + training_country
+				+ ", training_zipcode=" + training_zipcode + ", training_time_zone=" + training_time_zone
+				+ ", training_location=" + training_location + ", training_room_number=" + training_room_number
+				+ ", training_start_date=" + training_start_date + ", training_end_date=" + training_end_date
+				+ ", training_break_down=" + training_break_down + ", training_url=" + training_url
+				+ ", training_phone=" + training_phone + "]";
+	}
 	public int getTraining_schedule_id() {
 		return training_schedule_id;
 	}

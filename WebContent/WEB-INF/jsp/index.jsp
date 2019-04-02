@@ -51,8 +51,10 @@
 <script src="<c:url value="resources/js/trainingType.js" />"></script>
 
 <!-- DT TEAM -->
+
 <script src="<c:url value="/resources/js/jquery-3.3.1.min.js" />"></script>
 <script src="<c:url value="/resources/js/main.js?version=1" />"></script>
+
 <script src="<c:url value="/resources/js/popper.min.js" />"></script>
 
 </head>
@@ -131,15 +133,19 @@
 					<div id="toProcessing-ddm" class="dropdown-menu"
 						style="min-width: 6rem">
 						<a class="dropdown-item" id="it-link" href="toProcessing/it/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/it-icon.png" />"> IT
+							style="padding-left: -10px; padding-right: 10px;"> <img
+							height="75px" width="width:75px"
+							src="<c:url value="/resources/img/Icon Internal.png" />">
+							IT
 						</a> <a class="dropdown-item" id="dt-link" href="toProcessing/dt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/dt-icon.png" />"> DT
+							style="padding-left: -10px; padding-right: 10px;"> <img
+							height="75px" width="width:75px"
+							src="<c:url value="/resources/img/Icon Development.png" />">
+							DT
 						</a> <a class="dropdown-item" id="vt-link" href="toProcessing/vt/"
-							style="padding-left: 10px; padding-right: 10px;"> <img
-							src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
-							VT
+							style="padding-left: -10px; padding-right: 10px;"> <img
+							height="75px" width="width:75px"
+							src="<c:url value="/resources/img/Icon Vender.png" />"> VT
 						</a>
 					</div>
 				</div>
@@ -249,12 +255,15 @@
 								<h5 class="card-title">
 									<span> <i class="fa fa-id-card" aria-hidden="true"
 										style="color: #3c8dbc; float: inherit;"></i>
-										${pro2.getVendorTrainingRequest().vendor_training_request_id}
+
+										${pro2.getTrainingRequest().training_request_id}
 									</span> <span style="float: right;"> <a href="#"
 										data-toggle="modal"
 										data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img
-											width='20px' height='20px'
-											src='.//resources/img/vendor-icon-placeholder.png'> </a>
+											width='75px' height='75px'
+											style="margin-top: 5px; margin-right: -20px;"
+											src='.//resources/img/Icon Vender.png'> </a>
+
 										<div class="modal"
 											id="Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"
 											tabindex="-1" role="dialog"
@@ -275,7 +284,10 @@
 																<a class="dropdown-item" id="it-link"
 																	href="changeProcessing/it/${pro2.getVendorTrainingRequest().vendor_training_request_id}/Vendor"
 																	style="padding-left: 10px; padding-right: 10px;"> <img
-																	src="<c:url value="/resources/img/it-icon.png" />">
+
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Internal.png" />">
+
 																	IT
 																</a>
 															</form>
@@ -284,7 +296,10 @@
 																<a class="dropdown-item" id="dt-link"
 																	href="changeProcessing/dt/${pro2.getVendorTrainingRequest().vendor_training_request_id}/Vendor"
 																	style="padding-left: 10px; padding-right: 10px;"> <img
-																	src="<c:url value="/resources/img/dt-icon.png" />">
+
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Development.png" />">
+
 																	DT
 																</a>
 															</form>
@@ -296,7 +311,9 @@
 										</div>
 									</span>
 								</h5>
-								<hr style="width: 90%; border-color: #b9b9b9;">
+
+								<hr style="width: 70%; border-color: #b9b9b9;">
+
 
 
 								<p class="card-text">
@@ -354,7 +371,7 @@
 											<div class="modal-header">
 												<div class="col-lg-4">
 													<p>
-														<b>Training Request ID:</b>
+														<b>Vendor Training Request ID:</b>
 														${pro2.getVendorTrainingRequest().vendor_training_request_id}
 													</p>
 												</div>
@@ -480,9 +497,7 @@
 															</div>
 															<div class="card">
 																<!-- Card header -->
-																<div
-																	onclick="javascript:section3(${pro2.getVendorTrainingRequest().vendor_training_request_id});"
-																	class="card-header" role="tab" id="headingThree3">
+																<div class="card-header" role="tab" id="headingThree3">
 																	<a style="text-decoration: none" class="collapsed"
 																		data-toggle="collapse" data-parent="#accordionEx"
 																		href="#collapseThree3" aria-expanded="false"
@@ -500,8 +515,11 @@
 																	<div class="card-body">
 																		<a
 																			href="PTListtoPM/${pro2.getVendorTrainingRequest().vendor_training_request_id}"
-																			class="btn btn-info btn-lg btn-block"> Send PT
-																			Approved List to PM </a>
+
+																			id="pmApproval" class="btn btn-info btn-lg btn-block">
+																			Send PT Approved List to PM </a>
+																		<div id="pendingApproval"></div>
+
 																	</div>
 																</div>
 															</div>
@@ -728,6 +746,15 @@
 										</div>
 									</div>
 								</div>
+								<img
+									id="logtooltip-${pro2.getVendorTrainingRequest().vendor_training_request_id}"
+									data-html="true"
+									onclick="logg(${pro2.getVendorTrainingRequest().vendor_training_request_id});"
+									title="Click icon to load log"
+									style="margin-right: 8px; float: right;"
+									src="https://img.icons8.com/ios/20/000000/edit-property.png"
+									data-toggle="tooltip" data-placement="left" />
+
 							</div>
 						</div>
 					</c:forEach>
@@ -742,12 +769,15 @@
 								<h5 class="card-title">
 									<span> <i class="fa fa-id-card" aria-hidden="true"
 										style="color: #3c8dbc; float: inherit;"></i>
-										${itList.getInternalTrainingRequest().internal_training_id}
+
+										${itList.getTrainingRequest().training_request_id}
 									</span> <span style="float: right;"> <a href="#"
 										data-toggle="modal"
 										data-target="#Process${itList.getInternalTrainingRequest().internal_training_id}"><img
-											width='20px' height='20px' style="margin-top: 27px;"
-											src='.//resources/img/it-icon.png'> </a>
+											width='75px' height='75px'
+											style="margin-top: 5px; margin-right: -20px;"
+											src='.//resources/img/Icon Internal.png'> </a>
+
 										<div class="modal"
 											id="Process${itList.getInternalTrainingRequest().internal_training_id}"
 											tabindex="-1" role="dialog"
@@ -768,7 +798,10 @@
 																<a class="dropdown-item" id="it-link"
 																	href="changeProcessing/dt/${itList.getInternalTrainingRequest().internal_training_id}/Internal"
 																	style="padding-left: 10px; padding-right: 10px;"> <img
-																	src="<c:url value="/resources/img/dt-icon.png" />">
+
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Development.png" />">
+
 																	DT
 																</a>
 															</form>
@@ -776,8 +809,11 @@
 															<form>
 																<a class="dropdown-item" id="dt-link"
 																	href="changeProcessing/vt/${itList.getInternalTrainingRequest().internal_training_id}/Internal"
-																	style="padding-left: 10px; padding-right: 10px;"> <img
-																	src="<c:url value="/resources/img/vendor-icon-placeholder.png" />">
+
+																	style="padding-left: 0px; padding-right: 0px;"> <img
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Vender.png" />">
+
 																	VT
 																</a>
 															</form>
@@ -789,7 +825,7 @@
 										</div>
 									</span>
 								</h5>
-								<hr style="width: 90%; border-color: #b9b9b9;">
+								<hr style="width: 70%; border-color: #b9b9b9;">
 
 								<%-- <h5 class="card-title">Vendor Request</h5>
 								<h6 class="card-subtitle mb-2 text-muted">ID:
@@ -857,11 +893,57 @@
 									<span><i class="fa fa-id-card" aria-hidden="true"
 										style="color: #3c8dbc; float: inherit;"></i>
 										${inProcess.request.training_request_id} </span> <span
-										style="float: right;"> <img style="margin-top: 27px;"
-										src="<c:url value="/resources/img/dt-icon.png" />">
+
+										style="float: right;"> <a href="#" data-toggle="modal"
+										data-target="#Process${inProcess.training.getDtt_training_id()}"><img
+											width='75px' height='75px'
+											style="margin-top: 5px; margin-right: -20px;"
+											src='.//resources/img/Icon Development.png'> </a>
+										<div class="modal"
+											id="Process${inProcess.training.getDtt_training_id()}"
+											tabindex="-1" role="dialog"
+											aria-labelledby="myModalLabelUpdate">
+											<div class="modal-dialog modal-dialog-centered"
+												role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h4 class="modal-title" id="myModalLabelDelete">Choose
+															Training Type</h4>
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close"></button>
+													</div>
+													<!-- Modal body -->
+													<div class="modal-body">
+														<c:catch>
+															<form>
+																<a class="dropdown-item" id="it-link"
+																	href="changeProcessing/it/${inProcess.training.getDtt_training_id()}/Develop"
+																	style="padding-left: 10px; padding-right: 10px;"> <img
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Internal.png" />">
+																	IT
+																</a>
+															</form>
+															<br>
+															<form>
+																<a class="dropdown-item" id="dt-link"
+																	href="changeProcessing/vt/${inProcess.training.getDtt_training_id()}/Develop"
+																	style="padding-left: 10px; padding-right: 10px;"> <img
+																	height="75px" width="width:75px"
+																	src="<c:url value="/resources/img/Icon Vender.png" />">
+																	VT
+																</a>
+															</form>
+															<br>
+														</c:catch>
+													</div>
+												</div>
+											</div>
+										</div>
 									</span>
 								</h5>
-								<hr style="width: 90%; border-color: #b9b9b9;">
+								<hr style="width: 70%; border-color: #b9b9b9;">
+
 								<p class="card-text">
 								<table style="margin-bottom: -15px;">
 									<tr>
@@ -905,6 +987,7 @@
 
 								<div class="modal"
 									id="edit_steps${inProcess.request.training_request_id}">
+
 									<div style="margin-top: 45px;"
 										class="modal-dialog modal-dialog-centered modal-xl">
 										<div class="modal-content">
@@ -1085,10 +1168,12 @@
 																					id="modalIcons"
 																					class="fas fa-angle-down rotate-icon"></i>
 																			</h5>
+
 																		</a>
 																	</div>
 
 																	<!-- Card body -->
+
 																	<div id="collapse6" class="collapse" role="tabpanel"
 																		aria-labelledby="heading6" data-parent="#accordion">
 																		<div class="card-body pt-0">
@@ -1102,6 +1187,7 @@
 																	<div class="card-header" role="tab" id="headingFour4">
 																		<a id="ts${inProcess.request.training_request_id}"
 																			style="text-decoration: none" class="collapsed"
+
 																			data-toggle="collapse" data-parent="#accordion"
 																			href="#collapseFour4" aria-expanded="false"
 																			aria-controls="collapseFour4">
@@ -1118,11 +1204,14 @@
 																		data-parent="#accordion">
 																		<div class="card-body">
 																			<form
+
 																				action="trainingSchedule/${inProcess.schedule.getTraining_schedule_id()}/${inProcess.request.training_request_id}">
+
 																				<!-- <label>Training Dates</label> -->
 																				<div class="form-group">
 																					<div class="row">
 																						<div class="col-3"></div>
+
 
 																						<div class="col-3"></div>
 																					</div>
@@ -1163,16 +1252,20 @@
 																								class="form-control">
 																						</div>
 																					</div>
-																					<!-- <div style="margin-top: 0.4rem;" class="row">
+																					 <div style="margin-top: 0.4rem;" class="row">
 																					<div class="col">
+
 																						<input name="timezone" placeholder="Time Zone" 
+
 																							type="text" class="form-control">
 																					</div>
-																				</div> -->
+																				</div> 
 																					<div style="margin-top: 0.4rem;" class="row">
 																						<div class="col">
+
 																							<select name="training_time_zone"
 																								class="form-control" id="timezone">
+
 																								<option selected="selected" disabled>Time
 																									Zone</option>
 																								<option timeZoneId="1" gmtAdjustment="GMT-12:00"
@@ -1460,39 +1553,49 @@
 																					</div>
 																					<div style="margin-top: 0.4rem;" class="row">
 																						<div class="col">
+
 																							<input name="training_location"
 																								placeholder="Location: ${inProcess.schedule.training_location}"
 																								type="text" class="form-control">
+
 																						</div>
 																					</div>
 																					<div style="margin-top: 0.4rem;" class="row">
 																						<div class="col">
+
 																							<input name="training_room_number"
 																								placeholder="Room Number: ${inProcess.schedule.training_room_number}"
 																								type="text" class="form-control">
+
 																						</div>
 																					</div>
 																					<div style="margin-top: 0.4rem;" class="row">
 																						<div class="col">
+
 																							<input name="training_break_down"
 																								placeholder="Training Break Down: ${inProcess.schedule.training_break_down}"
+
 																								type="text" class="form-control">
 																						</div>
 																					</div>
 																				</div>
+
 																				<div class="onlineForm" class="form-group">
 																					<div class="row">
 																						<div class="col">
 																							<br> <input name="training_url"
 																								placeholder="Training URL: ${inProcess.schedule.training_url}"
 																								type="text" class="form-control">
+
 																						</div>
 																					</div>
 																					<div style="margin-top: 0.4rem;" class="row">
 																						<div class="col">
+
 																							<input name="training_phone"
 																								placeholder="Training Phone: ${inProcess.schedule.training_phone}"
 																								type="text" class="form-control">
+
 																						</div>
 																					</div>
 																				</div>
@@ -1509,14 +1612,17 @@
 
 
 
+
 														<div class="col-sm-4">
 															<div class="card proc-card">
 																<div class="card-header" style="color: white; text-align:center; weight:bold">Summary: ${inProcess.request.training_request_id}</div>
+
 																<div class="card-body proc-card-body">
 																	<i class="fas fa-chalkboard-teacher" title="Training"></i>
 																	${inProcess.request.request_training_type}:
 																	${inProcess.request.request_training_module}
 																	(${inProcess.request.request_training_module_scope})<br>
+
 																	<i class="fas fa-user" title="Trainer"></i>
 																	${inProcess.currentTrainer.first_name}
 																	${inProcess.currentTrainer.last_name}<br> <i
@@ -1528,6 +1634,7 @@
 																		class="fas fa-building" title="Training Mode"></i> <span>${inProcess.request.request_training_mode}</span>
 																	<hr>
 																	<p id="status">Status: ${inProcess.status.status}</p>
+
 																</div>
 															</div>
 														</div>
@@ -1542,29 +1649,6 @@
 
 											</div>
 
-
-											<script>
-									//console.log(${inProcess.status.status});
-									
-							//		var modalid="#edit_steps" + ${inProcess.request.training_request_id};
-
-								// var id="#ts"+${inProcess.request.training_request_id};
-
-									//$(id).click(function() {
-										//var status=${inProcess.status.status};
-									//	console.log(${inProcess.status.status});
-									//	console.log(${index.index});
-									//	if(status==203){
-									//		$(id).attr("href", "");	
-									//	}
-									//	else {
-									//		var whatever="#collapseFour4" + ${inProcess.request.training_request_id};
-									//		$(id).att("href", whatever);
-									//	}
-										
-								//	});
-							
-									</script>
 										</div>
 										<!-- DTT Modal End -->
 
@@ -1608,7 +1692,10 @@
 							<div class="card-header exec-card-header">
 
 								<h4 class="card=title">
-									<span class="fa fa-calendar-check"></span> Workflow
+
+									<span class="fa fa-calendar-check"></span>
+									${wf.request.training_request_id}
+
 									<button id="exec-expand-btn" data-toggle="collapse"
 										data-target="#exec-table">
 										<span class="fa fa-angle-double-down" title="Expand"></span>
@@ -1794,7 +1881,9 @@
 	$(document).ready(function(){
 		if (/.myModal+.....$/.test(window.location.href)) {
 
+			
 	  		var myModal = window.location.hash.substr(1);
+	  			  		
 	  		$('#' + myModal).modal('show');
 	  		
 	  		ajax(myModal.substr(7));
@@ -1809,8 +1898,9 @@
 
 	  		$('#myModal' + myModal).modal('show');
 	  		ajax(myModal);
+	  		
 	  		section2(myModal);
-	  		$('#collapseTwo2').attr("class","collapse show");
+	  		$('[id=collapseTwo2]').attr("class","collapse show");
 
 		}
 	});
@@ -1845,54 +1935,165 @@
             success : function(data) {
            		//titles: Completed In Progress Pending
            		//styles: green     yellow      red
-           		//303 - nothing done
-            	//304 - SPOC Shortlist done
-            	//305 - PT Shortlist done 
+           		
+           		//headingOne1 href="#collapseOne1"
+           		//headingTwo2 
             	if(data.status === 303){
-            		$("#dot-sec1").attr("title", "In Progress");
-            		$("#dot-sec1").attr("style", "background-color:yellow;");
-            		$("#dot-sec2").attr("title", "Pending");
-            		$("#dot-sec2").attr("style", "background-color:red;");
-            		$("#dot-sec3").attr("title", "Pending");
-            		$("#dot-sec3").attr("style", "background-color:red;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Select Vendors for SPOC Shortlist from Vendor Management")
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","");
+            		$('[id=headingThree3link]').attr("href","");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "In Progress");
+            		$("[id=dot-sec1]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec2]").attr("title", "Pending");
+            		$("[id=dot-sec2]").attr("style", "background-color:red;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Select Vendors for SPOC Shortlist from Vendor Management");
             	}
             	if(data.status === 304){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "In Progress");
-            		$("#dot-sec2").attr("style", "background-color:yellow;");
-            		$("#dot-sec3").attr("title", "Pending");
-            		$("#dot-sec3").attr("style", "background-color:red;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Select Procurement Team approved Vendors from SPOC Shortlist")
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "In Progress");
+            		$("[id=dot-sec2]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Select Procurement Team approved Vendors from SPOC Shortlist");
             	}
             	if(data.status === 305){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "Completed");
-            		$("#dot-sec2").attr("style", "background-color:green;");
-            		$("#dot-sec3").attr("title", "In Progress");
-            		$("#dot-sec3").attr("style", "background-color:yellow;");
-            		$("#dot-sec4").attr("title", "Pending");
-            		$("#dot-sec4").attr("style", "background-color:red;"); 
-            		$("#progressSummary").text("Send Procurement Team Shortlist to Project Manager")
-
+            		$("[id=pmApproval]").show();
+            		$('[id=pendingApproval]').html("");
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "In Progress");
+            		$("[id=dot-sec3]").attr("style", "background-color:yellow;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Send Procurement Team Shortlist to Project Manager");
             	}
-            	if(data.status === 306){
-            		$("#dot-sec1").attr("title", "Completed");
-            		$("#dot-sec1").attr("style", "background-color:green;");
-            		$("#dot-sec2").attr("title", "Completed");
-            		$("#dot-sec2").attr("style", "background-color:green;");
-            		$("#dot-sec3").attr("title", "Completed");
-            		$("#dot-sec3").attr("style", "background-color:green;");
-            		$("#dot-sec4").attr("title", "In Progress");
-            		$("#dot-sec4").attr("style", "background-color:yellow;"); 
-            		$("#progressSummary").text("Complete Training Schedule")
+            	if(data.status === 310){
+            		$('[id=pendingApproval]').html("");	
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:orange;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Sent to Project Manager for approval");
+            		
+            		// Hide button after sending to PM for approval
+            		$("[id=pmApproval]").hide();
+            		
+            		// Show icon for message sent
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/office/40/000000/outbox.png">Sent')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/reading-confirmation.png">Received')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ios/50/000000/data-pending.png">Pending')
+            		//$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/ok.png">Approved');
             	}
+            	if(data.status === 320){
+            		$("[id=pmApproval]").hide();
+            		$('[id=pendingApproval]').html("");
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Pending");
+            		$("[id=dot-sec3]").attr("style", "background-color:orange;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;"); 
+            		$("[id=progressSummary]").text("Received by Project Manager<br>Pending approval");
+            		
+            		// Show icon for message read
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/reading-confirmation.png">Received')
+            	}
+            	if(data.status === 321){
+            		$("[id=pmApproval]").hide();
+            		$('[id=pendingApproval]').html("");
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","");
+            		
+            		$("[id=dot-sec1]").attr("title", "Declined");
+            		$("[id=dot-sec1]").attr("style", "background-color:red;");
+            		$("[id=dot-sec2]").attr("title", "Declined");
+            		$("[id=dot-sec2]").attr("style", "background-color:red;");
+            		$("[id=dot-sec3]").attr("title", "Declined");
+            		$("[id=dot-sec3]").attr("style", "background-color:red;");
+            		$("[id=dot-sec4]").attr("title", "Declined");
+            		$("[id=dot-sec4]").attr("style", "background-color:red;");
+            		$("[id=progressSummary]").text("Request has been declined by the Project Manager");
+            		
+            		// Show icon for Pending approval
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ios/50/000000/data-pending.png">Pending')
+            	}
+            	if(data.status === 322){
+            		$('[id=pendingApproval]').html("");
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","#collapseFour4");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Completed");
+            		$("[id=dot-sec3]").attr("style", "background-color:green;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:yellow;"); 
+            		$("[id=progressSummary]").text("Request has been approved by the Project Manager");  
+            		
+            		// Show icon for Approved
+            		$('[id=pendingApproval]').append('<img src="https://img.icons8.com/ultraviolet/40/000000/ok.png">Approved');
+            	}
+            	if(data.status === 330){
+            		$('[id=pendingApproval]').html("");	 
+            		$('[id=headingOne1link]').attr("href","#collapseOne1");
+            		$('[id=headingTwo2link]').attr("href","#collapseTwo2");
+            		$('[id=headingThree3link]').attr("href","#collapseThree3");
+            		$('[id=headingFour4link]').attr("href","#collapseFour4");
+            		
+            		$("[id=dot-sec1]").attr("title", "Completed");
+            		$("[id=dot-sec1]").attr("style", "background-color:green;");
+            		$("[id=dot-sec2]").attr("title", "Completed");
+            		$("[id=dot-sec2]").attr("style", "background-color:green;");
+            		$("[id=dot-sec3]").attr("title", "Completed");
+            		$("[id=dot-sec3]").attr("style", "background-color:green;");
+            		$("[id=dot-sec4]").attr("title", "Pending");
+            		$("[id=dot-sec4]").attr("style", "background-color:green;"); 
+            		$("[id=progressSummary]").text("Training schedule has been submitted");
+            	}
+            	
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 alert("Status: " + textStatus); alert("Error: " + errorThrown); 
@@ -1909,10 +2110,11 @@
             url : 'section1',
             success : function(data) {
             	//$("#th1").show();
+             	$('[id=table-body1]').html("");
             	for(var i = 0; i < data.length; i++){
     				var shortlistSPOC = data[i];
-            		var tr = '<tr><td><input class="SPOCchckbx form-check-input" type="checkbox" onchange="SPOCchkbx(this,'+id+')" name="'+shortlistSPOC.vendor_name+'" id="ckSPOC-'+shortlistSPOC.vendor_id+'"/></td><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
-            		$('#table-body1').append(tr);
+            		var tr = '<tr><td><input class="SPOCchckbx form-check-input" type="checkbox" onchange="SPOCchkbx(this,'+id+')" name="'+shortlistSPOC.vendor_name+'" id="'+shortlistSPOC.vendor_id+'"/></td><td>' + shortlistSPOC.vendor_name +  '</td><td>' + shortlistSPOC.vendor_phone +  '</td><td>' + shortlistSPOC.vendor_email +  '</td><td>' + shortlistSPOC.vendor_city +  '</td><td>' + shortlistSPOC.vendor_state +  '</td></tr>';
+            		$('[id=table-body1]').append(tr);
             	}      	
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
@@ -1923,19 +2125,31 @@
 	
 	$('#PTApprovedLink').tooltip();
 	$('#VMLink').tooltip();
+	$('[id^=logtooltip]').tooltip();
 	
 	function SPOCchkbx(checkboxElem, id) {
+		console.log('The vendor training request id is: ' + id);
 		var checkedIds = $(".SPOCchckbx:checked").map(function() {
-		    return this.id.substring(7);
+		    return this.id;
 		    }).toArray();
+		
+		console.log('The checked ids are: ' + checkedIds);
+		
 		var checkedNames = $(".SPOCchckbx:checked").map(function() {
 		    return this.name;
 		    }).toArray();
+		
+		console.log('The checked names are: ' + checkedNames);
+		
     	var xx = "Click to move " + checkedNames.join(", ") + " to PT shortlist";
-    	$('#PTApprovedLink').attr("data-original-title", xx);
-    	
+    	//$('#PTApprovedLink').attr("data-original-title", xx);
+    	$('[id=PTApprovedLink]').attr("data-original-title", xx);
+
+    	//console.log('')
     	var yy = "vendor/PTApproved/" + id +"/" + checkedIds.join(",");
-    	$('#PTApprovedLink').attr("href", yy);
+    	//$('#PTApprovedLink').attr("href", yy);
+    	$('[id=PTApprovedLink]').attr("href", yy);
+
 	}
 	
 	// Section 2 accordion
@@ -1949,6 +2163,7 @@
             	//$("#th2").show();
             	for(var i = 0; i < data.length; i++){
     				var shortlistPT = data[i];
+    				console.log('the shortlist data: ' + shortlistPT.vendor_name);
             		var tr='<tr><td>' + shortlistPT.vendor_name +  '</td><td>' + shortlistPT.vendor_phone +  '</td><td>' + shortlistPT.vendor_email +  '</td><td>' + shortlistPT.vendor_city +  '</td><td>' + shortlistPT.vendor_state +  '</td></tr>';
             		$('#table-body2').append(tr);
             	}       
@@ -1984,7 +2199,7 @@
 				$('#online-audio').val(data.training_phone);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                //alert("Status: " + textStatus); alert("Error: " + errorThrown); 
             }   
 		});
 	}
@@ -1994,6 +2209,28 @@
 	<!-- Yosuf ElSaadany 3/24/2019 10:30pm -->
 	<!-- All Ajax Requests -->
 	<script>
+	
+	function logg(id) {
+        $.ajax({
+           type: "POST",
+           data: {id: id},
+           url : 'logs',
+           success : function(data) {
+               console.log(data);
+				var table = "<table>";
+               for(var i = 0; i < data.length; i++){
+                   var log = data[i];
+                    var tr = '<tr><td>' + log.description +  '</td><td>' + log.status_change_time +  '</td></tr>';
+                    //$('#vendorLogs').append(tr);
+                    table += tr;
+               }
+				table += "</table><br>End of log for: " + log.training_request_id;
+				var ttid = "logtooltip-" + id;
+              	$("#"+ttid).attr("data-original-title",table);
+           }
+        });
+    }
+	
 	// Open IT TEAM JSP Page
 	function openItPage(id) {	
 		$.ajax({

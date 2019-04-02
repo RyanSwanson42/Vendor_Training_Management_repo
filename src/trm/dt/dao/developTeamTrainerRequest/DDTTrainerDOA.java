@@ -65,4 +65,6 @@ public class DDTTrainerDOA
 		doa.updateTrainerId(10042, 1000001);
 		System.out.println("hello again.");
 	}
+
 }
+

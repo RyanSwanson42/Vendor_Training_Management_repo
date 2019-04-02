@@ -24,6 +24,13 @@ public class DDTTrainer {
 		return e;	
 	}
 	
+	@Override
+	public String toString() {
+		return "DDTTrainer [dtt_trainer_request_id=" + dtt_trainer_request_id + ", request_sent_date="
+				+ request_sent_date + ", trainer_id=" + trainer_id + ", schedule_id=" + schedule_id + ", topic=" + topic
+				+ ", comments=" + comments + ", response=" + response + ", active_status=" + active_status + "]";
+	}
+
 	public TrainingSchedule getSchedule(int schedule_id)
 	{
 		DDTTrainingScheduleDAO tsd = new DDTTrainingScheduleDAO();

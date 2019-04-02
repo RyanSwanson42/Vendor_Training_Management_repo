@@ -1,3 +1,4 @@
+
 package trm.dt.dao.inProcessCard;
 
 import java.util.List;
@@ -52,3 +53,4 @@ public class InProcessCardDAO
 	}
 	
 }
+

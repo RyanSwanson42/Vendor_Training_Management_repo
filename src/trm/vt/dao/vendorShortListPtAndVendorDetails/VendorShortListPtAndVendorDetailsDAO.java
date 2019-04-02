@@ -19,7 +19,7 @@ public class VendorShortListPtAndVendorDetailsDAO {
 	
 	public List<VendorShortListPtAndVendorDetails> getShortListPtForSpoc(int vendor_training_request_id){
 		
-		String sql = "select vd.VENDOR_NAME, vd.VENDOR_PHONE,vd.VENDOR_EMAIL,vd.VENDOR_CITY,vd.VENDOR_STATE from vendor_short_list_pt vslp\r\n" +
+		String sql = "select vd.vendor_id, vd.VENDOR_NAME, vd.VENDOR_PHONE,vd.VENDOR_EMAIL,vd.VENDOR_CITY,vd.VENDOR_STATE from vendor_short_list_pt vslp\r\n" +
 						"inner join vendor_details vd on vslp.VENDOR_ID = vd.VENDOR_ID \r\n" + 
 						"inner join vendor_training_request vtr on vslp.VENDOR_TRAINING_REQUEST_ID = vtr.VENDOR_TRAINING_REQUEST_ID \r\n" +
 						"inner join training_request tr on vtr.TRAINING_REQUEST_ID = tr.TRAINING_REQUEST_ID \r\n" +

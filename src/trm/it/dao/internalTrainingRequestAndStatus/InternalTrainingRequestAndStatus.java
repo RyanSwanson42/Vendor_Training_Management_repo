@@ -1,8 +1,8 @@
 package trm.it.dao.internalTrainingRequestAndStatus;
 
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequest;
-import trm.vt.dao.employee.Employee;
-import trm.vt.dao.trainingRequest.TrainingRequest;
+import trm.it.dao.employee.Employee;
+import trm.it.dao.trainingRequest.TrainingRequest;
 
 public class InternalTrainingRequestAndStatus {
 
@@ -32,7 +32,5 @@ public class InternalTrainingRequestAndStatus {
 	public String toString() {
 		return "\nInternalTrainingRequestAndStatus [trainingRequest=" + trainingRequest + ", internalTrainingRequest="
 				+ internalTrainingRequest + ", employee=" + employee + "]";
-	}
-	
-	
+	}	
 }

@@ -14,11 +14,12 @@ public class VendorShortListSpocAndVendorDetailsMapper implements RowMapper<Vend
 		
 		VendorDetail vd = new VendorDetail();
 		
-		vd.setVendor_name(result.getString(1));
-		vd.setVendor_phone(result.getString(2));
-		vd.setVendor_email(result.getString(3));
-		vd.setVendor_city(result.getString(4));
-		vd.setVendor_state(result.getString(5));
+		vd.setVendor_id(result.getInt(1));
+		vd.setVendor_name(result.getString(2));
+		vd.setVendor_phone(result.getString(3));
+		vd.setVendor_email(result.getString(4));
+		vd.setVendor_city(result.getString(5));
+		vd.setVendor_state(result.getString(6));
 		
 		
 		VendorShortListSpocAndVendorDetails v = new VendorShortListSpocAndVendorDetails();

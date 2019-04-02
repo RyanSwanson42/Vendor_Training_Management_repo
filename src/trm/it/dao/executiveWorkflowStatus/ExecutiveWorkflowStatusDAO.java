@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import trm.it.dao.employee.Employee;
 import trm.it.dao.employee.EmployeeMapper;
-import trm.it.dao.it.internalTrainingRequest.InternalTrainingRequestDAO;
+import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 
 public class ExecutiveWorkflowStatusDAO {
 	/*

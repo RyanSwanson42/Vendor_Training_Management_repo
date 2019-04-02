@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import trm.it.bl.InputForm;
 import trm.it.bl.InputFormServices;
-import trm.it.bl.SecurityCheck;
 import trm.it.dao.getName.GetName;
 import trm.it.dao.getName.GetNameDAO;
 import trm.it.dao.getStatus.GetStatusDAO;
@@ -50,20 +49,20 @@ public class InternalTrainingController {
 		return "infoNewAndProcess";
 	}
 
-	@RequestMapping(value="/login")
-	public String login_service(HttpServletRequest request, ModelMap model)
-	{
-		boolean result = SecurityCheck.isUserValid(request.getParameter("un"), request.getParameter("up"));
-		if (result )
-		{
-			String uid = request.getParameter("un");
-			String message = "main";
-			model.addAttribute("userid",uid);
-			model.addAttribute("newmessage",message);
-			return "main";
-		}
-		else return "login";
-	}
+//	@RequestMapping(value="/login")
+//	public String login_service(HttpServletRequest request, ModelMap model)
+//	{
+//		boolean result = SecurityCheck.isUserValid(request.getParameter("un"), request.getParameter("up"));
+//		if (result )
+//		{
+//			String uid = request.getParameter("un");
+//			String message = "main";
+//			model.addAttribute("userid",uid);
+//			model.addAttribute("newmessage",message);
+//			return "main";
+//		}
+//		else return "login";
+//	}
 	//end of testing directives	
 	
 //	... i dont know what the value here is going to be: get from other team... replace ...it/ with the correct path
@@ -90,7 +89,7 @@ public class InternalTrainingController {
 	{
 		GetStatusDAO gs = new GetStatusDAO();
 		TrainingManagementStatusDAO tsdao = new TrainingManagementStatusDAO();
-		inputform.display();
+
 		new InputFormServices().saveForm(inputform.getTrainingID(), new GetNameDAO().getIdByName(inputform.getTrainerName()), inputform.getTrainerName(),
 				inputform.getMode(), inputform.getAddress(), inputform.getCity(),
 				inputform.getRoomNum(), inputform.getUrl(), inputform.getPhoneNum(),

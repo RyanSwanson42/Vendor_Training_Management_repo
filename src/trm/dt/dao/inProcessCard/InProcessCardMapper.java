@@ -1,3 +1,4 @@
+
 package trm.dt.dao.inProcessCard;
 
 import java.sql.ResultSet;
@@ -80,4 +81,3 @@ public class InProcessCardMapper implements RowMapper<InProcessCard>
 	}
 
 }
-
