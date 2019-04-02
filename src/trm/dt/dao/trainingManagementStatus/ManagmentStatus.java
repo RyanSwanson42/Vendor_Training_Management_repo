@@ -15,6 +15,12 @@ public class ManagmentStatus {
 		return tr;		
 	}
 	
+	@Override
+	public String toString() {
+		return "ManagmentStatus [training_management_status_id=" + training_management_status_id
+				+ ", training_request_id=" + training_request_id + ", status=" + status + "]";
+	}
+
 	public int getTraining_management_status_id() {
 		return training_management_status_id;
 	}

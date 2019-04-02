@@ -35,61 +35,61 @@ public class CallbackFunction {
 		return date;
 	}
 
-	public void statusChange(int training_id, int status) {
+	public void statusChange(int training_id, int status, String firstName, String lastName) {
 		String message = "";
 		switch (status) {
 		case 103:
-			message = "Internal Training Request started";
+			message = firstName +" "+lastName+": Internal Training Request started";
 			break;
 		case 104:
-			message = "Looking for available internal trainers";
+			message = firstName +" "+lastName+": Looking for available internal trainers";
 			break;
 		case 105:
-			message = "Internal Training Request ";
+			message = firstName +" "+lastName+": Internal Training Request ";
 			break;
 		case 106:
-			message = "Internal Training Request ";
+			message = firstName +" "+lastName+": Internal Training Request ";
 			break;
 		case 107:
-			message = "Internal Training Request ";
+			message = firstName +" "+lastName+": Internal Training Request ";
 			break;
 		case 108:
-			message = "Internal Training Request ";
+			message = firstName +" "+lastName+": Internal Training Request ";
 			break;
 		case 109:
-			message = "Internal Training Request ";
+			message = firstName +" "+lastName+": Internal Training Request ";
 			break;
 		case 110:
-			message = "Internal Training Request at PM for Final Approval";
+			message = firstName +" "+lastName+": Internal Training Request at PM for Final Approval";
 			// function to ask PM to choose
 			break;
 		case 121:
-			message = "Internal Training Request declined by PM / Awaiting next action";
+			message = firstName +" "+lastName+": Internal Training Request declined by PM / Awaiting next action";
 			// ask spoc if they want to move to next type of training or restart internal
 			// process
 			// if to decide to move back or continue
 			break;
 		case 122:
-			message = "Internal Training Request approved by PM / Ready for training";
+			message = firstName +" "+lastName+": Internal Training Request approved by PM / Ready for training";
 			// move automatically or wait for the start date
 			break;
 		case 130:
-			message = "Internal Training in progress";
+			message = firstName +" "+lastName+": Internal Training in progress";
 			break;
 		case 203:
-			message = "Development Training Request started";
+			message = firstName +" "+lastName+": Development Training Request started";
 			break;
 		case 204:
-			message = "Confirming details with available development trainers";
+			message = firstName +" "+lastName+": Confirming details with available development trainers";
 			break;
 		case 205:
-			message = "Confirming details with development trainer's manager";
+			message = firstName +" "+lastName+": Confirming details with development trainer's manager";
 			break;
 		case 206:
-			message = "Awaiting PM for development trainer approval";
+			message = firstName +" "+lastName+": Awaiting PM for development trainer approval";
 			break;
 		case 207:
-			message = "Confirming logistical details for development training";
+			message = firstName +" "+lastName+": Confirming logistical details for development training";
 			break;
 		case 208:
 			message = "";
@@ -98,52 +98,43 @@ public class CallbackFunction {
 			// DDT
 			break;
 		case 210:
-			message = "Development Training Request at PM for final approval";
+			message = firstName +" "+lastName+": Development Training Request at PM for final approval";
 			break;
 		case 221:
-			message = "Development Training Request declined by PM / Awaiting next action";
+			message = firstName +" "+lastName+": Development Training Request declined by PM / Awaiting next action";
 			break;
 		case 222:
-			message = "Development Training Request approved by PM / Ready for training";
+			message = firstName +" "+lastName+": Development Training Request approved by PM / Ready for training";
 			break;
 		case 230:
-			message = "Development Training in progress";
+			message = firstName +" "+lastName+": Development Training in progress";
 			break;
 		case 303:
-			message = "Vendor Training Request started";
+			message = firstName +" "+lastName+": Vendor Training Request started";
 			break;
 		case 304:
-			message = "Vendor Training Request ";
+			message = firstName +" "+lastName+": Vendor Training Request SPOC Shortlist";
 			break;
 		case 305:
-			message = "Vendor Training Request ";
-			break;
-		case 306:
-			message = "Vendor Training Request ";
-			break;
-		case 307:
-			message = "Vendor Training Request ";
-			break;
-		case 308:
-			message = "Vendor Training Request ";
-			break;
-		case 309:
-			message = "Vendor Training Request ";
+			message = firstName +" "+lastName+": Vendor Training Request PT Shortlist";
 			break;
 		case 310:
-			message = "Vendor Training Request at PM for Final Approval";
+			message = firstName +" "+lastName+": Vendor Training Request sent to PM for Final Approval";
+			break;
+		case 320:
+			message = firstName +" "+lastName+": Vendor Training Request received by PM";
 			break;
 		case 321:
-			message = "Vendor Training Request declined by PM / awaiting next action";
+			message = firstName +" "+lastName+": Vendor Training Request declined by PM / awaiting next action";
 			break;
 		case 322:
-			message = "Vendor Training Request approved by PM / ready for training";
+			message = firstName +" "+lastName+": Vendor Training Request approved by PM / ready for training";
 			break;
 		case 330:
-			message = "Vendor Training in progress";
+			message = firstName +" "+lastName+": Vendor Training in progress";
 			break;
 		case 150:
-			message = "Training completed / Archiving request";
+			message = firstName +" "+lastName+": Training completed / Archiving request";
 			break;
 		default:
 			break;

@@ -29,6 +29,19 @@ public class TrainingRequest {
 		return e;	
 	}
 	 
+	@Override
+	public String toString() {
+		return "TrainingRequest [training_request_id=" + training_request_id + ", requester_id=" + requester_id
+				+ ", vertical=" + vertical + ", request_training_type=" + request_training_type
+				+ ", request_training_module=" + request_training_module + ", request_training_module_scope="
+				+ request_training_module_scope + ", request_training_mode=" + request_training_mode
+				+ ", request_start_date=" + request_start_date + ", request_end_date=" + request_end_date
+				+ ", request_location=" + request_location + ", request_time_zone=" + request_time_zone
+				+ ", request_approx_participant=" + request_approx_participant + ", request_project_spoc="
+				+ request_project_spoc + ", time_requested=" + time_requested + ", justification_of_request="
+				+ justification_of_request + "]";
+	}
+
 	public int getTraining_request_id() {
 		return training_request_id;
 	}

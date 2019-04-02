@@ -53,4 +53,12 @@ public class TrainingRequestLog {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "TrainingRequestLog [request_log_id=" + request_log_id + ", training_request_id=" + training_request_id
+				+ ", status_changed_to=" + status_changed_to + ", status_change_time=" + status_change_time
+				+ ", description=" + description + "]";
+	}
+	
 }
