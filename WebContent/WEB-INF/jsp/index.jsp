@@ -16,7 +16,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="author" content="Vendor TRM Team">
 
-<title>Vendor TRM</title>
+<title>TRM</title>
+<link rel="icon" href="<c:url value="/resources/img/trm.png" />">
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -64,10 +65,10 @@
 	<nav class="main-header navbar navbar-expand-lg navbar-dark fixed-top"
 		style="background-color: #3c8dbc">
 	<div class="container">
-		<img src="<c:url value="resources/img/AtosSyntelLogoMedWhite.png" />"
-			height="30" /> <a class="navbar-brand" href="#"> <!--<b>Atos</b>Syntel-->
-			<i>Vendor <b>TRM</b>
-		</i>
+		<a class="navbar-brand" href="#">
+			<img height="30" src="<c:url value="/resources/img/trm.png" />"/>
+			<img src="<c:url value="resources/img/AtosSyntelLogoMedWhite.png" />"
+				height="30" /> 
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarResponsive" aria-controls="navbarResponsive"
@@ -75,18 +76,18 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
-			<ul class="navbar-nav ml-auto">
+			<ul style="font-weight: 700;" class="navbar-nav ml-auto">
 				<li class="nav-item py-1" style="padding-right: 5px"><input
 					type="search" id="sb"
 					style="color: white; border-radius: 15px; border: #fff 2px solid; background-color: #3c8dbc; padding-top: 2px; padding-bottom: 3px"
 					required placeholder="  Filter..." /></li>
 				<li class="nav-item"><a class="nav-link"
-					onclick="location.href='/SpringApp/report'" style="cursor: pointer">
+					onclick="location.href='/SpringApp/report'" style="cursor: pointer; color: white;">
 						Run Report</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="vendormanagement/0">Vendor Management</a></li>
+					href="vendormanagement/0"  style="color:white">Vendor Management</a></li>
 				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> <i class="fas fa-user-circle"
 						style="float: none;"></i> ${username}
@@ -149,7 +150,7 @@
 						</a>
 					</div>
 				</div>
-
+				<!-- if statement to display img if array is empty -->
 				<!-- Start of for loop for new training requests on the left of the screen -->
 				<c:forEach var="pro1" items="${trainingRequestList}"
 					varStatus="theCount">
@@ -247,6 +248,8 @@
 				id="pd">
 				<h4>Processing</h4>
 				<div class="row" id="hp">
+					
+					<!-- VT Team Cards -->
 					<c:forEach var="pro2" items="${vendorTrainingRequestList2}"
 						varStatus="theCount">
 						<div class="card"
@@ -259,13 +262,13 @@
 										${pro2.getTrainingRequest().training_request_id}
 									</span> <span style="float: right;"> <a href="#"
 										data-toggle="modal"
-										data-target="#Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img
+										data-target="#ProcessVT${pro2.getVendorTrainingRequest().vendor_training_request_id}"><img
 											width='75px' height='75px'
 											style="margin-top: 5px; margin-right: -20px;"
 											src='.//resources/img/Icon Vender.png'> </a>
 
 										<div class="modal"
-											id="Process${pro2.getVendorTrainingRequest().vendor_training_request_id}"
+											id="ProcessVT${pro2.getVendorTrainingRequest().vendor_training_request_id}"
 											tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabelUpdate">
 											<div class="modal-dialog modal-dialog-centered"
@@ -357,10 +360,10 @@
 								</p>
 
 								<!-- Yosuf ElSaadany 3/14/2019 1:47 pm Integration of Modal- DOM for Modal -->
-								<i style="margin-left: 10px" id="modalIcons" title="Open"
-									data-toggle="modal"
+								<i style="margin-left: 10px; color:red" id="modalIcons" data-placement="right"
+									data-original-title="Process Request" data-toggle="modal"
 									data-target="#myModal${pro2.getVendorTrainingRequest().vendor_training_request_id}"
-									class="fas fa-external-link-alt"
+									class="fas fa-external-link-alt  fa-lg"
 									onclick="ajax(${pro2.getVendorTrainingRequest().vendor_training_request_id});"></i>
 
 								<div class="modal"
@@ -725,8 +728,9 @@
 								</div>
 
 								<!-- Yosuf ElSaadany 3/15/2019 11:06 pm Adding Approval Email Popup -->
-								<i id="modalIcons" title="Upload" data-toggle="modal"
-									data-target="#approval" class="fas fa-upload"></i>
+								<i id="modalIcons" data-toggle="modal" data-placement="bottom"
+									data-original-title="Upload Approval Email" 
+									data-target="#approval" class="fas fa-upload fa-lg"></i>
 								<div class="modal" id="approval">
 									<div class="modal-dialog modal-md">
 										<div class="modal-content">
@@ -752,7 +756,7 @@
 									onclick="logg(${pro2.getVendorTrainingRequest().vendor_training_request_id});"
 									title="Click icon to load log"
 									style="margin-right: 8px; float: right;"
-									src="https://img.icons8.com/ios/20/000000/edit-property.png"
+									src="https://img.icons8.com/ios/24/000000/edit-property.png"
 									data-toggle="tooltip" data-placement="left" />
 
 							</div>
@@ -773,13 +777,13 @@
 										${itList.getTrainingRequest().training_request_id}
 									</span> <span style="float: right;"> <a href="#"
 										data-toggle="modal"
-										data-target="#Process${itList.getInternalTrainingRequest().internal_training_id}"><img
+										data-target="#ProcessIT${itList.getInternalTrainingRequest().internal_training_id}"><img
 											width='75px' height='75px'
 											style="margin-top: 5px; margin-right: -20px;"
 											src='.//resources/img/Icon Internal.png'> </a>
 
 										<div class="modal"
-											id="Process${itList.getInternalTrainingRequest().internal_training_id}"
+											id="ProcessIT${itList.getInternalTrainingRequest().internal_training_id}"
 											tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabelUpdate">
 											<div class="modal-dialog modal-dialog-centered"
@@ -872,10 +876,34 @@
 								<%-- <i style="margin-left: 10px" id="modalIcons" title="Open"
 									class="fas fa-external-link-alt"
 									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i> --%>
-								<a class="nav-link" href="it"><i
-									style="margin-left: 10px; color: black;" id="modalIcons"
-									title="Open" class="fas fa-external-link-alt"
+								<a href="it"><i data-placement="right"
+									data-original-title="Process Request" 
+									style="margin-left: 10px; color: red;" id="modalIcons"
+									class="fas fa-external-link-alt fa-lg"
 									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i></a>
+								
+								<i id="modalIcons" data-toggle="modal" data-placement="bottom"
+									data-original-title="Upload Approval Email" 
+									data-target="#approval" class="fas fa-upload fa-lg"></i>
+								<div class="modal" id="approval">
+									<div class="modal-dialog modal-md">
+										<div class="modal-content">
+											<!-- Modal Header -->
+											<div class="modal-header">
+												<div class="modal-title">Attach Approval Email</div>
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+											</div>
+											<!-- Modal body -->
+											<div class="modal-body">
+												<input type="file" />
+											</div>
+											<!-- Modal footer -->
+											<div class="modal-footer">
+												<button class="btn btn-primary">Upload</button>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 
 						</div>
@@ -895,12 +923,12 @@
 										${inProcess.request.training_request_id} </span> <span
 
 										style="float: right;"> <a href="#" data-toggle="modal"
-										data-target="#Process${inProcess.training.getDtt_training_id()}"><img
+										data-target="#ProcessDT${inProcess.training.getDtt_training_id()}"><img
 											width='75px' height='75px'
 											style="margin-top: 5px; margin-right: -20px;"
 											src='.//resources/img/Icon Development.png'> </a>
 										<div class="modal"
-											id="Process${inProcess.training.getDtt_training_id()}"
+											id="ProcessDT${inProcess.training.getDtt_training_id()}"
 											tabindex="-1" role="dialog"
 											aria-labelledby="myModalLabelUpdate">
 											<div class="modal-dialog modal-dialog-centered"
@@ -978,10 +1006,10 @@
 									</tr>
 								</table>
 								<div style="margin-top: 20px;">
-									<i style="margin-left: 10px;" id="modalIcons" title="Open"
+									<i style="margin-left: 10px; color:red;" id="modalIcons" title="Open"
 										data-toggle="modal"
 										data-target="#edit_steps${inProcess.request.training_request_id}"
-										class="fas fa-external-link-alt"></i>
+										class="fas fa-external-link-alt fa-lg"></i>
 								</div>
 								</p>
 
@@ -1865,15 +1893,11 @@
 						  /* alert("You selected: " + checkedIds.join(", ") + " to process"); */
 					    }
 					});   
-					$('#sb').change(
-							function() {
-								$('.card').show();
-								var filter = $(this).val(); // get the value of the input, which we filter on
-								$('.container').find(
-										".card-title:not(:contains(" + filter
-												+ "))").parent().css('display',
-										'none');
-							});
+					$('#sb').keyup(function() {
+						$('.card').removeClass('d-none');
+						var filter = $(this).val(); //input value
+						$(document).find('.card .card-body h5:not(:contains("'+filter+'"))').parent().parent().addClass('d-none');
+					});
 				});
 	</script>
 
@@ -2126,6 +2150,8 @@
 	$('#PTApprovedLink').tooltip();
 	$('#VMLink').tooltip();
 	$('[id^=logtooltip]').tooltip();
+	$('[id=modalIcons]').tooltip();
+
 	
 	function SPOCchkbx(checkboxElem, id) {
 		console.log('The vendor training request id is: ' + id);

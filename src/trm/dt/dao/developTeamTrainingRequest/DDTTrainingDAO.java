@@ -38,9 +38,9 @@ public class DDTTrainingDAO {
 						trainer_approval_mail, trainer_manager_approval_mail, description_of_status });
 	}
 
-	public void deleteDTTraining(int Dtt_training_id) {
-		temp.update("delete from Develop_Team_Training_Request where Dtt_training_id=?",
-				new Object[] { Dtt_training_id });
+	public void deleteDTTraining(int training_request_id) {
+		temp.update("delete from Develop_Team_Training_Request where training_request_id=?",
+				new Object[] { training_request_id });
 	}
 
 	public DDTTraining getDDTTraining(int Dtt_training_id) {

@@ -73,10 +73,10 @@ public class InProcessCardMapper implements RowMapper<InProcessCard>
 		status.setStatus(result.getInt("status"));
 		sl.setStatus(status);
 		
-		RequestLog reqLog = new RequestLog();
+		/*RequestLog reqLog = new RequestLog();
 		reqLog.setDescription(result.getString("DESCRIPTION"));
 		sl.setReqLog(reqLog);
-
+*/
 		return sl;
 	}
 
