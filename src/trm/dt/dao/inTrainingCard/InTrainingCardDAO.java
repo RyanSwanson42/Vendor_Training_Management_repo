@@ -29,7 +29,7 @@ public class InTrainingCardDAO {
 					+ "dtr.trainer_request_id = dttr.dtt_trainer_request_id "
 					+ "join EMPLOYEE ct on ct.employee_id = dttr.trainer_id "
 					+ "join EXECUTIVE_WORKFLOW_STATUS  ex on ex.training_request_id = tr.training_request_id"
-					+ " where s.status = 230 and tr.vertical = ?", 
+					+ " where tr.vertical = ? and s.status = 130 or s.status =  230 or s.status = 330", 
 				new Object[]{vertical},new InTrainingCardMapper());
 		return InTrainingCardList;
 	}
