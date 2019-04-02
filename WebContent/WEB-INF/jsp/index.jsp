@@ -779,9 +779,11 @@
 								<%-- <i style="margin-left: 10px" id="modalIcons" title="Open"
 									class="fas fa-external-link-alt"
 									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i> --%>
-									<a class="nav-link" href="it"><i style="margin-left: 10px; color:black;" id="modalIcons" title="Open"
+<%-- 									${itList.getTrainingRequest().training_request_id} --%>
+									<a class="nav-link" href="itModal/10074"><i style="margin-left: 10px; color:black;" id="modalIcons" title="Open"
 									class="fas fa-external-link-alt"
-									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});"></i></a>
+									></i></a>
+<%-- 									onclick="openItPage(${itList.getInternalTrainingRequest().internal_training_id});" --%>
 							</div>
 							
 						</div>

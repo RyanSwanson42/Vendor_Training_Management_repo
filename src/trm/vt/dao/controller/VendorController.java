@@ -40,9 +40,11 @@ import trm.it.bl.InputForm;
 import trm.it.bl.InputFormServices;
 import trm.it.dao.getName.GetName;
 import trm.it.dao.getName.GetNameDAO;
+import trm.it.dao.getStatus.GetStatusDAO;
 import trm.it.dao.internalTrainingRequest.InternalTrainingRequestDAO;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatus;
 import trm.it.dao.internalTrainingRequestAndStatus.InternalTrainingRequestAndStatusDAO;
+import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;
 /*import trm.it.dao.trainingManagementStatus.TrainingManagementStatusDAO;*/
 import trm.vt.bl.SecurityCheck;
 import trm.vt.dao.SpocChart.SpocChart;
@@ -621,8 +623,8 @@ public class VendorController {
 		return "processInProgress";
 	}
 
-	@RequestMapping(value = "itModal")
-	public String updateproduct(@RequestParam("trainingID") int trainingID, ModelMap map) {
+	@RequestMapping(value = "itModal/{trainingID}")
+	public String updateproduct(@PathVariable("trainingID") int trainingID, ModelMap map) {
 		InputForm inputform = new InputFormServices().loadForm(trainingID);
 		map.addAttribute("command", inputform);
 		map.addAttribute("maheshFun", inputform);
@@ -633,28 +635,44 @@ public class VendorController {
 		for (GetName gn : alltrainers) {
 			names.add(gn.getEmployee().getNames());
 		}
-		System.out.println(names.toString());
+		//System.out.println(names.toString());
 		map.addAttribute("alltrainers", names);
 
 		return "processInProgress";
 	}
 
-	/*
-	 * @RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to
-	 * root directory then go ahead public String
-	 * updateproductservice(@ModelAttribute("inputform") InputForm
-	 * inputform, @PathVariable("trainingID") int trainingID) { GetStatusDAO gs =
-	 * new GetStatusDAO(); TrainingManagementStatusDAO tsdao = new
-	 * TrainingManagementStatusDAO(); new
-	 * InputFormServices().saveForm(inputform.getTrainingID(), new
-	 * GetNameDAO().getIdByName(inputform.getTrainerName()),
-	 * inputform.getTrainerName(), inputform.getMode(), inputform.getAddress(),
-	 * inputform.getCity(), inputform.getRoomNum(), inputform.getUrl(),
-	 * inputform.getPhoneNum(), inputform.getStartDate(), inputform.getEndDate(),
-	 * inputform.getStartTime(), inputform.getEndTime(), inputform.getDescription(),
-	 * inputform.getState(), inputform.getCountry(), inputform.getZipCode(),
-	 * inputform.getTimeZone(), inputform.getSchedBreakdown());
-	 * 
-	 * return "redirect:/it/{trainingID}"; }
-	 */
+	@RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to root directory then go ahead
+	public String updateproductservice(@ModelAttribute("inputform") InputForm inputform, @PathVariable("trainingID") int trainingID)
+	{
+		GetStatusDAO gs = new GetStatusDAO();
+		TrainingManagementStatusDAO tsdao = new TrainingManagementStatusDAO();
+
+		new InputFormServices().saveForm(inputform.getTrainingID(), new GetNameDAO().getIdByName(inputform.getTrainerName()), inputform.getTrainerName(),
+				inputform.getMode(), inputform.getAddress(), inputform.getCity(),
+				inputform.getRoomNum(), inputform.getUrl(), inputform.getPhoneNum(),
+				inputform.getStartDate(), inputform.getEndDate(), inputform.getStartTime(),
+				inputform.getEndTime(), inputform.getDescription(), inputform.getState(),
+				inputform.getCountry(), inputform.getZipCode(), inputform.getTimeZone(),
+				inputform.getSchedBreakdown());
+	
+		return "processInProgress";
+	}
+	
+//	  @RequestMapping(value="saveRequest/{trainingID}") // in form, ../ - come to
+//	  root directory then go ahead public String
+//	  updateproductservice(@ModelAttribute("inputform") InputForm
+//	  inputform, @PathVariable("trainingID") int trainingID) { GetStatusDAO gs =
+//	  new GetStatusDAO(); TrainingManagementStatusDAO tsdao = new
+//	  TrainingManagementStatusDAO(); new
+//	  InputFormServices().saveForm(inputform.getTrainingID(), new
+//	  GetNameDAO().getIdByName(inputform.getTrainerName()),
+//	  inputform.getTrainerName(), inputform.getMode(), inputform.getAddress(),
+//	  inputform.getCity(), inputform.getRoomNum(), inputform.getUrl(),
+//	  inputform.getPhoneNum(), inputform.getStartDate(), inputform.getEndDate(),
+//	  inputform.getStartTime(), inputform.getEndTime(), inputform.getDescription(),
+//	  inputform.getState(), inputform.getCountry(), inputform.getZipCode(),
+//	  inputform.getTimeZone(), inputform.getSchedBreakdown());
+//	  
+//	  return "redirect:/it/{trainingID}"; }
+//	 
 }
