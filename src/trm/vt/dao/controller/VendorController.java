@@ -3,6 +3,7 @@ package trm.vt.dao.controller;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import trm.dt.dao.developTeamTrainerRequest.DDTTrainerDOA;
 import trm.dt.dao.developTeamTrainingRequest.DDTTrainingDAO;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflow;
 import trm.dt.dao.executiveWorkflowStatus.ExecutiveWorkflowDAO;
@@ -30,6 +32,9 @@ import trm.dt.dao.inProcessCard.InProcessCard;
 import trm.dt.dao.inProcessCard.InProcessCardDAO;
 import trm.dt.dao.inTrainingCard.InTrainingCard;
 import trm.dt.dao.inTrainingCard.InTrainingCardDAO;
+import trm.dt.dao.trainingManagementStatus.ManagmentStatusDAO;
+import trm.dt.dao.trainingRequest.TrainingRequest;
+import trm.dt.dao.trainingSchedule.DDTTrainingScheduleDAO;
 import trm.dt.ddtProjectQueries.CallbackFunction;
 import trm.dt.trial.DDTProject.DTTProcessingCard;
 import trm.dt.trial.DDTProject.DTTdaoServices;
@@ -237,14 +242,117 @@ public class VendorController {
 
 	@RequestMapping(value = "/toProcessing/dt/{req_id}")
 	public String toProcessingDT(@PathVariable("req_id") int[] req_id) {
+
+		Instant instant = Instant.now();
+		Timestamp timestamp = Timestamp.from(instant);
 		for (int i = 0; i < req_id.length; i++) {
-			new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i]);
+			
+			
+			int DDTScheduleId = new DDTTrainingScheduleDAO().getScheduleId();
+			new DDTTrainingScheduleDAO().insertTrainingSchedule(DDTScheduleId, null, null, null, null, null, null, null, null, null, null, null, 0);
+			
+			int DDTTrainerReqId = new DDTTrainerDOA().getTrainerRequestId();
+			new DDTTrainerDOA().insertDTTrainer(DDTTrainerReqId, timestamp, 1000000, DDTScheduleId, null, null, null, 0);
+			
+			System.out.println("Schedule ID: " + DDTScheduleId);
+			System.out.println("DDTTrainer ID: " + DDTTrainerReqId);
+			
+			new DDTTrainingDAO().insertDDTTrainingWithDTTID(req_id[i],DDTScheduleId, DDTTrainerReqId);
 			new CallbackFunction().statusChange(req_id[i], 203);
 			System.out.println("Updating Status for Training Request: " + req_id[i] + " to Dev Team Trainer");
+			
+			
 		}
 		return "redirect:/dashboard";
 	}
+	
+	//DT Accordion Current Trainer Update 
+/*	@RequestMapping(value ="updateTrainer/{dtt_trainer_request_id}")
+	public String updateCurrentTrainer(@ModelAttribute("Employee") Employee emp, @PathVariable("dtt_trainer_request_id") int dtt_trainer_request_id)
+	{
+		int empId = emp.getEmployee_id();
+		
+		new DDTTrainerDOA().updateTrainerId(dtt_trainer_request_id, empId);
+		System.out.println("dtt_trainer_req_id: " + dtt_trainer_request_id);
+		System.out.println("Trainer_id: " + empId);
+		System.out.println(emp.getCity());
+		return "redirect:/dashboard";
+	} */
 
+	//DT Start Date and End Date Update
+	@RequestMapping(value ="updateDate/{dtt_trainer_request_id}/{training_request_id}")
+	public String updateStartEndDate(@PathVariable("training_request_id") int training_request_id, @PathVariable("dtt_trainer_request_id") int dtt_trainer_request_id, @ModelAttribute("TrainingRequest") TrainingRequest req, @ModelAttribute("Employee") Employee emp)
+	{
+		
+		int empId = emp.getEmployee_id();
+		System.out.println("dtt_trainer_req_id: " + dtt_trainer_request_id);
+		System.out.println("Trainer_id: " + empId);
+		System.out.println(emp.getCity());
+			
+		
+		new DDTTrainerDOA().updateTrainerId(dtt_trainer_request_id, empId);
+		
+		System.out.println("start date");
+		String startDate = req.getRequest_start_date();
+		System.out.println(startDate);
+		
+		String startDateYear = startDate.substring(0, 4);
+		System.out.println(Integer.parseInt(startDateYear));
+		
+		String startDateMonth = startDate.substring(5, 7);
+		System.out.println(startDateMonth);
+		
+		String startDateDay = startDate.substring(8);
+		System.out.println(startDateDay);
+		
+		@SuppressWarnings("deprecation")
+		Timestamp fullStartDate = new Timestamp(Integer.parseInt(startDateYear) - 1900, Integer.parseInt(startDateMonth) - 1, Integer.parseInt(startDateDay), 0, 0, 0, 0);
+		System.out.println(fullStartDate);
+		
+		System.out.println("----------------------------end date");
+		String endDate = req.getRequest_end_date();
+		System.out.println(endDate);
+		
+		String endDateYear = endDate.substring(0, 4);
+		System.out.println(Integer.parseInt(endDateYear));
+		
+		String endDateMonth = endDate.substring(5, 7);
+		System.out.println(endDateMonth);
+		
+		String endDateDay = startDate.substring(8);
+		System.out.println(endDateDay);
+		
+		@SuppressWarnings("deprecation")
+		Timestamp fullEndDate = new Timestamp(Integer.parseInt(endDateYear) - 1900, Integer.parseInt(endDateMonth) - 1, Integer.parseInt(endDateDay), 0, 0, 0, 0);
+		System.out.println(fullEndDate);
+		
+		new trm.dt.dao.trainingRequest.TrainingRequestDAO().updateEndStartDate(fullStartDate, fullEndDate, training_request_id);
+		System.out.println("updated");
+		
+		new trm.dt.dao.trainingRequest.TrainingRequestDAO().updateTrainingRequestMode(training_request_id, req.getRequest_training_mode());
+		System.out.println("updated Mode " + req.getRequest_training_mode());
+		
+		new CallbackFunction().statusChange(training_request_id, 210);
+		
+		return "redirect:/dashboard";
+	}
+	
+	
+	@RequestMapping(value = "trainingSchedule/{training_schedule_id}/{training_request_id}")
+	public String update(@ModelAttribute("TrainingSchedule") trm.dt.dao.trainingSchedule.TrainingSchedule s, @ModelAttribute("TrainingRequest") TrainingRequest req,
+			@PathVariable("training_schedule_id") int training_schedule_id, @PathVariable("training_request_id") int training_request_id) {
+		
+		int zip = s.getTraining_zipcode();
+		String sZip = String.valueOf(zip);
+		
+		new DDTTrainingScheduleDAO().updateTrainingSchedule(training_schedule_id, s.getTraining_city(), s.getTraining_state(), s.getTraining_country(), sZip, s.getTraining_time_zone(), s.getTraining_location(), s.getTraining_room_number(), s.getTraining_break_down(), s.getTraining_url(), Double.parseDouble(s.getTraining_phone()));
+		
+		new CallbackFunction().statusChange(training_request_id, 230);
+		
+		return "redirect:/dashboard";
+	}  
+	
+	
 	@RequestMapping(value = "/toProcessing/vt/{req_id}")
 	public String toProcessingVT(@PathVariable("req_id") int[] req_id) {
 		for (int i = 0; i < req_id.length; i++) {
@@ -278,7 +386,7 @@ public class VendorController {
 		if(type.equals("Internal"))
 				training_request_id = new TrainingRequestDAO().getTrainingRequestIdWithInternalTrainingRequestId(req_id);
 		new CallbackFunction().clearPreviousTrainingRequset(training_request_id);
-		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id);
+//		new DDTTrainingDAO().insertDDTTrainingWithDTTID(training_request_id);
 		new CallbackFunction().statusChange(training_request_id, 203);
 		return "redirect:/dashboard";
 	}

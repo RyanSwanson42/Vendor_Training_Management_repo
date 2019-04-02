@@ -55,7 +55,7 @@ public class DispatcherController {
 	            req.setSpoc(new EmployeeDAO().getEmployee(req.getRequest_project_spoc()));
 	            req.setStatus(new TrainingManagementStatusDAO().getTrainingManagementStatus(req.getTraining_request_id()).get(0));
 	            req.setLog(new TrainingRequestLogDAO().getTrainingRequestLog(req.getTraining_request_id()));
-	            req.setSchedule(new TrainingScheduleDAO().getTrainingSchedule(req.getTraining_request_id(), req.getStatus().getStatus()).get(0));
+	            req.setSchedule(new DDTTrainingScheduleDAO().getTrainingSchedule(req.getTraining_request_id(), req.getStatus().getStatus()).get(0));
 	            req.setParticipantList(new Training_ParticipantsDAO().getAllTraining_ParticipantsBySession(req.getTraining_request_id()));
 	        }
 	        //request.getSession().setAttribute("command", pm);

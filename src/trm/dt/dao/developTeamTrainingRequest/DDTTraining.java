@@ -7,7 +7,7 @@ import trm.dt.dao.employee.EmployeeDAO;
 import trm.dt.dao.trainingRequest.TrainingRequest;
 import trm.dt.dao.trainingRequest.TrainingRequestDAO;
 import trm.dt.dao.trainingSchedule.TrainingSchedule;
-import trm.dt.dao.trainingSchedule.TrainingScheduleDAO;
+import trm.dt.dao.trainingSchedule.DDTTrainingScheduleDAO;
 
 public class DDTTraining {
 	private int Dtt_training_id;
@@ -35,7 +35,7 @@ public class DDTTraining {
 	
 	public TrainingSchedule getSchedule(int schedule_id)
 	{
-		TrainingScheduleDAO tsd = new TrainingScheduleDAO();
+		DDTTrainingScheduleDAO tsd = new DDTTrainingScheduleDAO();
 		TrainingSchedule ts = tsd.getTrainingSchedule(schedule_id);
 		return ts;
 	}

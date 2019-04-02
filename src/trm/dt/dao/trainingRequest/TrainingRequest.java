@@ -75,8 +75,8 @@ public class TrainingRequest {
 	public String getRequest_start_date() {
 		return request_start_date;
 	}
-	public void setRequest_start_date(String request_start_date) {
-		this.request_start_date = request_start_date;
+	public void setRequest_start_date(String start_date) {
+		this.request_start_date = start_date;
 	}
 	public String getRequest_end_date() {
 		return request_end_date;

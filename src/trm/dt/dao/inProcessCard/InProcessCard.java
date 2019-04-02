@@ -1,11 +1,13 @@
 package trm.dt.dao.inProcessCard;
 
 import trm.dt.dao.developTeamTrainerRequest.DDTTrainer;
+
 import trm.dt.dao.developTeamTrainingRequest.DDTTraining;
 import trm.dt.dao.employee.Employee;
 import trm.dt.dao.trainingManagementStatus.ManagmentStatus;
 import trm.dt.dao.trainingRequest.TrainingRequest;
-import trm.vt.dao.trainingSchedule.TrainingSchedule;
+import trm.dt.dao.trainingRequestLog.RequestLog;
+import trm.dt.dao.trainingSchedule.*;
 
 public class InProcessCard 
 {
@@ -16,7 +18,14 @@ public class InProcessCard
 	private DDTTrainer trainer = new DDTTrainer();
 	private Employee currentTrainer = new Employee();
 	private ManagmentStatus status = new ManagmentStatus();
+	private RequestLog reqLog = new RequestLog();
 	
+	public RequestLog getReqLog() {
+		return reqLog;
+	}
+	public void setReqLog(RequestLog reqLog) {
+		this.reqLog = reqLog;
+	}
 	public DDTTraining getTraining() {
 		return training;
 	}

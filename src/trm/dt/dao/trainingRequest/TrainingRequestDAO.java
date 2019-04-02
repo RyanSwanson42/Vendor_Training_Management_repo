@@ -38,6 +38,18 @@ public class TrainingRequestDAO
 				request_location,request_time_zone,request_approx_participant,
 				time_requested,justification_of_request,training_request_id});
 	}
+	
+	
+	public void updateEndStartDate(
+			Timestamp request_start_date,Timestamp request_end_date,int training_request_id)
+	{
+		temp.update("update Training_Request set request_start_date=?,request_end_date=? where training_request_id=?", 
+				new Object[]{request_start_date,request_end_date,training_request_id});
+	}
+	
+	
+	
+	
 	public void insertTrainingRequest(int requester_id,String vertical,String request_training_type,
 			String request_training_module,String request_training_module_scope,String request_training_mode,
 			Timestamp request_start_date,Timestamp request_end_date,String request_location,
@@ -60,5 +72,12 @@ public class TrainingRequestDAO
 		List<TrainingRequest> trainingRequest =  temp.query("select * from Training_Request where training_request_id=?", 
 				new Object[]{training_request_id},new TrainingRequestMapper());
 		return trainingRequest.get(0);
+	}
+	
+	
+	public void updateTrainingRequestMode(int training_request_id, String mode)
+	{
+		temp.update("update Training_Request set request_training_mode=? where training_request_id=?",
+				new Object[]{mode, training_request_id});
 	}
 }

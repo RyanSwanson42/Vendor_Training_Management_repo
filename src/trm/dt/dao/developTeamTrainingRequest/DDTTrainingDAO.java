@@ -51,10 +51,10 @@ public class DDTTrainingDAO
 		return trainingRequest.get(0);
 	}
 	
-	public void insertDDTTrainingWithDTTID(int training_request_id) {
+	public void insertDDTTrainingWithDTTID(int training_request_id, int scheduleId, int trainer_requestId) {
 		
-		String sql = "insert into DEVELOP_TEAM_TRAINING_REQUEST(Dtt_training_id, training_request_id) values (dtt_training_req_id_seq.nextval, ?)";
+		String sql = "insert into DEVELOP_TEAM_TRAINING_REQUEST(Dtt_training_id, training_request_id, trainer_request_id, schedule_id) values (dtt_training_req_id_seq.nextval, ?, ?, ?)";
 		
-		temp.update(sql, new Object[] {training_request_id});
+		temp.update(sql, new Object[] {training_request_id, trainer_requestId, scheduleId});
 	}
 }
