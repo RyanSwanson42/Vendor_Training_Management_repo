@@ -17,10 +17,7 @@ $(document).ready(function () {
         $("#modeClassroom").hide();
         $("#modeVirtual").show();
     }
-    function showTrainer() {
-        $("#newTrainer").toggle();
-    }
-
+    
     $("#classroom").click(function() {
         showClass();
     });
@@ -28,14 +25,4 @@ $(document).ready(function () {
     $("#virtual").click(function() {
         showVirtual();
     });
-
-/*    $("#addTrainer").click(function () {
-        showTrainer();
-    });*/
-
-    $("#buttonPop").click(function () {
-        showTrainer();
-    });
-
-    
 });
